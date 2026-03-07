@@ -1,0 +1,790 @@
+# Intro to File Upload Attacks — EXPLANATION NOTES
+
+### Overview
+
+Uploading files is a core feature of many modern web applications. Social media platforms allow users to upload profile pictures and media, while corporate or enterprise applications often support document uploads such as PDFs or reports.
+
+While useful, file upload functionality introduces significant security risk. If user input and uploaded files are not properly validated, attackers may be able to store malicious files on the server and abuse them to compromise the application or the underlying system.
+
+---
+
+### Why File Uploads Are Dangerous
+
+File upload vulnerabilities are among the most common issues in web and mobile applications. Many of these vulnerabilities are classified as **High** or **Critical** severity because they can lead directly to server-side compromise.
+
+According to public vulnerability databases, insecure file upload (CWE-434) appears frequently across real-world applications, highlighting how often this feature is implemented incorrectly.
+
+---
+
+### Root Causes of File Upload Vulnerabilities
+
+The primary reason file upload vulnerabilities exist is **weak or missing validation**, including:
+
+- No restriction on allowed file types
+    
+- Poor validation of file extensions or MIME types
+    
+- Inadequate inspection of file contents
+    
+- Trusting client-side validation only
+    
+
+The most dangerous scenario is an **unauthenticated arbitrary file upload**, where any user can upload any file type without authentication. This often leads directly to full server compromise.
+
+---
+
+### Common Attacks via File Uploads
+
+The most severe and common outcome of an arbitrary file upload vulnerability is **remote command execution (RCE)**. This is typically achieved by uploading:
+
+- A web shell that allows arbitrary command execution
+    
+- A script that initiates a reverse shell connection to the attacker
+    
+
+A web shell enables attackers to execute system commands, enumerate the server, and pivot further into the environment. Reverse shells provide interactive access directly to the compromised server.
+
+---
+
+### Attacks Even Without Arbitrary Uploads
+
+Even when uploads are restricted to specific file types, exploitation may still be possible if protections are weak or misconfigured. Possible attacks include:
+
+- Injecting **XSS** or **XXE** payloads into allowed file formats
+    
+- Triggering **Denial of Service (DoS)** conditions
+    
+- Overwriting sensitive system or application files
+    
+- Abusing parser or library vulnerabilities
+    
+
+---
+
+### Additional Risk Factors
+
+File upload vulnerabilities are not always caused by poor custom code. They are often introduced by:
+
+- Outdated or vulnerable third-party libraries
+    
+- Insecure default configurations
+    
+- Missing server-side hardening
+    
+
+---
+
+### Defensive Perspective
+
+Later sections of the module focus on secure design and prevention techniques, including:
+
+- Strong server-side validation
+    
+- Allow-listing safe file types
+    
+- Secure file storage practices
+    
+- Defense-in-depth strategies
+    
+
+Properly securing file upload functionality is critical, as even a single mistake can lead to complete system compromise.
+
+# Absent Validation — EXPLANATION NOTES
+
+### Core Vulnerability
+
+Absent validation is the most basic form of file upload vulnerability. The application applies no front-end or back-end restrictions on uploaded files, allowing attackers to upload arbitrary file types without limitation.
+
+This is especially dangerous because it often leads directly to remote code execution.
+
+---
+
+### Attacker Workflow
+
+The attacker begins by identifying that the upload form accepts any file type. Indicators include:
+
+- No mention of allowed extensions
+    
+- File selector set to “All Files”
+    
+- Successful selection of executable files such as `.php`
+    
+
+If the back-end also lacks validation, uploaded files are stored and made accessible by the web server.
+
+---
+
+### Arbitrary File Upload Impact
+
+With unrestricted uploads, attackers can:
+
+- Upload web shells
+    
+- Upload reverse shell scripts
+    
+- Execute arbitrary system commands
+    
+
+Simply visiting the uploaded script triggers execution, granting control over the server.
+
+---
+
+### Identifying the Web Framework
+
+Successful exploitation depends on uploading a script written in the server’s execution language.
+
+Framework identification techniques shown include:
+
+- Manually requesting `/index.ext` variants
+    
+- Observing extension-based routing
+    
+- Using browser extensions like Wappalyzer
+    
+- Leveraging web scanners such as Burp or ZAP
+    
+
+In this lab, accessing `/index.php` confirms PHP is in use.
+
+---
+
+### Vulnerability Confirmation
+
+Uploading a simple PHP script and accessing it confirms execution capability.
+
+When the uploaded file renders output generated by server-side code rather than showing raw source, this proves:
+
+- The file is executed by the interpreter
+    
+- The upload directory is web-accessible
+    
+- No server-side validation or execution restrictions exist
+    
+
+This confirms full arbitrary file upload with code execution.
+
+---
+
+### Security Implication
+
+Once arbitrary code execution is confirmed, the application is effectively compromised. The attacker can escalate from basic execution to full system control in subsequent steps.
+
+This section establishes the foundation for exploiting file upload vulnerabilities in later stages of the attack chain.
+
+# Upload Exploitation — EXPLANATION NOTES
+
+### Exploitation Goal
+
+Once arbitrary file upload is confirmed, the final exploitation step is uploading a malicious script written in the same language as the web application and triggering its execution to gain control over the server.
+
+---
+
+### Web Shells
+
+Web shells allow command execution through the browser. Prebuilt shells such as **phpbash** or those found in **SecLists** provide additional features like directory navigation and file transfer, making post-exploitation easier.
+
+They are especially useful when outbound connections are blocked or restricted.
+
+---
+
+### Custom Web Shells
+
+A minimal custom web shell uses native language execution functions and accepts commands via HTTP parameters. This approach is reliable, easy to recreate during real engagements, and useful when external resources are unavailable.
+
+The same concept applies across frameworks; only the execution function differs.
+
+---
+
+### Reverse Shells
+
+Reverse shells provide a fully interactive terminal session and are generally preferred over web shells. They require embedding attacker-controlled IP and port values and rely on the server initiating an outbound connection.
+
+Execution occurs when the uploaded script is accessed through the browser.
+
+---
+
+### Listener Coordination
+
+A listener must be active before triggering the reverse shell. Once the connection is established, the attacker gains a shell under the web server’s execution context.
+
+---
+
+### Payload Generation
+
+Tools like **msfvenom** automate reverse shell creation for multiple languages and may bypass simple filtering mechanisms. Generated payloads are uploaded and triggered in the same manner as manually sourced scripts.
+
+---
+
+### Limitations and Reliability
+
+Shell execution may fail due to disabled functions, web application firewalls, or network egress restrictions. In such cases, attackers must rely on alternate shells or filter bypass techniques covered later in the module.
+
+This section completes the exploitation chain from unrestricted upload to interactive system access.
+# Client-Side Validation — EXPLANATION NOTES
+
+### Core Idea
+
+Client-side validation relies entirely on front-end code such as JavaScript and HTML attributes. Because this code runs in the browser, the attacker has full control over it. If the back-end does not enforce the same restrictions, client-side validation provides no real security.
+
+---
+
+### Validation Weakness
+
+The application restricts uploads to image formats using:
+
+- The `accept` attribute in the HTML file input
+    
+- A JavaScript function that checks file extensions and disables submission
+    
+
+No request is sent to the server when validation fails, indicating enforcement happens exclusively on the client.
+
+---
+
+### Bypass Method 1: Back-End Request Modification
+
+By capturing a legitimate image upload request and modifying:
+
+- The `filename` value
+    
+- The file contents
+    
+
+An attacker can upload a PHP script directly to `/upload.php`. Since the server does not validate file type, the upload succeeds and the script becomes accessible.
+
+This bypass completely ignores front-end restrictions.
+
+---
+
+### Bypass Method 2: Disabling Front-End Validation
+
+The `onchange` handler calls a JavaScript function responsible for validation. Removing this function call from the HTML disables the restriction entirely.
+
+Because this modification occurs only in the browser, it does not persist across refreshes—but persistence is unnecessary for exploitation.
+
+---
+
+### Execution Confirmation
+
+Once uploaded, the application references the uploaded file as a profile image. The attacker can extract the file path from the DOM and access it directly.
+
+Passing command parameters to the web shell confirms server-side code execution.
+
+---
+
+### Attacker Mindset
+
+Client-side controls are treated as cosmetic. An attacker assumes:
+
+- Any client-side check can be bypassed
+    
+- Real security must exist on the server
+    
+- Upload endpoints are prime candidates for manipulation
+    
+
+---
+
+### Common Pitfalls
+
+- Assuming disabled buttons or error messages equal protection
+    
+- Forgetting to test direct request manipulation
+    
+- Trusting `accept` attributes or JavaScript validation
+    
+
+---
+
+### Methodology Fit
+
+This technique is a classic example of bypassing weak validation in file upload attacks. It bridges initial restriction discovery with full remote code execution and prepares the ground for more advanced filter bypass techniques covered later.
+
+# Blacklist Filters — EXPLANATION NOTES
+
+### Core Weakness
+
+Blacklist-based validation attempts to block known dangerous extensions rather than allowing only safe ones. This approach is fundamentally flawed because it is impossible to enumerate every executable extension supported by a web server.
+
+---
+
+### Back-End Validation Behavior
+
+The server extracts the file extension and checks it against a hardcoded blacklist. Any extension not explicitly listed is implicitly trusted, even if it can still be executed by the PHP interpreter.
+
+The comparison is also case-sensitive, introducing additional bypass opportunities on case-insensitive file systems.
+
+---
+
+### Extension Fuzzing Strategy
+
+By fuzzing the filename extension in the upload request, an attacker can identify which extensions are accepted by the back-end. Requests that do not trigger the blacklist error indicate allowed extensions.
+
+This turns the upload endpoint into an oracle for discovering executable file types.
+
+---
+
+### Exploitation with Non-Blacklisted Extensions
+
+Once an allowed extension is identified, the attacker uploads a PHP payload using that extension. If the web server maps the extension to the PHP interpreter, the code executes normally.
+
+The `.phtml` extension is commonly supported in PHP configurations and frequently overlooked in blacklists.
+
+---
+
+### Execution Confirmation
+
+Accessing the uploaded file and passing command parameters confirms that server-side code execution is achieved, demonstrating complete bypass of the blacklist filter.
+
+---
+
+### Attacker Mindset
+
+Blacklist defenses are treated as incomplete by default. An attacker assumes:
+
+- More executable extensions exist than are blocked
+    
+- The server configuration may support legacy or alternate handlers
+    
+- Enumeration will eventually reveal a viable bypass
+    
+
+---
+
+### Methodology Fit
+
+This technique is a classic file upload filter bypass and represents a direct evolution from client-side bypasses to weak server-side controls. It reinforces why allowlists and content-based validation are required for secure upload handling.
+# Whitelist Filters — EXPLANATION NOTES
+
+### Whitelist vs Blacklist
+
+Whitelisting is generally stronger than blacklisting because it only permits explicitly allowed extensions. However, poor implementation can still lead to bypasses, especially when developers misuse regular expressions or rely on filename checks alone.
+
+---
+
+### Weak Regex Whitelists
+
+The first whitelist example checks only whether an allowed extension appears **anywhere** in the filename. This allows filenames that _contain_ an image extension but still end with a PHP extension.
+
+This leads directly to double-extension attacks.
+
+---
+
+### Double Extension Bypass
+
+By placing an allowed extension before a PHP extension, the regex condition is satisfied while the server still processes the file as executable PHP.
+
+This works when the application:
+
+- Uses `contains`-style regex
+    
+- Does not normalize or strictly validate filenames
+    
+
+---
+
+### Strict Regex and Its Limits
+
+A stricter regex enforces the allowed extension at the end of the filename. This defeats simple double extensions but does not protect against server-level misconfigurations.
+
+Security is only as strong as the weakest layer.
+
+---
+
+### Reverse Double Extension via Server Misconfiguration
+
+If the web server maps PHP execution based on substring matching rather than strict filename endings, files like `shell.php.jpg` can still execute PHP code.
+
+This bypass relies on:
+
+- Correct application-level validation
+    
+- Incorrect web server handler configuration
+    
+
+---
+
+### Character Injection Attacks
+
+Injected characters can alter how filenames are interpreted by different components (application, OS, web server, language runtime).
+
+Older PHP versions, Windows file handling, and legacy systems are especially vulnerable to null bytes, colons, and control characters.
+
+---
+
+### Fuzzing as a Discovery Tool
+
+Generating filename permutations and fuzzing upload endpoints turns validation logic into an oracle. Any filename that uploads successfully or executes code reveals a bypass condition.
+
+This approach is essential when dealing with unknown validation logic or mixed blacklist/whitelist defenses.
+
+---
+
+### Methodology Fit
+
+This section demonstrates how layered defenses fail when any layer is weak or inconsistent. It reinforces the attacker mindset of testing:
+
+- Application logic
+    
+- Regex correctness
+    
+- Server configuration
+    
+- Platform-specific quirks
+    
+
+Whitelist validation without strict normalization, content inspection, and server hardening is insufficient against determined attackers.
+# Type Filters — EXPLANATION NOTES
+
+### Why Extension Checks Fail
+
+File extensions alone are unreliable because web servers may still execute PHP code embedded in files with image extensions or misleading filenames. This is why modern applications add content-based validation.
+
+---
+
+### Content-Type Header Validation
+
+Some applications trust the `Content-Type` header supplied by the client. Since this header is set by the browser, it is fully attacker-controlled. Modifying the file-level Content-Type in the upload request can bypass this check if no server-side verification is performed.
+
+---
+
+### MIME-Type Validation
+
+MIME-Type validation inspects the actual file contents instead of headers. It determines the file type using magic bytes at the beginning of the file, making it more reliable than extension or header checks.
+
+However, this method can still be bypassed if the attacker can craft a file that starts with valid magic bytes while containing executable code.
+
+---
+
+### Magic Bytes Injection
+
+By prepending valid image magic bytes such as `GIF8` to a PHP script, the file is classified as an image while still being interpreted as PHP when accessed. This allows bypassing MIME-type checks while preserving code execution.
+
+---
+
+### Combined Filter Bypass
+
+In hardened scenarios, multiple defenses may exist simultaneously:
+
+- Client-side validation
+    
+- Extension blacklist
+    
+- Extension whitelist
+    
+- Content-Type header validation
+    
+- MIME-type validation
+    
+
+By combining:
+
+- Allowed extensions
+    
+- Allowed Content-Type headers
+    
+- Valid magic bytes
+    
+- Executable PHP payloads
+    
+
+an attacker can craft a file that passes all checks but still executes server-side code.
+
+---
+
+### Attacker Mindset
+
+Attackers assume every validation layer can be flawed:
+
+- Headers can be spoofed
+    
+- Regex can be miswritten
+    
+- MIME detection can be tricked
+    
+- Server handlers may execute unexpected extensions
+    
+
+Each layer is tested independently and then combined to achieve execution.
+
+---
+
+### Methodology Fit
+
+This section represents the culmination of upload exploitation techniques, demonstrating how layered defenses fail when not consistently enforced. It highlights why secure upload handling must include strict allowlists, content verification, server hardening, and non-executable storage locations.
+# Limited File Uploads — EXPLANATION NOTES
+
+### Limited Upload ≠ Safe Upload
+
+Even when arbitrary file uploads are prevented, allowing “safe” file types can still introduce serious vulnerabilities. Attackers pivot from code execution to **client-side and parser-based attacks**.
+
+---
+
+### Stored XSS via File Uploads
+
+If a web application allows uploading HTML, SVG, or displays image metadata, attackers can inject JavaScript that executes when the file is viewed. This enables:
+
+- Session hijacking
+    
+- CSRF
+    
+- Credential theft
+    
+
+Metadata-based XSS is especially dangerous because users do not expect images to execute code.
+
+---
+
+### SVG as an Attack Vector
+
+SVG files are XML-based and rendered by browsers. This makes them powerful payload containers for:
+
+- Stored XSS
+    
+- XXE
+    
+- SSRF
+    
+
+When an uploaded SVG is displayed inline, embedded scripts are executed in the application’s origin.
+
+---
+
+### XXE via SVG and XML-Based Files
+
+If XML parsing is insecure, attackers can define external entities to read local files or application source code. This allows:
+
+- System file disclosure
+    
+- Application source disclosure
+    
+- Internal endpoint discovery
+    
+
+Using PHP stream wrappers enables reading PHP source code safely without execution.
+
+---
+
+### Chaining for Deeper Exploitation
+
+Reading application source code helps identify:
+
+- Upload directories
+    
+- File naming schemes
+    
+- Additional vulnerabilities
+    
+
+This enables white-box style exploitation after an initial black-box foothold.
+
+---
+
+### DoS Through File Uploads
+
+Even “safe” file types can be weaponized to cause denial of service:
+
+- Decompression bombs (ZIP)
+    
+- Pixel flood images
+    
+- XML entity expansion
+    
+- Oversized uploads
+    
+
+These attacks target server memory, disk space, or CPU resources.
+
+---
+
+### Attacker Mindset
+
+When code execution is blocked, attackers shift goals:
+
+- From RCE → XSS / XXE / SSRF
+    
+- From shells → source code disclosure
+    
+- From compromise → service disruption
+    
+
+Every allowed file type is treated as a potential parser attack surface.
+
+---
+
+### Methodology Fit
+
+This section highlights why **file upload security is not just about extensions**. Secure handling requires:
+
+- Strict parsing
+    
+- Safe rendering
+    
+- Metadata sanitization
+    
+- Non-executable storage
+    
+- Resource limits
+    
+
+Failing any one of these can still lead to full compromise.
+
+# Other Upload Attacks — EXPLANATION NOTES
+
+### Filename Injection Attacks
+
+When uploaded filenames are reused insecurely, they become an attack surface. If a backend passes the filename into system commands, shell metacharacters can trigger command injection. If filenames are reflected in HTML, they can trigger stored XSS. If used in database queries, they can introduce SQL injection.
+
+Attackers treat filenames as untrusted input equal to form fields.
+
+---
+
+### Upload Directory Disclosure
+
+If uploaded files are not directly accessible, attackers attempt to discover the upload path. Error conditions are a common disclosure vector. Collisions, race conditions, and oversized filenames may cause backend errors that leak filesystem paths or internal logic.
+
+Source disclosure vulnerabilities such as LFI or XXE can also reveal upload directories and naming schemes.
+
+---
+
+### Windows-Specific Filename Attacks
+
+Windows filesystems introduce unique attack primitives. Reserved characters and device names may cause write failures, path confusion, or error-based information disclosure if not sanitized.
+
+The legacy 8.3 filename convention allows attackers to reference or overwrite files using shortened aliases. This can lead to overwriting configuration files, causing denial of service, or accessing sensitive files.
+
+---
+
+### Advanced Upload Attack Surface
+
+Any automatic processing applied to uploaded files increases risk. Media encoding, compression, renaming, and parsing may invoke vulnerable libraries or custom logic.
+
+Known examples include multimedia parsers vulnerable to XXE or memory corruption. Custom pipelines are especially risky because they are rarely hardened or fuzz-tested.
+
+---
+
+### Attacker Mindset
+
+A secure upload filter does not end the attack. Attackers analyze:
+
+- How filenames are handled
+    
+- Where files are stored
+    
+- What processes touch the file after upload
+    
+- Which platform-specific quirks apply
+    
+
+Upload functionality is treated as a chain, not a single control point.
+
+---
+
+### Methodology Fit
+
+This section broadens the file upload threat model beyond extension and content checks. It emphasizes that filenames, error handling, platform behavior, and post-processing logic are all viable exploitation paths, especially in mature or hardened applications.
+
+# Preventing File Upload Vulnerabilities — EXPLANATION NOTES
+
+### Defensive Objective
+
+This section shifts perspective from exploitation to remediation. The goal is to harden file upload functionality so that even determined attackers cannot abuse it to gain code execution, leak data, or disrupt service.
+
+---
+
+### Extension Validation Strategy
+
+Relying on a single extension check is insufficient. A secure design combines:
+
+- **Blacklist checks** to block dangerous extensions appearing anywhere in the filename
+    
+- **Whitelist checks** to ensure the filename ends with an explicitly allowed extension
+    
+
+Using both mitigates bypass techniques such as double extensions.
+
+---
+
+### Content Validation Strategy
+
+Extension validation must be paired with content validation. Attackers can spoof extensions and headers, so the application must:
+
+- Verify the filename extension
+    
+- Verify the HTTP Content-Type header
+    
+- Verify the MIME type derived from file contents
+    
+
+All three must agree with the expected file type.
+
+---
+
+### Upload Directory Protection
+
+Uploaded files should never be directly accessible. Serving files through a controlled download handler:
+
+- Prevents direct execution
+    
+- Enables authorization checks
+    
+- Mitigates IDOR and LFI risks
+    
+
+Direct access to upload directories should be blocked entirely.
+
+---
+
+### File Storage Hardening
+
+Randomizing stored filenames prevents:
+
+- Guessing file paths
+    
+- Filename-based injections
+    
+- Direct access to uploaded content
+    
+
+Storing metadata in a database allows safe reconstruction during downloads without exposing internal paths.
+
+Isolating uploads on a separate server or container limits blast radius if compromise occurs.
+
+---
+
+### Runtime Hardening
+
+Disabling dangerous execution functions reduces impact even if code execution is achieved. Error suppression prevents attackers from learning internal paths, configurations, or logic.
+
+---
+
+### Additional Defense-in-Depth Measures
+
+Other important protections include:
+
+- File size limits
+    
+- Dependency and library updates
+    
+- Malware scanning
+    
+- Web Application Firewalls
+    
+
+These controls do not replace secure coding but provide additional layers of resilience.
+
+---
+
+### Methodology Fit
+
+This section provides a remediation checklist that directly maps to the exploitation techniques demonstrated earlier. Each defensive control exists because a real-world bypass has already been shown.
+
+Strong upload security is achieved through **layered validation, isolation, and least privilege**, not a single filter.
+#
+#
+#
+#
+#
+#
+#
+#
