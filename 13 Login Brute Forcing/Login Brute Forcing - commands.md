@@ -10,8 +10,8 @@
 
 **The Role of Brute Forcing in Penetration Testing**
 
+![[Pasted image 20260310224517.png]]
 
-![[Pasted image 20260203145024.png]]
 # Password Security Fundamentals
 
 **Commands**

@@ -1,4 +1,4 @@
-# Introduction to Server-side Attacks — EXPLANATION NOTES
+# Introduction to Server-side Attacks 
 
 This section introduces the concept of **server-side attacks** and contrasts them with client-side vulnerabilities. The core distinction is where exploitation and impact occur: client-side attacks execute in the user’s browser, while server-side attacks execute on or are mediated by the server itself.
 
@@ -41,7 +41,7 @@ This introductory section sets the foundation for later exploitation by:
 
 No exploitation steps are shown here; this page is purely conceptual and intended to scope the attack surface before hands-on labs begin.
 
-# Introduction to SSRF — EXPLANATION NOTES
+# Introduction to SSRF 
 
 This section formally introduces **Server-Side Request Forgery (SSRF)** and establishes why it is considered a high-impact vulnerability, including its placement in the OWASP Top 10.
 
@@ -109,7 +109,7 @@ No exploitation mechanics are demonstrated yet; this page exists to anchor the m
 
 
 
-# Identifying SSRF — EXPLANATION NOTES
+# Identifying SSRF
 
 This section demonstrates how to **confirm and operationalize an SSRF vulnerability** using a realistic web application flow.
 
@@ -186,7 +186,7 @@ This section teaches a critical SSRF mindset:
     
 
 By the end of this page, SSRF has transitioned from a theoretical flaw into a **practical internal reconnaissance vector**, setting the stage for deeper exploitation in subsequent sections.
-# Exploiting SSRF — EXPLANATION NOTES
+# Exploiting SSRF 
 
 This section demonstrates how SSRF moves from **confirmation** into **impactful exploitation** by abusing trust boundaries, protocol handling, and internal-only services.
 
@@ -271,7 +271,7 @@ Effective SSRF exploitation relies on understanding:
     
 
 At this stage, SSRF is no longer reconnaissance — it is **direct control over internal systems**.
-# Blind SSRF — EXPLANATION NOTES
+# Blind SSRF 
 
 This section introduces **blind SSRF**, where the server-side request still occurs, but the response is **not returned to the attacker**. The vulnerability exists, but visibility is lost.
 
@@ -357,7 +357,7 @@ Even without response data, attackers can:
     
 
 The key mindset shift is moving from **content exfiltration** to **inference through behavior**.
-# Preventing SSRF — EXPLANATION NOTES
+# Preventing SSRF 
 
 This section shifts from an attacker mindset to a **defensive and architectural perspective**, outlining how SSRF vulnerabilities can be prevented or their impact reduced.
 
@@ -423,7 +423,7 @@ Proper SSRF prevention requires coordination between:
     
 
 This section closes the SSRF lifecycle by reinforcing that **secure defaults and constrained design** are more reliable than reactive filtering.#
-# Template Engines — EXPLANATION NOTES
+# Template Engines
 
 This section introduces **template engines** and builds the conceptual foundation needed to understand **Server-Side Template Injection (SSTI)** later in the module.
 
@@ -499,7 +499,7 @@ This page exists to ensure you understand:
 
 All exploitation comes later — this is **mental model setup**, not attack execution yet.
 
-# Introduction to SSTI — EXPLANATION NOTES
+# Introduction to SSTI 
 
 This section introduces **Server-Side Template Injection (SSTI)** and explains _why_ it is one of the most dangerous server-side vulnerabilities.
 
@@ -583,7 +583,7 @@ This page sets the conceptual boundary for SSTI:
 
 This is the foundation. The next sections will focus on **detecting SSTI** and **breaking out of the template sandbox** in real applications.
 
-# Identifying SSTI — EXPLANATION NOTES
+# Identifying SSTI 
 
 This section explains **how to confirm an SSTI vulnerability and fingerprint the template engine** used by a web application. Unlike SSRF, SSTI exploitation is highly dependent on engine-specific behavior, so identification is mandatory before exploitation.
 
@@ -656,7 +656,7 @@ SSTI identification follows a clear chain:
 
 This structured approach avoids guesswork and ensures reliable, repeatable SSTI exploitation in later stages.
 
-# Exploiting SSTI – Jinja2 — EXPLANATION NOTES
+# Exploiting SSTI – Jinja2 
 
 This section demonstrates **full exploitation of an SSTI vulnerability in a Jinja2-based application**, progressing from information disclosure to local file access and finally remote code execution.
 
@@ -757,7 +757,7 @@ Jinja2 SSTI exploitation follows a reliable chain:
     
 
 This section illustrates why SSTI is considered one of the most critical server-side vulnerabilities: **it collapses the boundary between data and code entirely**.
-# Exploiting SSTI – Twig — EXPLANATION NOTES
+# Exploiting SSTI – Twig 
 
 This section covers **SSTI exploitation in the Twig template engine**, which is commonly used in PHP applications, especially those built with the Symfony framework.
 
@@ -838,7 +838,7 @@ Attackers unfamiliar with a template engine can usually pivot quickly by:
 
 This concludes the SSTI exploitation section by reinforcing that **template engines are execution environments**, not just rendering tools.
 
-# SSTI Tools of the Trade & Preventing SSTI — EXPLANATION NOTES
+# SSTI Tools of the Trade & Preventing SSTI
 
 This section covers **automation and defense** for Server-Side Template Injection, completing the SSTI lifecycle from discovery to mitigation.
 
@@ -948,7 +948,7 @@ Once user input becomes executable template logic, full compromise is often inev
 
 This concludes the SSTI section by tying together **automation, exploitation, and secure design**.
 
-# Introduction to SSI Injection — EXPLANATION NOTES
+# Introduction to SSI Injection 
 
 This section introduces **Server-Side Includes (SSI)** and explains how improper handling of SSI directives can lead to **SSI Injection**, a server-side code execution vulnerability.
 
@@ -1025,7 +1025,7 @@ SSI injection sits at the intersection of:
 The key risk factor is **user input becoming server-parsed content**. Once that boundary is crossed, SSI directives turn static HTML into an execution surface.
 
 This page establishes the conceptual groundwork for identifying and exploiting SSI injection in the sections that follow.
-# Exploiting SSI Injection — EXPLANATION NOTES
+# Exploiting SSI Injection 
 
 This section demonstrates **practical exploitation of an SSI Injection vulnerability**, resulting in full remote code execution.
 
@@ -1097,7 +1097,7 @@ SSI injection typically arises from:
 The core failure is allowing **user-controlled input to become server-parsed content**.
 
 This section completes the SSI attack chain by showing how a simple reflection bug escalates into **full remote code execution**.
-# Preventing SSI Injection — EXPLANATION NOTES
+# Preventing SSI Injection 
 
 This section focuses on **defensive controls** to prevent Server-Side Includes (SSI) from becoming an execution vector.
 
@@ -1181,7 +1181,7 @@ Strong prevention requires:
 
 The key takeaway is to **never allow user input to become server-interpreted content**. When SSI is unavoidable, its power must be tightly constrained to prevent escalation into remote code execution.
 
-# Intro to XSLT Injection — EXPLANATION NOTES
+# Intro to XSLT Injection 
 
 This section introduces **XSLT Injection**, a server-side vulnerability that arises when user-controlled input is embedded into XSLT data and processed by an XSLT engine.
 
@@ -1260,7 +1260,7 @@ XSLT injection is conceptually similar to other server-side injection flaws:
 Understanding basic XSLT syntax and execution flow is essential before moving on to **identification and exploitation**, which are covered in the next sections.
 
 
-# Exploiting XSLT Injection — EXPLANATION NOTES
+# Exploiting XSLT Injection 
 
 This section demonstrates **end-to-end exploitation of an XSLT Injection vulnerability**, progressing from detection to full remote code execution.
 
@@ -1325,7 +1325,7 @@ XSLT injection exploitation follows a structured path:
     
 
 XSLT injection is especially dangerous because its impact depends less on application code and more on **XSLT engine configuration**, which is often overlooked during development and hardening.
-# Preventing XSLT Injection — EXPLANATION NOTES
+# Preventing XSLT Injection 
 
 This section concludes the module by focusing on **defensive strategies** to prevent XSLT injection and reduce its potential impact.
 

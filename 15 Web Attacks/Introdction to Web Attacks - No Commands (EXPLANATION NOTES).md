@@ -1,4 +1,4 @@
-# Introduction to Web Attacks — EXPLANATION NOTES
+# Introduction to Web Attacks 
 
 ## HTTP Verb Tampering
 
@@ -101,7 +101,7 @@ Common pitfalls:
 This module focuses on three core web attack classes that target authorization weaknesses, backend object handling flaws, and insecure XML parsing — all extremely common in real-world environments.
 
 
-# Bypassing Basic Authentication — EXPLANATION NOTES
+# Bypassing Basic Authentication
 
 ## Target Endpoint
 
@@ -177,7 +177,7 @@ Common mistakes:
     
 - Assuming Basic Auth applies uniformly across all verbs
 - # 
-# Bypassing Security Filters — EXPLANATION NOTES
+# Bypassing Security Filters 
 
 ## What the filter is doing
 
@@ -211,8 +211,7 @@ Once command injection is confirmed and the security filter is bypassed via HTTP
 - Forgetting that method changes can alter which backend superglobal/handler processes input (e.g., GET vs POST), which is exactly what makes this class of bug possible.
 - 
 - #
-# Verb Tampering Prevention — EXPLANATION NOTES
-
+# Verb Tampering Prevention 
 ## Insecure Configuration
 
 All three server examples demonstrate the same root issue: authorization is restricted to a single HTTP method (GET).
@@ -306,7 +305,7 @@ Defenders must enforce consistency.
 
 
 
-# Intro to IDOR — EXPLANATION NOTES
+# Intro to IDOR 
 
 ## What IDOR Is
 
@@ -431,7 +430,7 @@ Parameter Analysis → Identifier Manipulation → Authorization Testing → Pri
 
 This vulnerability class is fundamentally about broken access control, which is one of the most critical categories in modern web security.
 
-# Identifying IDORs — EXPLANATION NOTES
+# Identifying IDORs 
 
 ## URL Parameters & APIs
 
@@ -581,7 +580,7 @@ IDOR is fundamentally a backend authorization failure, not an identifier exposur
 The core question is always:  
 "Does the backend verify that this user is allowed to access this specific object?"# 
 
-# Mass IDOR Enumeration — EXPLANATION NOTES
+# Mass IDOR Enumeration 
 
 ## Insecure Parameters
 
@@ -628,7 +627,7 @@ The script loops through a range of `uid` values, fetches each documents page, e
 
 
 
-# Bypassing Encoded References — EXPLANATION NOTES
+# Bypassing Encoded References 
 
 ## What’s being protected and what’s exposed
 
@@ -685,7 +684,7 @@ Single-object IDOR → predictable reference derivation → automated multi-obje
     
 - Assuming a download gateway endpoint implies authorization is enforced server-side (it often isn’t).
 
-# IDOR in Insecure APIs — EXPLANATION NOTES
+# IDOR in Insecure APIs 
 
 ## What “IDOR in APIs” means
 
@@ -779,7 +778,7 @@ This section illustrates a realistic approach to API IDOR:
 
 
 
-# Chaining IDOR Vulnerabilities — EXPLANATION NOTES
+# Chaining IDOR Vulnerabilities 
 
 ## Information disclosure IDOR creates the missing key
 
@@ -820,7 +819,7 @@ Modifying an admin’s email (e.g., to `flag@idor.htb`) demonstrates unauthorize
     
 - Assuming a role cookie implies server-side authorization (it often implies the opposite).
 
-# IDOR Prevention — EXPLANATION NOTES
+# IDOR Prevention 
 
 ## Core Fix: Object-Level Access Control
 
@@ -938,7 +937,7 @@ If both are implemented correctly:
 This section reinforces the fundamental rule of web security:
 
 Authorization must always be enforced on the backend, per object, per request.
-# Intro to XXE — EXPLANATION NOTES
+# Intro to XXE 
 
 ## What XXE Is
 
@@ -1073,7 +1072,7 @@ In the next sections, this theoretical understanding will be used to:
     
 - Exfiltrate data blindly
 
-# Local File Disclosure — EXPLANATION NOTES
+# Local File Disclosure 
 
 ## Identifying XXE Injection Points
 
@@ -1205,8 +1204,7 @@ The core vulnerability is unsafe XML parsing with external entity resolution ena
 
 
 
-# Advanced File Disclosure — EXPLANATION NOTES
-
+# Advanced File Disclosure 
 ## Why Basic XXE Sometimes Fails
 
 Standard external entity inclusion works only when:
@@ -1371,7 +1369,7 @@ Disabling external entity resolution completely mitigates these attack chains.
     
 
 This layered approach ensures maximum coverage during testing.
-# Blind Data Exfiltration — EXPLANATION NOTES
+# Blind Data Exfiltration 
 
 ## Completely Blind XXE Scenario
 
@@ -1591,7 +1589,7 @@ Blind XXE exploitation proves:
 Disabling output is not a defense.
 
 Only safe XML parsing (disabling external entity resolution) truly prevents XXE attacks.
-# XXE Prevention — EXPLANATION NOTES
+# XXE Prevention 
 
 **XML LIBRARY / COMPONENT MANAGEMENT**
 

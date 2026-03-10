@@ -1,4 +1,4 @@
-# Login Brute Forcing — EXPLANATION NOTES
+# Login Brute Forcing 
 
 **Introduction**  
 This section frames brute forcing as the systematic guessing of secrets that protect systems, comparing digital credentials to physical locks. The goal is to set context for why authentication mechanisms are high-value targets and why repeated guessing is still relevant despite modern defenses.
@@ -14,7 +14,7 @@ Different techniques optimize the guessing process based on available informatio
 
 **The Role of Brute Forcing in Penetration Testing**  
 Within penetration testing, brute forcing is used selectively rather than blindly. Testers rely on it when other attack paths fail, when password policies appear weak, or when specific high-value accounts are in scope. The purpose is not just access, but to demonstrate risk and validate the effectiveness of authentication controls and defensive mechanisms.
-# Password Security Fundamentals — EXPLANATION NOTES
+# Password Security Fundamentals 
 
 This section is purely conceptual and establishes why brute-force attacks succeed or fail based on password quality rather than tooling alone.
 
@@ -76,7 +76,7 @@ The Python script demonstrates an online dictionary attack against a POST-based 
 The attack flow is simple but effective: fetch a wordlist, iterate through each candidate, submit it to the target endpoint, and inspect responses for indicators of success. The presence of a valid HTTP response and a specific JSON key acts as the success condition, allowing the attack to terminate early once the correct password is identified.
 
 From a methodology perspective, this mirrors real penetration testing practice. Dictionary attacks are commonly attempted before brute force because they are faster, quieter, and more likely to succeed against systems with poor password hygiene. Defensively, the example reinforces why rate limiting, monitoring, and strong password policies are critical to preventing low-effort account compromise.
-# Hybrid Attacks*
+# Hybrid Attacks
 Hybrid attacks exploit predictable human behavior, particularly around password reuse and mandatory password rotation policies. Instead of choosing entirely new passwords, users often make minimal changes—such as appending symbols or incrementing years—which creates highly guessable patterns.
 
 The attack strategy begins with a dictionary attack using common or context-aware passwords. If this fails, it evolves into a controlled brute-force phase that mutates those same dictionary entries. By appending numbers, symbols, or date-based variations, attackers achieve wide coverage without resorting to an impractical full keyspace brute force.
@@ -99,7 +99,7 @@ The web form example highlights Hydra’s ability to brute-force custom login lo
 The RDP example illustrates Hydra’s hybrid capability, blending brute-force generation with protocol awareness. Instead of relying on wordlists, it dynamically generates passwords within a defined length and character set, aligning with suspected password policies.
 
 From an attacker’s mindset, Hydra is a force multiplier: it automates credential attacks across protocols while remaining adaptable to context and constraints. From a defensive perspective, this section underscores why exposed authentication services must be protected with strong passwords, rate limiting, monitoring, and multi-factor authentication.
-# Login Brute Forcing — EXPLANATION NOTES
+# Login Brute Forcing 
 
 **Basic HTTP Authentication**  
 This section explains Basic HTTP Authentication as a simple challenge-response mechanism where credentials are transmitted in every request using Base64 encoding. While Base64 is often misunderstood as encryption, it is merely an encoding scheme, meaning credentials can be trivially decoded if intercepted.
@@ -111,7 +111,7 @@ Because Basic Auth does not implement account lockouts, CAPTCHA challenges, or r
 The Hydra example demonstrates a focused brute-force attack where the username is already known. By eliminating the username variable, the attack reduces complexity and accelerates success. Hydra’s `http-get` module handles the authentication exchange automatically, submitting credentials via the Authorization header and interpreting server responses.
 
 From an attacker’s perspective, Basic Auth is low-hanging fruit when exposed without additional controls. From a defensive standpoint, this section reinforces why Basic Auth should only be used in conjunction with HTTPS, strong credentials, rate limiting, and preferably replaced with more robust authentication mechanisms whenever possible.
-# Login Forms — EXPLANATION NOTES
+# Login Forms 
 
 This section demonstrates how custom HTML login forms operate and how they can be brute-forced using Hydra’s `http-post-form` module.
 
@@ -131,7 +131,7 @@ The final Hydra command chains all identified elements together: username list, 
 
 This workflow reflects standard web brute-force methodology: reconnaissance, parameter identification, condition tuning, automation, and post-authentication verification.
 
-# Medusa — EXPLANATION NOTES
+# Medusa 
 
 **Installation**
 
@@ -154,7 +154,7 @@ Each module is purpose-built to communicate with a specific authentication mecha
 The SSH example represents a classic service brute-force scenario using username and password lists. The multi-host HTTP example shows Medusa’s parallelism when attacking several targets at once. The empty and default password example highlights attacker techniques for quickly identifying weak configurations without full brute-force cycles.
 
 Overall, Medusa fits into brute-force methodology as a high-performance, protocol-aware tool used after credential patterns, services, and authentication mechanisms are identified.
-# Web Services — EXPLANATION NOTES
+# Web Services 
 
 This section demonstrates chaining brute-force attacks across multiple services to expand access on a target system.
 
@@ -170,7 +170,7 @@ Retrieving the flag file demonstrates post-exploitation objectives: leveraging c
 
 The attack path follows standard methodology: external brute-force, authenticated access, internal enumeration, lateral service targeting, and data extraction.
 
-# Custom Wordlists — EXPLANATION NOTES
+# Custom Wordlists 
 
 **Username Anarchy**
 

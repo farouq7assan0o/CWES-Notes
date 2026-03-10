@@ -1,4 +1,4 @@
-# Intro to File Upload Attacks — EXPLANATION NOTES
+# Intro to File Upload Attacks 
 
 ### Overview
 
@@ -89,7 +89,7 @@ Later sections of the module focus on secure design and prevention techniques, i
 
 Properly securing file upload functionality is critical, as even a single mistake can lead to complete system compromise.
 
-# Absent Validation — EXPLANATION NOTES
+# Absent Validation 
 
 ### Core Vulnerability
 
@@ -171,7 +171,7 @@ Once arbitrary code execution is confirmed, the application is effectively compr
 
 This section establishes the foundation for exploiting file upload vulnerabilities in later stages of the attack chain.
 
-# Upload Exploitation — EXPLANATION NOTES
+# Upload Exploitation 
 
 ### Exploitation Goal
 
@@ -220,7 +220,7 @@ Tools like **msfvenom** automate reverse shell creation for multiple languages a
 Shell execution may fail due to disabled functions, web application firewalls, or network egress restrictions. In such cases, attackers must rely on alternate shells or filter bypass techniques covered later in the module.
 
 This section completes the exploitation chain from unrestricted upload to interactive system access.
-# Client-Side Validation — EXPLANATION NOTES
+# Client-Side Validation 
 
 ### Core Idea
 
@@ -300,7 +300,7 @@ Client-side controls are treated as cosmetic. An attacker assumes:
 
 This technique is a classic example of bypassing weak validation in file upload attacks. It bridges initial restriction discovery with full remote code execution and prepares the ground for more advanced filter bypass techniques covered later.
 
-# Blacklist Filters — EXPLANATION NOTES
+# Blacklist Filters 
 
 ### Core Weakness
 
@@ -354,7 +354,7 @@ Blacklist defenses are treated as incomplete by default. An attacker assumes:
 ### Methodology Fit
 
 This technique is a classic file upload filter bypass and represents a direct evolution from client-side bypasses to weak server-side controls. It reinforces why allowlists and content-based validation are required for secure upload handling.
-# Whitelist Filters — EXPLANATION NOTES
+# Whitelist Filters 
 
 ### Whitelist vs Blacklist
 
@@ -434,7 +434,7 @@ This section demonstrates how layered defenses fail when any layer is weak or in
     
 
 Whitelist validation without strict normalization, content inspection, and server hardening is insufficient against determined attackers.
-# Type Filters — EXPLANATION NOTES
+# Type Filters 
 
 ### Why Extension Checks Fail
 
@@ -512,7 +512,7 @@ Each layer is tested independently and then combined to achieve execution.
 ### Methodology Fit
 
 This section represents the culmination of upload exploitation techniques, demonstrating how layered defenses fail when not consistently enforced. It highlights why secure upload handling must include strict allowlists, content verification, server hardening, and non-executable storage locations.
-# Limited File Uploads — EXPLANATION NOTES
+# Limited File Uploads 
 
 ### Limited Upload ≠ Safe Upload
 
@@ -629,7 +629,7 @@ This section highlights why **file upload security is not just about extensions*
 
 Failing any one of these can still lead to full compromise.
 
-# Other Upload Attacks — EXPLANATION NOTES
+# Other Upload Attacks 
 
 ### Filename Injection Attacks
 
@@ -684,7 +684,7 @@ Upload functionality is treated as a chain, not a single control point.
 
 This section broadens the file upload threat model beyond extension and content checks. It emphasizes that filenames, error handling, platform behavior, and post-processing logic are all viable exploitation paths, especially in mature or hardened applications.
 
-# Preventing File Upload Vulnerabilities — EXPLANATION NOTES
+# Preventing File Upload Vulnerabilities 
 
 ### Defensive Objective
 

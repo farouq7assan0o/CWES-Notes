@@ -1,4 +1,4 @@
-# Intro to Command Injections — EXPLANATION NOTES
+# Intro to Command Injections 
 
 This section introduces **command injection** as a high-impact vulnerability where user input is interpreted as part of a system command executed by the backend server.
 
@@ -95,7 +95,7 @@ Command injection fits into the broader injection class alongside SQLi and XSS:
     
 
 Later sections build on this foundation to show detection techniques, exploitation chains, filter evasion, and prevention strategies.
-# Detection — EXPLANATION NOTES
+# Detection 
 
 ### Detection Philosophy
 
@@ -161,7 +161,7 @@ An attacker:
 ### Transition to Exploitation
 
 Once any operator alters behavior or triggers an error, command injection is confirmed. Subsequent sections build on this detection phase to execute controlled commands, bypass filters, and escalate impact.
-# Other Injection Operators — EXPLANATION NOTES
+# Other Injection Operators
 
 ### AND Operator (&&)
 
@@ -201,7 +201,7 @@ This page reinforces that exploitation is not just about execution, but also abo
 ### Question Resolution
 
 Among the tested operators, the pipe (`|`) operator is the one that only shows the output of the injected command, as it redirects the output stream of the first command into the second.
-# Identifying Filters — EXPLANATION NOTES
+# Identifying Filters 
 
 ### Purpose of Filtering
 
@@ -232,7 +232,7 @@ Among the tested operators, the **new-line character (`\n`)** is not blacklisted
 ### Attacker Takeaway
 
 Blacklists are brittle and incomplete. Attackers do not need every operator to work—only one. Identifying allowed characters is the first step toward filter evasion and successful exploitation.
-# Bypassing Space Filters — EXPLANATION NOTES
+# Bypassing Space Filters 
 
 ### Context
 
@@ -269,7 +269,7 @@ These techniques enable execution of commands like `ls -la` despite space filter
 ### Defensive Takeaway
 
 Character blacklisting is insufficient. Secure command execution requires strict argument handling, proper escaping, or avoiding shell execution entirely.
-# Bypassing Other Blacklisted Characters — EXPLANATION NOTES
+# Bypassing Other Blacklisted Characters 
 
 ### Motivation
 
@@ -365,7 +365,7 @@ Command blacklists are fragile. Shell parsing flexibility makes it trivial to di
 ### Lab Continuation
 
 These obfuscation methods enable reading files such as `flag.txt` even when common utilities are blacklisted, completing the exploitation chain established in earlier sections.
-# Advanced Command Obfuscation — EXPLANATION NOTES
+# Advanced Command Obfuscation 
 
 ### Case Manipulation
 
@@ -414,7 +414,7 @@ These techniques enable execution of complex, multi-stage commands that include 
 
 Once execution reaches a shell, expressive features make reliable filtering impractical. Robust defenses must avoid shell execution entirely or strictly control allowed commands and arguments.
 
-# Evasion Tools — EXPLANATION NOTES
+# Evasion Tools 
 
 ### Purpose of Evasion Tools
 
@@ -451,7 +451,7 @@ Automated tools are used when defenders rely on pattern-based detection. Each ge
 ### Defensive Implication
 
 The existence of such tools highlights the futility of blacklist-based defenses. Preventing command injection requires eliminating shell execution paths or enforcing strict, parameterized command invocation.
-# Command Injection Prevention — EXPLANATION NOTES
+# Command Injection Prevention
 
 ### Avoid System Command Execution
 

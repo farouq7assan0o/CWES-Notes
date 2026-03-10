@@ -1,4 +1,4 @@
-# What is Authentication — EXPLANATION NOTES
+# What is Authentication 
 
 **What is Authentication**
 
@@ -25,7 +25,7 @@ Single-factor authentication relies on only one factor, most commonly knowledge-
 Multi-factor authentication combines two or more different factor categories. By requiring multiple independent proofs of identity, MFA significantly increases the cost and complexity of attacks. Even if one factor is compromised, the attacker is blocked by the remaining factor.
 
 From an exploitation methodology standpoint, identifying whether an application uses single-factor or multi-factor authentication directly influences attack strategy, feasibility, and expected impact.
-# Attacks on Authentication — EXPLANATION NOTES
+# Attacks on Authentication 
 
 **Attacks on Authentication**
 
@@ -49,7 +49,7 @@ Inherence-based authentication offers high usability and removes reliance on pas
 
 Attackers may target biometric databases, spoof biometric sensors, or exploit weaknesses in biometric matching algorithms. From a risk perspective, inherence-based authentication failures are more severe than other types because recovery options are extremely limited.
 
-# Broken Authentication - Enumerating Users — EXPLANATION NOTES
+# Broken Authentication - Enumerating Users
 
 User enumeration happens when an authentication-related endpoint (login, registration, password reset) behaves differently for **valid** vs **invalid** usernames. The “behavior difference” can be obvious (different error messages) or subtle (timing differences, redirects, response size, etc.). Even if usernames aren’t treated as secret by developers, they often matter because they narrow brute-force scope and enable password spraying or targeted attacks.
 
@@ -76,7 +76,7 @@ Once you identify a valid username, the next step in the overall methodology is 
 - Password spraying across a small set of confirmed valid users.
     
     #
-# Broken Authentication - Brute-Forcing Passwords — EXPLANATION NOTES
+# Broken Authentication - Brute-Forcing Passwords 
 
 This section explains why password-only authentication is fragile and how attackers operationalize that weakness once they have a valid username.
 
@@ -91,7 +91,7 @@ The lab also shows how to make brute-forcing faster by aligning your guesses wit
 
 Once you have a policy-compliant wordlist, the brute-force step uses `ffuf` against the login POST request. The key idea is to keep the username fixed (`admin`) and fuzz the password field. You then filter out responses that indicate failure (here, the substring “Invalid username”), leaving any response that behaves differently (commonly a redirect like HTTP 302) as the likely success.
 
-# Broken Authentication - Brute-Forcing Password Reset Tokens — EXPLANATION NOTES
+# Broken Authentication - Brute-Forcing Password Reset Tokens
 
 Password recovery mechanisms typically rely on a **one-time reset token** (sent via email or SMS) that allows a user to prove ownership of an account and set a new password.
 
@@ -119,8 +119,7 @@ For a **6-digit OTP**, there are:
 1,000,000 possible values (000000–999999).
 
 This section demonstrates how insufficient entropy in reset tokens directly enables account takeover, even without knowing the original password.
-# Broken Authentication — EXPLANATION NOTES
-
+# Broken Authentication 
 This section demonstrates how a weak 2FA (a 4-digit OTP) can be brute-forced when the application lacks effective protections against repeated incorrect submissions (rate limiting, lockouts, progressive delays, or bot detection). Because a 4-digit numeric code has only 10,000 possibilities (0000–9999), exhaustive guessing is feasible.
 
 The flow is:
@@ -145,7 +144,7 @@ Common pitfalls in this lab pattern:
 - Not accounting for post-success behavior: after the first correct OTP, many subsequent attempts may also appear “successful” because the session is already marked as passed 2FA, so you look for the _first_ candidate that triggers the state change.
 - 
 - #
-# Weak Brute-Force Protection — EXPLANATION NOTES
+# Weak Brute-Force Protection 
 
 This section explains defensive mechanisms against brute-force attacks and how flawed implementations can be bypassed.
 
@@ -235,7 +234,7 @@ From an exploitation methodology perspective:
     
 
 The key lesson: brute-force protection must be implemented server-side, tied to trusted sources, and designed with proper validation boundaries. Any reliance on user-controlled input for security decisions introduces a bypass opportunity.
-# Default Credentials — EXPLANATION NOTES
+# Default Credentials 
 
 This section focuses on a very common but often overlooked authentication weakness: unchanged default credentials.
 
@@ -320,7 +319,7 @@ Testing default credentials is part of authentication testing under OWASP method
 
 It is a baseline check — simple, quick, and often surprisingly effective.
 
-# Vulnerable Password Reset — EXPLANATION NOTES
+# Vulnerable Password Reset 
 
 This section demonstrates two major password reset weaknesses: predictable security questions and parameter manipulation.
 
@@ -413,7 +412,7 @@ From an attacker mindset:
     
     
     #
-# Authentication Bypass via Direct Access — EXPLANATION NOTES
+# Authentication Bypass via Direct Access 
 
 This section covers a full authentication bypass caused by improper access control and a common redirect-handling bug.
 
@@ -492,7 +491,7 @@ When testing authentication and access control:
 
 The key lesson: access control must be enforced server-side, and redirect logic must halt execution to avoid leaking protected content.
 
-# Authentication Bypass via Parameter Modification — EXPLANATION NOTES
+# Authentication Bypass via Parameter Modification 
 
 This section shows an authentication/authorization bypass caused by treating a client-controlled parameter as an authentication requirement.
 
@@ -576,7 +575,7 @@ Correct design is:
 - If the session user is `htb-stdnt`, the server should not allow arbitrary `user_id` values to override that identity.
 
 
-# Attacking Session Tokens — EXPLANATION NOTES
+# Attacking Session Tokens
 
 This section explains how weak session token handling can lead to full session hijacking and privilege escalation.
 
@@ -699,7 +698,7 @@ When testing session security:
 
 Session token weaknesses can completely bypass authentication and authorization controls, making them one of the most critical areas in web security testing.
 
-# Attacking Session Tokens — EXPLANATION NOTES
+# Attacking Session Tokens 
 
 This section explains how weak session token handling can lead to full session hijacking and privilege escalation.
 
@@ -821,7 +820,7 @@ When testing session security:
     
 
 Session token weaknesses can completely bypass authentication and authorization controls, making them one of the most critical areas in web security testing.
-# Further Session Attacks — EXPLANATION NOTES
+# Further Session Attacks 
 
 This section discusses two additional session-related weaknesses: Session Fixation and Improper Session Timeout.
 

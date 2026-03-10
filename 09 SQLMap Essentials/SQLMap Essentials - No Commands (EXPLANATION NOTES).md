@@ -1,4 +1,4 @@
-# SQL Injection Fundamentals — EXPLANATION NOTES
+# SQL Injection Fundamentals
 
 **INPUT SANITIZATION**
 
@@ -45,7 +45,7 @@ Prepared statements separate SQL logic from user data entirely. Placeholders def
 **OVERALL MITIGATION STRATEGY**
 
 Effective SQL injection prevention relies on layered defenses: parameterized queries, strict input validation, least-privilege database users, and optional WAF protection. No single control is sufficient on its own, but together they drastically reduce exploitation risk.
-# Getting Started with SQLMap — EXPLANATION NOTES
+# Getting Started with SQLMap
 
 **Basic Help Listing**  
 This introduces the minimal set of options required to define a target and start testing. It is meant for quick usage and common cases without overwhelming new users.
@@ -74,7 +74,7 @@ False positives can occur if pages are unstable. WAFs may block obvious payloads
 
 **Methodology Fit**  
 This section establishes the foundation for all later SQLMap usage: target definition, confirmation of vulnerability, and understanding how SQLMap automatically selects and chains SQL injection techniques.
-# SQLMap Output Description — EXPLANATION NOTES
+# SQLMap Output Description
 
 **URL Content Stability**  
 This confirms that repeated identical requests return consistent responses. Stable content allows SQLMap to reliably detect differences caused specifically by injection payloads rather than random page noise.
@@ -118,7 +118,7 @@ SQLMap lists only verified, exploitable injection points along with their techni
 **Output Logging**  
 All scan data is stored locally for reuse. Session files allow SQLMap to resume work without repeating detection steps, minimizing further requests to the target.
 
-# Running SQLMap on an HTTP Request — EXPLANATION NOTES
+# Running SQLMap on an HTTP Request
 
 **cURL to SQLMap Conversion**  
 Copying requests directly from the browser ensures that headers, cookies, compression, and request formatting exactly match legitimate traffic. This avoids false negatives caused by missing headers or session context.
@@ -155,7 +155,7 @@ Overcomplicated command lines, missing authentication headers, and unmarked inje
 
 **Lab Progression Fit**  
 This section bridges detection and exploitation by teaching how to reliably deliver payloads to real-world endpoints, preparing for enumeration and advanced attacks in later sections.
-# Handling SQLMap Errors — EXPLANATION NOTES
+# Handling SQLMap Errors
 
 **Parse DBMS Errors**  
 Enabling error parsing forces SQLMap to extract and display database error messages directly in the output. This is critical when malformed payloads trigger syntax errors that reveal DBMS type, query structure, or filtering behavior. It greatly reduces guesswork when troubleshooting failed injections.
@@ -174,7 +174,7 @@ The recommended approach is progressive: first parse DBMS errors, then log traff
 
 **Operational Context**  
 These techniques are essential in real-world engagements where authentication, нестable responses, custom headers, or security controls interfere with automated exploitation.#
-# Attack Tuning — EXPLANATION NOTES
+# Attack Tuning 
 
 **Payload Structure**  
 Each SQLMap payload consists of a vector (the injected SQL logic) and boundaries (prefixes and suffixes). Correct boundary placement ensures the vector fits syntactically into the vulnerable SQL query.
@@ -206,7 +206,7 @@ Regular users should avoid aggressive tuning unless necessary. Advanced tuning i
 
 **Methodology Fit**  
 Attack tuning represents the transition from automated discovery to precision exploitation, giving the tester control when default heuristics are insufficient.
-# Database Enumeration — EXPLANATION NOTES
+# Database Enumeration 
 
 **Enumeration Purpose**  
 Enumeration begins after SQL injection exploitability is confirmed. The objective is to systematically extract metadata and data from the backend database.
@@ -247,7 +247,7 @@ Extracted data is stored locally and can be exported in CSV, HTML, or SQLite for
 **Operational Context**  
 Enumeration is the core payoff of SQL injection. The precision and scope of extraction should always align with engagement goals and operational constraints.
 
-# Advanced Database Enumeration — EXPLANATION NOTES
+# Advanced Database Enumeration 
 
 **DB Schema Enumeration**  
 The `--schema` switch retrieves the full database structure, including databases, tables, columns, and data types. This provides a complete architectural overview and helps identify sensitive tables before dumping data.
@@ -282,7 +282,7 @@ Advanced enumeration should be guided by objectives. Blind use of `--all` can ov
 **Methodology Fit**  
 Advanced enumeration represents the final data-exfiltration phase of SQL injection, transforming a confirmed vulnerability into actionable intelligence. 
 
-# Bypassing Web Application Protections — EXPLANATION NOTES
+# Bypassing Web Application Protections
 
 **Anti-CSRF Token Bypass**  
 Applications using anti-CSRF tokens require fresh, per-request values. The `--csrf-token` option instructs SQLMap to automatically extract and refresh token values from responses, enabling continued automation against protected forms.
@@ -322,7 +322,7 @@ Modern protections continuously evolve. Bypassing them often requires layered te
 
 **Methodology Fit**  
 Protection bypassing represents the final obstacle between detection and exploitation, enabling SQLMap to operate effectively against hardened real-world targets.
-# OS Exploitation — EXPLANATION NOTES
+# OS Exploitation 
 
 **OS Exploitation Overview**  
 After confirming SQL injection exploitability, SQLMap can extend the attack beyond the database to the underlying operating system. This includes reading files, writing files, and executing OS commands, depending on DBMS privileges and configuration.

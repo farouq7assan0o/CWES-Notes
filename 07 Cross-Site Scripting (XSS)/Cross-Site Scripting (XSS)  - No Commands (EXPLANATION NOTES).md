@@ -1,4 +1,4 @@
-# Intro to XSS — EXPLANATION NOTES
+# Intro to XSS 
 
 **Introduction**  
 Cross-Site Scripting (XSS) is one of the most common web application vulnerabilities and stems from improper handling of user-controlled input. Although XSS does not directly compromise the backend server, its prevalence and ability to impact users at scale make it a consistently medium-risk issue that must be addressed proactively.
@@ -13,7 +13,7 @@ XSS enables attackers to execute arbitrary JavaScript in a victim’s browser. T
 Stored XSS is the most severe form because the payload is persisted and automatically delivered to multiple users. Reflected XSS relies on immediate reflection of input in server responses and typically requires user interaction (e.g., clicking a crafted link). DOM-based XSS occurs entirely in client-side JavaScript, where user input is processed and rendered without server involvement, making it harder to detect with traditional server-side testing.
 
 Understanding these distinctions is critical because each XSS type requires different detection techniques, exploitation methods, and prevention strategies.#
-# Stored XSS — EXPLANATION NOTES
+# Stored XSS
 
 **Stored XSS**  
 Stored (persistent) XSS happens when your injected input is saved server-side (commonly in a database) and later rendered back into a page without proper output encoding/sanitization. Because it re-triggers on refresh and affects every visitor, it’s typically the highest-impact XSS type.
@@ -29,7 +29,7 @@ Browsers or contexts sometimes block `alert()`, so alternate “obvious effect�
     
 
 For the lab’s cookie-based flag prompt, you use the same script tag pattern but swap the JavaScript expression to show cookies (i.e., `document.cookie`) instead of origin.
-# Stored XSS — EXPLANATION NOTES
+# Stored XSS 
 
 **XSS Testing Payloads**  
 Stored XSS occurs when attacker-controlled input is saved server-side and later rendered to users without proper output encoding.  
@@ -48,7 +48,7 @@ This instance is shared across users; persistent payloads will execute for any v
 
 **Flag Payload**  
 Replacing `window.origin` with `document.cookie` extracts cookies accessible to JavaScript for the current origin, demonstrating the real impact of Stored XSS (session theft).
-# Reflected XSS — EXPLANATION NOTES
+# Reflected XSS
 
 **Hack The Box Academy**  
 This section is about non-persistent XSS, specifically Reflected XSS, where the payload is processed by the server and reflected back in the response without being properly sanitized.
@@ -71,7 +71,7 @@ The payload appears inside the error message response HTML, which is why it exec
 **Flag Payload**  
 Swapping `window.origin` for `document.cookie` makes the alert display the cookie value accessible to JavaScript for that origin.
 
-# DOM XSS — EXPLANATION NOTES
+# DOM XSS
 
 **Hack The Box Academy**  
 This section covers DOM-based XSS, a non-persistent XSS type fully handled in the browser without server interaction.
@@ -93,7 +93,7 @@ The sink is where the input is written into the DOM. Using `innerHTML` without s
 
 **Flag Payload**  
 Replacing `window.origin` with `document.cookie` causes the payload to display cookies accessible to JavaScript, demonstrating session compromise via DOM-based XSS.
-# XSS Discovery — EXPLANATION NOTES
+# XSS Discovery 
 
 **Hack The Box Academy**  
 This section is about finding XSS, not exploiting it: understanding _where_ inputs enter, _how_ they get transformed, and _where_ they end up in the browser.
@@ -121,7 +121,7 @@ XSS isn’t only form fields and URL params. If the app reflects request metadat
 
 **Courses Mentioned**  
 These are deeper follow-ons for code review and whitebox approaches, where you trace input handling end-to-end to craft a context-perfect payload—often the most reliable way to find XSS in mature apps.
-# Defacing — EXPLANATION NOTES
+# Defacing 
 
 **Hack The Box Academy**  
 This section demonstrates practical exploitation of Stored XSS by visually altering a web page for all visitors.
@@ -146,7 +146,7 @@ Attackers typically inject simple, high-contrast HTML with a short message and l
 
 **Final Defacement Payload**  
 The HTML is minified into a single line and injected via XSS, making the change persistent and visible to all visitors while the original source code remains underneath.
-# XSS Phishing — EXPLANATION NOTES
+# XSS Phishing 
 
 **Target Paths**  
 `/phishing` reflects user input into HTML, enabling reflected XSS.  

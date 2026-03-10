@@ -1,4 +1,4 @@
-# SQL Injection Fundamentals — EXPLANATION NOTES
+# SQL Injection Fundamentals 
 
 **Introduction**
 
@@ -16,7 +16,7 @@ The impact of SQL injection can be severe. Attackers may extract sensitive data 
 
 SQL injection vulnerabilities stem from insecure coding practices and excessive database privileges. Preventive measures focus on proper input handling, including sanitization and validation, as well as secure coding patterns such as parameterized queries. Restricting database user privileges limits the damage if an injection does occur. These mitigation strategies are covered in later sections of the module.
 
-# SQL Injection Fundamentals — Intro to Databases 
+# SQL Injection Fundamentals
 
 **Intro to Databases**
 
@@ -30,7 +30,7 @@ This section defines a DBMS as the software layer responsible for creating, mana
 
 This section explains the multi-tier architecture used by most database-backed applications. It clarifies how client-side applications (Tier I) send user-driven events to middleware (Tier II), which translates them into database queries. The DBMS executes these queries and returns results or errors. The explanation highlights where SQL injection typically occurs: at the boundary where user input is transformed into database queries. It also notes deployment choices, such as separating the application server and database for performance and scalability.
 
-# **SQL Injection Fundamentals — Types of Databases — EXPLANATION NOTES**
+# Types of Databases 
 
 **Types of Databases**
 
@@ -43,7 +43,7 @@ This section explains relational databases as schema-driven systems that store d
 **Non-relational Databases**
 
 This section explains NoSQL databases as schema-less systems designed for flexibility and scalability. It describes how data is stored using alternative models such as key-value, document-based, wide-column, and graph structures. The JSON example demonstrates how records are stored as nested objects rather than rows in tables. The section also clearly differentiates SQL injection from NoSQL injection, noting that NoSQL systems have their own distinct injection techniques that are addressed separately in later material.
-# **SQL Injection Fundamentals — Intro to MySQL — EXPLANATION NOTES**
+# Intro to MySQL
 
 **Structured Query Language (SQL)**
 
@@ -65,7 +65,7 @@ This section explains how data is stored in tables composed of rows and columns.
 
 This section explains common table and column constraints that enforce data integrity, such as auto-incrementing identifiers, required fields, uniqueness constraints, default values, and primary keys. It highlights how these properties define record identity and relationships, which is critical for understanding how attackers target specific columns or records during SQL injection attacks.
 
-# **SQL Injection Fundamentals — SQL Statements — EXPLANATION NOTES**
+# SQL Statements 
 
 **INSERT Statement**
 
@@ -87,7 +87,7 @@ This section explains how table structures can be modified after creation. It co
 
 This section explains how existing records can be modified conditionally. It emphasizes the importance of the WHERE clause in limiting affected rows. UPDATE queries are commonly abused in SQL injection to overwrite credentials, reset passwords, or alter application logic by changing stored values.
 
-# **SQL Injection Fundamentals — Query Results — EXPLANATION NOTES**
+# Query Results 
 
 **Sorting Results**
 
@@ -104,7 +104,7 @@ This section explains conditional filtering of query results using `WHERE`. It s
 **LIKE Clause**
 
 This section explains pattern matching using `LIKE`, `%`, and `_`. It demonstrates how partial matches and fixed-length matches work. In SQL injection, `LIKE` is frequently abused for blind enumeration of values when exact matches are unknown.
-# **SQL Injection Fundamentals — SQL Operators — EXPLANATION NOTES**
+# SQL Operators 
 
 **AND Operator**
 
@@ -129,7 +129,7 @@ This section demonstrates how logical and comparison operators are applied withi
 **Multiple Operator Precedence**
 
 This section explains how MySQL evaluates complex expressions based on operator precedence. Understanding evaluation order is essential in SQL injection, as subtle changes in arithmetic or logical grouping can drastically alter query behavior and results.
-# **SQL Injection Fundamentals — Intro to SQL Injections — EXPLANATION NOTES**
+# Intro to SQL Injections 
 
 **Use of SQL in Web Applications**
 
@@ -152,7 +152,7 @@ This section explains why malformed injections cause SQL syntax errors and why a
 This section categorizes SQL injection techniques based on how query output is retrieved. It distinguishes between in-band, blind, and out-of-band SQL injection, and further breaks them down into union-based, error-based, boolean-based, and time-based approaches. It clarifies that the module will focus on union-based SQL injection as an introductory exploitation method.
 
 ![[Pasted image 20260126005717.png]]
-# **SQL Injection Fundamentals — Subverting Query Logic — EXPLANATION NOTES**
+# Subverting Query Logic 
 
 **Authentication Bypass**
 
@@ -173,7 +173,7 @@ By injecting an always-true condition into either the username or password field
 **Attacker Mindset**
 
 The attacker focuses on forcing a true condition rather than guessing credentials. Understanding operator precedence and query structure allows authentication to be bypassed without knowing valid usernames or passwords.
-# **SQL Injection Fundamentals — Using Comments — EXPLANATION NOTES**
+# Using Comments 
 
 **Comments**
 
@@ -191,7 +191,7 @@ This section demonstrates how applications may use parentheses to enforce strict
 
 The attacker adapts payloads based on query structure, ensuring syntax validity while neutralizing security conditions. Comments are a powerful tool for removing unwanted logic without needing to satisfy it, especially when combined with operator precedence and parenthesis handling.
 
-# **SQL Injection Fundamentals — Union Clause — EXPLANATION NOTES**
+# Union Clause 
 
 **Union**
 
@@ -205,7 +205,7 @@ This section explains the key constraint for using `UNION`: both `SELECT` statem
 
 This section explains the attacker workaround when they want fewer “real” columns than the original query returns. The attacker pads the remaining required columns with filler values (“junk”), numbers, or `NULL` to satisfy the column count requirement. Using numbers is convenient because it also helps track which output column is being reflected on the page (useful later for finding the injectable/visible column).
 
-# **SQL Injection Fundamentals — Union Injection — EXPLANATION NOTES**
+# Union Injection 
 
 **Union Injection Overview**
 
@@ -226,7 +226,7 @@ Once a visible column is identified, the attacker replaces the placeholder value
 **Attacker Mindset**
 
 Union injection is about precision: matching column counts, respecting data types, and placing payloads only in reflected columns. Numbers and simple SQL functions are used first to map behavior before attempting full database enumeration.
-# **SQL Injection Fundamentals — Database Enumeration — EXPLANATION NOTES**
+# Database Enumeration 
 
 **MySQL Fingerprinting**
 
@@ -251,7 +251,7 @@ This section shows how to enumerate column names for a target table using `INFOR
 **Data**
 
 This section demonstrates dumping actual contents from a target table by selecting its columns directly (e.g., `username`, `password`) and referencing it with the database-qualified name (e.g., `dev.credentials`) to avoid ambiguity when the current database differs.
-# **SQL Injection Fundamentals — Reading Files — EXPLANATION NOTES**
+# Reading Files
 
 **Privileges**
 
@@ -270,7 +270,7 @@ This section demonstrates checking for high-level privileges (like `super_priv`)
 This section introduces `LOAD_FILE()` as the MySQL/MariaDB function used to read files from disk. It highlights two requirements: the DB user must have the needed privilege (often `FILE`), and the OS user running MySQL must be able to read the target file. It also shows how attackers can use this to read sensitive system files (e.g., `/etc/passwd`) or web application source code (e.g., `/var/www/html/search.php`), potentially exposing credentials and further attack paths.
 
 
-# SQL Injection Fundamentals — EXPLANATION NOTES
+# SQL Injection Fundamentals 
 
 **CHECKING FILE WRITE CONFIGURATION**
 

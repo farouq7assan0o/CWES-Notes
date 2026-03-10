@@ -1,4 +1,4 @@
-# Intro to File Inclusions — EXPLANATION NOTES
+# Intro to File Inclusions 
 
 ## PHP FILE INCLUSION FUNCTIONS
 
@@ -141,7 +141,7 @@ This is why parameters such as `page`, `file`, `template`, and `language` are co
 ---
 
 If you want, I can also show you the **very important mental model HTB expects for LFI enumeration (the 5-step attacker workflow used in real HTB boxes)** which makes the next sections much easier.
-# LFI Attacker Workflow — EXPLANATION NOTES
+# LFI Attacker Workflow 
 
 ## COMMON LFI PARAMETERS
 
@@ -202,7 +202,7 @@ If the application includes the file path directly without validation, the serve
 This confirms the presence of a Local File Inclusion vulnerability.
 
 Once confirmed, attackers move to the next stage: expanding file access, discovering application source code, and potentially escalating the vulnerability into remote code execution.
-# Local File Inclusion (LFI) — EXPLANATION NOTES
+# Local File Inclusion (LFI) 
 
 **TARGET URLS**  
 These examples show the exact progression from normal functionality to file inclusion testing. The key idea is that the application changes content based on a user-controlled `language` value, which makes it a natural candidate for inclusion testing.
@@ -259,7 +259,7 @@ A different feature then uses that stored value to build a file path, causing th
 These are the specific lab targets shown in the exercise. One question focuses on identifying a username from a system file, while the other targets a flag file in a known directory.
 
 From a methodology perspective, they reinforce the two common LFI goals in early exploitation: confirm file read access using predictable system files, then pivot to sensitive application or lab-specific files once inclusion is proven.
-# Basic Bypasses — EXPLANATION NOTES
+# Basic Bypasses 
 
 **PHP FILTER SNIPPETS**  
 These examples show two very common defensive patterns: naive substring removal and regex-based path allowlisting.
@@ -326,7 +326,7 @@ The `./languages/` path is especially important because it represents an approve
 These tools are included because the section explicitly relies on encoding helpers for crafting bypasses.
 
 They are not part of the vulnerability itself, but they support the attacker workflow by making precise transformations easy and repeatable. In practice, encoding tools are most useful when the bypass depends on exact byte representations rather than visually obvious traversal strings.
-# PHP Filters — EXPLANATION NOTES
+# PHP Filters 
 
 ## FUZZING FOR PHP FILES
 
@@ -394,7 +394,7 @@ The fuzzing tool automates file discovery by sending large numbers of requests u
 
 The decoding utility is used to convert the encoded file contents back into readable source code for analysis.
 
-# PHP Wrappers — EXPLANATION NOTES
+# PHP Wrappers 
 
 **PHP CONFIGURATION FILE PATHS**  
 These are the standard locations used to inspect PHP runtime settings. In this section, they matter because wrapper-based execution depends on configuration options that may or may not be enabled.
@@ -490,7 +490,7 @@ These tools support the workflow rather than define the vulnerability itself. Th
 Together, they make wrapper testing faster, more repeatable, and easier to validate during exploitation.
 
 
-# Remote File Inclusion (RFI) — EXPLANATION NOTES
+# Remote File Inclusion (RFI)
 
 **RFI-CAPABLE FUNCTIONS**  
 These are the inclusion mechanisms from the section that can accept remote resources. The important distinction is whether they only read remote content or also execute it once included.
@@ -531,7 +531,7 @@ The root path matters because the lab objective is to search under top-level dir
 These support the exploitation workflow by providing hosting, transport, and verification. The server components deliver the payload, while the command-line utilities help confirm environment configuration and test inclusion behavior.
 
 Their role in the methodology is operational: make payload delivery reliable, adaptable across protocols, and easy to validate when one transport path fails or is filtered.
-# LFI and File Uploads — EXPLANATION NOTES
+# LFI and File Uploads 
 
 ## PHP EXECUTION-CAPABLE FUNCTIONS
 
@@ -621,7 +621,7 @@ While the basic upload technique requires minimal tooling, wrapper-based methods
 
 
 
-# Log Poisoning — EXPLANATION NOTES
+# Log Poisoning 
 
 ## EXECUTION-CAPABLE FUNCTIONS
 
@@ -742,6 +742,86 @@ The session identifier parameter is used to locate the corresponding session fil
 The request client allows attackers to craft requests with custom headers. The interception proxy enables manipulation of HTTP traffic in real time.
 
 Both tools help inject payloads into logs or session files and verify whether the poisoning attempt was successful.
+
+# Automated Scanning 
+
+## FUZZ PARAMETERS
+
+Parameter fuzzing attempts to discover hidden GET or POST parameters that are not visible in the user interface. Many applications expose parameters internally that developers did not expect users to manipulate.
+
+These hidden parameters are often poorly validated and may directly interact with file inclusion functions. Identifying them expands the attack surface beyond visible inputs.
+
+## PARAMETER DISCOVERY RESULT
+
+Once fuzzing reveals a parameter, it becomes a candidate for vulnerability testing. In the context of file inclusion attacks, parameters that reference pages, languages, templates, or files are particularly interesting.
+
+The discovered parameter can then be tested with known LFI payload patterns.
+
+## LFI WORDLIST FUZZING
+
+Instead of manually trying different traversal payloads, a wordlist can automate testing thousands of common inclusion paths and bypass techniques.
+
+These wordlists include encoded traversal sequences, directory escapes, and references to sensitive system files. Automated testing allows attackers to quickly identify which payload patterns succeed against the target.
+
+## COMMON LFI PAYLOAD RESULTS
+
+Successful payloads typically reference known system files or configuration files that exist on most servers. These files are used as confirmation targets because their contents are predictable.
+
+Different variations of traversal and encoding techniques are included in the wordlist to bypass input filters or path normalization protections.
+
+## WORDLISTS
+
+Wordlists provide collections of known payload patterns or filesystem paths. Using curated lists increases the probability of discovering vulnerabilities quickly.
+
+Different lists serve different purposes, such as parameter discovery, file path enumeration, or server configuration discovery.
+
+## FUZZ WEBROOT PATH
+
+In some exploitation scenarios, attackers must know the absolute webroot path of the application. This information helps locate uploaded files, configuration files, or other sensitive resources.
+
+Fuzzing common webroot directories can reveal where the application is stored on the server filesystem.
+
+## WEBROOT RESULT
+
+Once the webroot directory is identified, attackers can use it to construct precise absolute paths during LFI exploitation.
+
+This is especially useful when relative traversal paths cannot reach the desired file location.
+
+## FUZZ SERVER FILES
+
+Server configuration files and system files often contain useful information such as log locations, server settings, credentials, or internal paths.
+
+Automated scanning of common system file locations helps attackers identify readable files that can reveal sensitive operational details.
+
+## DISCOVERED FILES
+
+The discovered files typically include operating system configuration files and web server configuration files.
+
+Reading these files can reveal server architecture, user accounts, environment variables, and internal paths that may enable further exploitation.
+
+## READ APACHE CONFIG
+
+Server configuration files contain important operational information such as the webroot directory and log file locations.
+
+Accessing these files through LFI can provide critical intelligence for subsequent attack stages like log poisoning or file upload exploitation.
+
+## READ APACHE ENV VARIABLES
+
+Some configuration values reference environment variables rather than explicit paths. Reading the environment variable configuration file reveals their actual values.
+
+This step helps attackers resolve abstract configuration values into real filesystem paths.
+
+## SERVER CONFIG VALUES
+
+These configuration values provide key operational information about the web server. They identify where application files are stored and where logs are written.
+
+Knowing these paths allows attackers to target logs for poisoning attacks or locate files for inclusion.
+
+## TOOLS
+
+Automated tools can accelerate vulnerability discovery and exploitation by performing many tests quickly.
+
+However, they are generally less flexible than manual testing. Skilled attackers often combine automated scanning with manual analysis to identify vulnerabilities that automated tools might miss.
 #
 #
 #
