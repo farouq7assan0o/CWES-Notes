@@ -822,6 +822,8 @@ Knowing these paths allows attackers to target logs for poisoning attacks or loc
 Automated tools can accelerate vulnerability discovery and exploitation by performing many tests quickly.
 
 However, they are generally less flexible than manual testing. Skilled attackers often combine automated scanning with manual analysis to identify vulnerabilities that automated tools might miss.
+
+
 #
 #
 #

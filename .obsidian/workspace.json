@@ -6,43 +6,40 @@
       {
         "id": "d6a806e4eb28a885",
         "type": "tabs",
-        "dimension": 56.963087248322154,
+        "dimension": 59.52012383900929,
         "children": [
-          {
-            "id": "aaa8f357fa543d9a",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "16  File Inclusions/File Inclusions - Commands.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "File Inclusions - Commands"
-            }
-          },
           {
             "id": "c73117f49320c3a1",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "README.md",
+                "file": "19 Attacking Common Applications/Attacking Common Applications   - Commands.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "README"
+              "title": "Attacking Common Applications   - Commands"
+            }
+          },
+          {
+            "id": "ab3eb702e1b8017d",
+            "type": "leaf",
+            "state": {
+              "type": "release-notes",
+              "state": {
+                "currentVersion": "1.12.7"
+              },
+              "icon": "lucide-book-up",
+              "title": "Release Notes 1.12.7"
             }
           }
-        ],
-        "currentTab": 1
+        ]
       },
       {
         "id": "ef8ac35093266f33",
         "type": "tabs",
-        "dimension": 43.03691275167785,
+        "dimension": 40.47987616099071,
         "children": [
           {
             "id": "ed8a971e62a015c1",
@@ -50,12 +47,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "08 SQL Injection Fundamentals/SQL Injection Fundamentals  - No Commands (EXPLANATION NOTES).md",
+                "file": "19 Attacking Common Applications/Attacking Common Applications  - No Commands (EXPLANATION NOTES).md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "SQL Injection Fundamentals  - No Commands (EXPLANATION NOTES)"
+              "title": "Attacking Common Applications  - No Commands (EXPLANATION NOTES)"
             }
           }
         ]
@@ -90,7 +87,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": " ",
+                "query": "tag:#GraphQL",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -115,7 +112,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 200
   },
   "right": {
     "id": "5fc1eff69b8ede0a",
@@ -222,35 +219,42 @@
   },
   "active": "c73117f49320c3a1",
   "lastOpenFiles": [
+    "19 Attacking Common Applications/Attacking Common Applications  - No Commands (EXPLANATION NOTES).md",
+    "19 Attacking Common Applications/Attacking Common Applications   - Commands.md",
+    "18 API Attacks/API Attacks - No Commands (EXPLANATION NOTES).md",
+    "18 API Attacks/API Attacks - Commands.md",
+    "19 Attacking Common Applications",
+    "Note pad.md",
+    "16  File Inclusions/File Inclusions - No Commands (EXPLANATION NOTES).md",
     "Pasted image 20260204003721.png",
+    "17 Attacking GraphQL/Pasted image 20260315122515.png",
+    "17 Attacking GraphQL/Attacking GraphQL - No Commands (EXPLANATION NOTES).md",
+    "17 Attacking GraphQL/Attacking GraphQL - Commands.md",
+    "18 API Attacks/Pasted image 20260315122202.png",
+    "18 API Attacks",
+    "17 Attacking GraphQL/Pasted image 20260315122202.png",
+    "16  File Inclusions/File Inclusions - Commands.md",
+    "17 Attacking GraphQL",
+    "04 Information Gathering - Web Edition/Information Gathering - Web Edition - Commands.md",
+    "04 Information Gathering - Web Edition/Information Gathering - Web Edition - No Commands (EXPLANATION NOTES).md",
+    "08 SQL Injection Fundamentals/SQL Injection Fundamentals  - No Commands (EXPLANATION NOTES).md",
+    "07 Cross-Site Scripting (XSS)/Cross-Site Scripting (XSS)  - No Commands (EXPLANATION NOTES).md",
+    "11 File Upload Attacks/File Upload Attacks  - No Commands (EXPLANATION NOTES).md",
+    "10 Command Injections/Command Injections - No Commands (EXPLANATION NOTES).md",
+    "07 Cross-Site Scripting (XSS)/Cross-Site Scripting (XSS) - Commands.md",
+    "08 SQL Injection Fundamentals/SQL Injection Fundamentals  - Commands.md",
+    "README.md",
     "12 Server-side Attacks/Pasted image 20260203120236.png",
     "12 Server-side Attacks/Server-side Attacks - Commands.md",
     "12 Server-side Attacks/Server-side Attacks - No Commands (EXPLANATION NOTES).md",
     "11 File Upload Attacks/File Upload Attacks - Commands.md",
     "10 Command Injections/Command Injections - Commands.md",
-    "07 Cross-Site Scripting (XSS)/Cross-Site Scripting (XSS) - Commands.md",
     "13 Login Brute Forcing/Pasted image 20260310224517.png",
     "13 Login Brute Forcing/Login Brute Forcing - Commands.md",
     "Pasted image 20260203145024.png",
-    "16  File Inclusions/File Inclusions - Commands.md",
     "15 Web Attacks/Introduction to Web Attacks - Commands.md",
     "14 Broken Authentication/Broken Authentication  - Commands.md",
     "09 SQLMap Essentials/SQLMap Essentials - Commands.md",
-    "08 SQL Injection Fundamentals/SQL Injection Fundamentals  - Commands.md",
-    "01 Web Requests/Web Requests - Commands.md",
-    "README.md",
-    "Note pad.md",
-    "16  File Inclusions/File Inclusions - No Commands (EXPLANATION NOTES).md",
-    "15 Web Attacks/Introdction to Web Attacks - No Commands (EXPLANATION NOTES).md",
-    "14 Broken Authentication/Broken Authentication - No Commands (EXPLANATION NOTES).md",
-    "13 Login Brute Forcing/Login Brute Forcing - No Commands (EXPLANATION NOTES).md",
-    "11 File Upload Attacks/File Upload Attacks  - No Commands (EXPLANATION NOTES).md",
-    "10 Command Injections/Command Injections - No Commands (EXPLANATION NOTES).md",
-    "09 SQLMap Essentials/SQLMap Essentials - No Commands (EXPLANATION NOTES).md",
-    "08 SQL Injection Fundamentals/SQL Injection Fundamentals  - No Commands (EXPLANATION NOTES).md",
-    "07 Cross-Site Scripting (XSS)/Cross-Site Scripting (XSS)  - No Commands (EXPLANATION NOTES).md",
-    "06 JavaScript Deobfuscation/JavaScript Deobfuscation - Commands.md",
-    "06 JavaScript Deobfuscation/JavaScript Deobfuscation - No Commands (EXPLANATION NOTES).md",
     "06 JavaScript Deobfuscation",
     "04 Information Gathering - Web Edition",
     "03 Using Web Proxies",
@@ -260,12 +264,6 @@
     "Pasted image 20260223005512.png",
     "machines/Pasted image 20260225125747.png",
     "machines/Pasted image 20260225125716.png",
-    "machines/Pasted image 20260225125705.png",
-    "machines/Pasted image 20260225111104.png",
-    "machines/Pasted image 20260225001140.png",
-    "Untitled 1",
-    "15 Web Attacks",
-    "16  File Inclusions",
-    "machines"
+    "Untitled 1"
   ]
 }
