@@ -109,14 +109,24 @@ http://localhost/FUZZ
 ```bash
 ffuf -w /usr/share/seclists/Discovery/Web-Content/directory-list-2.3-medium.txt -u http://IP:PORT/FUZZ
 ```
+ffuf -w /usr/share/seclists/Discovery/Web-Content/directory-list-2.3-medium.txt -u http://20.174.3.2`/FUZZ
 
+`
 **File Fuzzing**
 
 ```bash
 ffuf -w /usr/share/seclists/Discovery/Web-Content/common.txt -u http://IP:PORT/w2ksvrus/FUZZ -e .php,.html,.txt,.bak,.js -v
 ```
 
+
+ffuf -w /usr/share/seclists/Discovery/Web-Content/common.txt -u http://172.16.16.147:5121//FUZZ -e .php,.html,.txt,.bak,.js -v
+
 **Tools**
+
+
+ffuf -w /usr/share/seclists/Discovery/Web-Content/directory-list-2.3-medium.txt -u https://scc1.jaf.mil.jo/FUZZ  
+
+ffuf -w /usr/share/seclists/Discovery/Web-Content/common.txt -u https://scc1.jaf.mil.jo/FUZZ -e .php,.html,.txt,.bak,.js -v
 
 ffuf  
 wfuzz  
@@ -193,6 +203,12 @@ curl http://IP:PORT/get.php
 curl http://IP:PORT/get.php?x=1
 ```
 
+```
+git clone https://github.com/WebFuzzForge/wenum
+cd wenum
+pip install -r requirements.txt
+python3 wenum.py
+```
 **GET Parameter Fuzzing**
 
 ```bash
@@ -635,4 +651,38 @@ Server-Side Request Forgery (SSRF)
 
 
 #
+ffuf -w /usr/share/seclists/Discovery/Web-Content/directory-list-2.3-medium.txt -u http://154.57.164.70:30580/FUZZ
+
+ffuf -w /usr/share/seclists/Discovery/Web-Content/common.txt -u http://154.57.164.70:30580/admin/FUZZ -e .php,.html,.txt,.bak,.js -v
+
+http://154.57.164.70:30580/admin/panel.php?accessID=1
+
+wenum -w /usr/share/seclists/Discovery/Web-Content/common.txt --hc 404 -u "http://154.57.164.70:30580/admin/panel.php?accessID=FUZZ"
+
+ffuf -w /usr/share/wordlists/seclists/Discovery/Web-Content/common.txt:FUZZ -u http://154.57.164.70:30580/admin/panel.php?accessID=FUZZ -fs 58
+
+http://154.57.164.70:30580/admin/panel.php?accessID=getaccess
+
+http://FUZZ.fuzzing_fun.htb:30580
+
+gobuster dns -d http://FUZZ.fuzzing_fun.htb:30580 -w /usr/share/seclists/Discovery/DNS/subdomains-top1million-5000.txt
+
+ffuf -c \
+-w /usr/share/seclists/Discovery/DNS/subdomains-top1million-5000.txt:FUZZ \
+-u http://fuzzing_fun.htb:30580/ \
+-H "Host: FUZZ.fuzzing_fun.htb" \
+-fs 250-350
+
+20000.txt
+
+ffuf -w /usr/share/seclists/Discovery/Web-Content/directory-list-2.3-medium.txt -u http://hidden.fuzzing_fun.htb:30580/godeep/
+
+```
+feroxbuster -u http://hidden.fuzzing_fun.htb:30580/godeep/ -w /usr/share/wordlists/seclists/Discovery/Web-Content/common.txt -r -t 50 -k
+```
+
+
 #
+
+
+

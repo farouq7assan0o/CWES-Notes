@@ -1,370 +1,278 @@
-## 0 notifications
+[  
+![HTB Academy Logo](https://academy.hackthebox.com/htb-academy-logo.svg)](https://academy.hackthebox.com/app/dashboard)
 
-![](https://px.ads.linkedin.com/collect/?pid=6883&fmt=gif)
-
-- Home
-- [My Network](https://www.linkedin.com/mynetwork)
-- Jobs
-- [Messaging](https://www.linkedin.com/messaging/)
-- [Notifications](https://www.linkedin.com/notifications/)
-- ![](https://media.licdn.com/dms/image/v2/D4D03AQElOitvhO0zCw/profile-displayphoto-shrink_100_100/B4DZxJpczRIwAY-/0/1770762131535?e=1775692800&v=beta&t=FjICeJyxFvz7YF9qpwtA5NUsuz_xSCy7RX95mfDJnA4)
+- [
     
-    Me
+    Dashboard
+    
+    
+    
+    ](https://academy.hackthebox.com/app/dashboard "Dashboard")
+- [
+    
+    Library
+    
+    
+    
+    ](https://academy.hackthebox.com/app/library "Library")
+- Resources
+    
+
+[](https://roadmap.hackthebox.com/changelog?labels=academy)
+
+685
+
+[
+
+Upgrade
+
+](https://academy.hackthebox.com/app/billing)
+
+![user avatar](data:image/svg+xml,%3c?xml%20version=%271.0%27%20encoding=%27utf-8%27?%3e%3c!--%20Generator:%20Adobe%20Illustrator%2024.1.2,%20SVG%20Export%20Plug-In%20.%20SVG%20Version:%206.00%20Build%200\)%20--%3e%3csvg%20version=%271.1%27%20id=%27Layer_1%27%20xmlns=%27http://www.w3.org/2000/svg%27%20xmlns:xlink=%27http://www.w3.org/1999/xlink%27%20x=%270px%27%20y=%270px%27%20viewBox=%270%200%2032%2033%27%20style=%27enable-background:new%200%200%2032%2033;%27%20xml:space=%27preserve%27%3e%3cstyle%20type=%27text/css%27%3e%20.st0{fill:%239FEF00;}%20%3c/style%3e%3cdesc%3eCreated%20with%20Sketch.%3c/desc%3e%3cpath%20class=%27st0%27%20d=%27M29.6,9.3C29.6,9.3,29.6,9.3,29.6,9.3c0-0.3-0.1-0.6-0.4-0.8c0,0,0,0,0,0c0,0,0,0-0.1-0.1c0,0-0.1,0-0.1-0.1%20c0,0,0,0,0,0L16.6,1.2c0,0-0.1,0-0.1,0C16.3,1,16.1,1,15.9,1c-0.1,0-0.2,0-0.3,0.1c-0.1,0-0.1,0.1-0.2,0.1L3,8.3c0,0,0,0,0,0%20c0,0,0,0,0,0c0,0,0,0,0,0C2.8,8.4,2.8,8.5,2.7,8.6c0,0,0,0,0,0C2.5,8.8,2.4,9,2.4,9.3c0,0,0,0,0,0c0,0,0,0,0,0v14.3%20c0,0.4,0.2,0.8,0.6,1l12.4,7.2c0,0,0,0,0.1,0c0,0,0,0,0,0c0.1,0,0.1,0.1,0.2,0.1c0,0,0,0,0,0c0.1,0,0.2,0,0.2,0c0.1,0,0.2,0,0.2,0%20c0,0,0,0,0,0c0.1,0,0.1,0,0.2-0.1c0,0,0,0,0,0c0,0,0,0,0.1,0L29,24.7c0.4-0.2,0.6-0.6,0.6-1L29.6,9.3C29.6,9.4,29.6,9.3,29.6,9.3z%20M7.3,8.9L15.7,4c0.2-0.1,0.4-0.1,0.5,0l8.4,4.9c0.4,0.2,0.4,0.7,0,0.9l-8.4,4.9c-0.2,0.1-0.4,0.1-0.5,0L7.3,9.8%20C6.9,9.6,6.9,9.1,7.3,8.9z%20M14.5,27.4c0,0.4-0.4,0.7-0.8,0.5L5.3,23C5.1,22.9,5,22.7,5,22.5v-9.7c0-0.4,0.4-0.7,0.8-0.5l8.4,4.9%20c0.2,0.1,0.3,0.3,0.3,0.5V27.4z%20M27,22.5c0,0.2-0.1,0.4-0.3,0.5l-8.4,4.9c-0.4,0.2-0.8-0.1-0.8-0.5v-9.7c0-0.2,0.1-0.4,0.3-0.5%20l8.4-4.9c0.4-0.2,0.8,0.1,0.8,0.5V22.5z%27/%3e%3c/svg%3e)
+
+![Attacking Common Applications](https://cdn.services-k8s.prod.aws.htb.systems/content/modules/avatar/9e65e8b3-9947-447f-b838-69bb9e5bbf35.png)
+
+[Attacking Common Applications 48.48%](https://academy.hackthebox.com/app/module/113)
 
 ---
 
-- For Business
-- [Learning](https://www.linkedin.com/learning/?trk=nav_neptune_learning)
+---
 
-[](https://www.linkedin.com/company/cyberclantm/life/)
-
-[
-
-![Company logo for, CyberClan.](https://media.licdn.com/dms/image/v2/D4E0BAQHmEOoN7HlS9Q/company-logo_100_100/company-logo_100_100/0/1688332300710/cyberclantm_logo?e=1775692800&v=beta&t=N6M9wBaXFP6AgiUXAUzeSLre1c5u3Z3KFFZAej1u1GM)
-
-](https://www.linkedin.com/company/cyberclantm/life/)
-
-[](https://www.linkedin.com/company/cyberclantm/life/)[CyberClan](https://www.linkedin.com/company/cyberclantm/life/)
-
-Tier I SOC Analyst[](https://www.linkedin.com/jobs/view/4383151374/?trackingId=IcgaXLiwTrOFAwoJtmAQ8A%3D%3D#)
-
-United Kingdom · 6 days ago · Over 100 applicants
-
-Promoted by hirer · **Actively reviewing applicants**
-
-[Remote](https://www.linkedin.com/jobs/view/4383151374/?trackingId=IcgaXLiwTrOFAwoJtmAQ8A%3D%3D)
-
-[Full-time](https://www.linkedin.com/jobs/view/4383151374/?trackingId=IcgaXLiwTrOFAwoJtmAQ8A%3D%3D)
-
-[Easy Apply](https://www.linkedin.com/jobs/view/4383151374/apply/?openSDUIApplyFlow=true&trackingId=IcgaXLiwTrOFAwoJtmAQ8A%3D%3D)
-
-Save
-
-## Use AI to assess how you fit
-
-- [
+- ---
     
-    Show match details
-    
-    
-    
-    ](https://www.linkedin.com/preload/guideOverlay/?interop=guideOverlay&query=Show+match+details&originalThreadMailbox=urn%3Ali%3AguideJobs%3AACoAAFHT_zoB09fvGg0R0DZPkn2oJazcJ5lTAJg&conversationUrn=urn%3Ali%3Afsu_guideConversationV2%3Aurn%3Ali%3Aguide%3A87abf072d136d5184b97e2296ff0a164c9b56d5222384263c401ae4be9e3bbd8%7Eurn%3Ali%3AguideJobs%3AACoAAFHT_zoB09fvGg0R0DZPkn2oJazcJ5lTAJg&contextUrns=urn%3Ali%3Aguide%3A87abf072d136d5184b97e2296ff0a164c9b56d5222384263c401ae4be9e3bbd8&intent=GuideIntent_JOB_SEEKING_AGENT&originalIntent=GuideIntent_JOB_SEEKING_AGENT&trackingId=UFaPHj%2BvQyyEPiVVA89XIQ%3D%3D&customContext=subIntent%7E%3AJobSeekerAgentIntent_JOB_FIT_EXPLANATION%2CjobPostingId%7E%3A4383151374%2ChasHistory%7E%3Afalse&pageContextJobPostingUrns=urn%3Ali%3Afsd_jobPosting%3A4383151374)
-    
-- [
-    
-    Tailor my resume
-    
-    
-    
-    ](https://www.linkedin.com/job-apply-resources/?jobPostingId=4383151374)
-    
-- [
-    
-    Create cover letter
-    
-    
-    
-    ](https://www.linkedin.com/preload/guideOverlay/?interop=guideOverlay&query=Create+cover+letter&originalThreadMailbox=urn%3Ali%3AguideJobs%3AACoAAFHT_zoB09fvGg0R0DZPkn2oJazcJ5lTAJg&conversationUrn=urn%3Ali%3Afsu_guideConversationV2%3Aurn%3Ali%3Aguide%3A87abf072d136d5184b97e2296ff0a164c9b56d5222384263c401ae4be9e3bbd8%7Eurn%3Ali%3AguideJobs%3AACoAAFHT_zoB09fvGg0R0DZPkn2oJazcJ5lTAJg&contextUrns=urn%3Ali%3Aguide%3A87abf072d136d5184b97e2296ff0a164c9b56d5222384263c401ae4be9e3bbd8&intent=GuideIntent_JOB_SEEKING_AGENT&originalIntent=GuideIntent_JOB_SEEKING_AGENT&trackingId=qPWkEI9eT0%2Bbv%2BJwCR7tjg%3D%3D&customContext=subIntent%7E%3AJobSeekerAgentIntent_COVER_LETTER%2CjobPostingId%7E%3A4383151374%2ChasHistory%7E%3Afalse&pageContextJobPostingUrns=urn%3Ali%3Afsd_jobPosting%3A4383151374)
-    
-- [
-    
-    Help me stand out
-    
-    
-    
-    ](https://www.linkedin.com/preload/guideOverlay/?interop=guideOverlay&query=Help+me+stand+out&originalThreadMailbox=urn%3Ali%3AguideJobs%3AACoAAFHT_zoB09fvGg0R0DZPkn2oJazcJ5lTAJg&conversationUrn=urn%3Ali%3Afsu_guideConversationV2%3Aurn%3Ali%3Aguide%3A87abf072d136d5184b97e2296ff0a164c9b56d5222384263c401ae4be9e3bbd8%7Eurn%3Ali%3AguideJobs%3AACoAAFHT_zoB09fvGg0R0DZPkn2oJazcJ5lTAJg&contextUrns=urn%3Ali%3Aguide%3A87abf072d136d5184b97e2296ff0a164c9b56d5222384263c401ae4be9e3bbd8&intent=GuideIntent_JOB_SEEKING_AGENT&originalIntent=GuideIntent_JOB_SEEKING_AGENT&trackingId=StB5viScTjmu4QPi35uMXg%3D%3D&customContext=subIntent%7E%3AJobSeekerAgentIntent_JOB_RECOMMENDED_ACTIONS%2CjobPostingId%7E%3A4383151374%2ChasHistory%7E%3Afalse&pageContextJobPostingUrns=urn%3Ali%3Afsd_jobPosting%3A4383151374)
+    ---
     
 
-## About the job
+Section 17 / 33
 
-**Overall Purpose**
+[Go to Questions](https://academy.hackthebox.com/app/module/113/section/1216#questions-list)
 
-Our SOC Analysts form the first line of defence within our cyber security operations. You will be responsible for monitoring and assessing security events, mitigating and defending against malicious activity, and adapting to an evolving threat landscape. This role operates as a triage specialist, managing and configuring security tools, containing and remediating attacks, and preventing unauthorised access to critical systems and data.
-
-This position requires flexibility to work shifts (including unsociable hours, weekends, and bank holidays where these fall within your rota) as part of a 24/7 operational team.
-
-**Principal Duties and Responsibilities**
-
-- Monitor and identify cyber security threats and SIEM alerts that pose, or may pose, a risk to clients.
-- Triage alerts across a wide range of security controls and determine urgency, escalating to Tier 2 where appropriate.
-- Ensure investigation steps are clearly documented and escalated accurately when required.
-- Provide Tier 1 resolution for basic security incidents, including initial reporting, follow‑ups, and requests for further information or action.
-- Communicate directly with CyberClan customers regarding security incidents, emerging threats, and related matters.
-- Produce and maintain documentation relevant to the SOC and the role.
-- Contribute to continual improvement of the SOC knowledge base.
-- Collaborate with CyberClan’s global teams during incident response activities.
-- Support research into global security events, issues, and trends, producing advisories for customers where relevant.
-- Manage and configure security monitoring tools.
-- Investigate intrusion attempts and conduct in‑depth exploit analysis.
-- Perform cyber threat research and analysis to strengthen network security.
-- Assist in defining, testing, and operating new processes or technologies introduced to the SOC.
-- Provide analytical insights on client network traffic patterns relating to malware and other threats.
-- Manage and update service requests and incidents to ensure Service Level Agreements (SLAs) are met.
-- Continuously develop technical and personal skills and support the development of colleagues.
-- Proactively contribute to business KPIs.
-- Adhere to all Information Security and company policies.
-- Engage with strategic incident response and threat intelligence partners.
-- Undertake additional responsibilities, training, and tasks as reasonably requested by line management.
-- Conduct periodic assurance reviews and produce associated reports.
-- Participate in internal security awareness initiatives and training programme.
-
-**Person Specification**
-
-**Qualifications**
-
-- Bachelor’s degree in a relevant field (e.g., Computer Science, Information Technology, Cyber Security) or equivalent professional experience.
-- Security+ or equivalent certification (e.g., CompTIA CySA+, GSEC).
-- ITIL Foundation certification.
-
-**Skills, Knowledge, and Experience**
-
-- Experience using SOC tooling to identify and analyse threats.
-- Familiarity with collaboration tools.
-- Strong analytical mindset and structured approach to problem‑solving.
-- Previous SOC analysis experience is advantageous.
-- Willingness to share expertise and support team knowledge growth.
-- Understanding of IT systems, networking, and the wider threat landscape, including:
-- Network fundamentals (OSI model, TCP/IP, DNS, HTTPS, firewall logs).
-- Cloud platforms (AWS, Google Cloud, Azure).
-- Active Directory, Group Policies, PowerShell.
-- Endpoint protection technologies (AV, web filtering, ATP, encryption).
-- IDS/IPS systems.
-- SIEM platforms.
-- SOAR experience is an advantage.
-- Understanding of malware capabilities, attack vectors, and impacts.
-
-**Personal Qualities**
-
-- Excellent interpersonal and customer service skills.
-- Ability to communicate technical information clearly to non‑technical stakeholders.
-- Genuine enthusiasm for working in cyber security.
-- Strong written communication skills for documenting systems, processes, and incidents.
-- Ability to identify and suggest improvements.
-- Strong analytical and problem‑solving abilities.
-- Adaptability to organisational change and ability to work independently under pressure.
-- Proven ability to manage a varied workload effectively
-- .
-
-Cyberclan is committed to equal pay for equal work in its compensation practices. Applicants selected to move forward in the hiring process are subject to background checks, including but not limited to criminal record, credit, and/or reference checks.,
-
-**Additional Information**
-
-This role may require a flexible working pattern, including shifts, weekends, and evenings. We are committed to fair and transparent scheduling practices and fostering a collaborative working environment.
-
-## Set alert for similar jobs
-
-Security Operations Center Analyst, United Kingdom
-
-Off
-
-## See how you compare to other applicants
-
-### Based on LinkedIn data. Excludes subsidiaries.
-
-### Applicants for this job
-
-1213
-
-Applicants
-
-185
-
-Applicants in the past day
-
-### Applicant seniority level
-
-66% Entry level people applied for this job
-
-24% Senior level people applied for this job
-
-2% Manager level people applied for this job
-
-### Applicant education level
-
-26%
-
-have a Bachelor's Degree (Similar to you)
-
-21%
-
-have a Master's Degree
-
-12%
-
-have a Bachelor of Science
-
-41%
-
-have other degrees
-
-## Exclusive Job Seeker Insights about CyberClan
-
-### Powered by Bing
-
-The latest hiring trend
-
-76
-
-Total employees
-
-7%
-
-Company-wide
-
-2 year growth
-
-13%
-
-Information Technology
-
-2 year growth
-
-#### Chart
-
-Chart with 25 data points.
-
-The chart has 1 X axis displaying Time. Data ranges from 2024-03-01 00:00:00 to 2026-03-01 00:00:00.
-
-The chart has 1 Y axis displaying values. Data ranges from 70 to 77.
-
-End of interactive chart.
-
-Median employee tenure: **2.7 years**
+# Gitlab - Discovery & Enumeration
 
 ---
 
-[Show Premium Insights](https://www.linkedin.com/company/cyberclantm/insights/?insightType=HEADCOUNT)
+[GitLab](https://about.gitlab.com/) is a web-based Git-repository hosting tool that provides wiki capabilities, issue tracking, and continuous integration and deployment pipeline functionality. It is open-source and originally written in Ruby, but the current technology stack includes Go, Ruby on Rails, and Vue.js. Gitlab was first launched in 2014 and, over the years, has grown into a 1,400 person company with $150 million revenue in 2020. Though the application is free and open-source, they also offer a paid enterprise version. Here are some quick [stats](https://about.gitlab.com/company/) about GitLab:
 
-## About the company
+- At the time of writing, the company has 1,466 employees
+- Gitlab has over 30 million registered users located in 66 countries
+- The company publishes most of its internal procedures and OKRs publicly on their website
+- Some companies that use GitLab include Drupal, Goldman Sachs, Hackerone, Ticketmaster, Nvidia, Siemens, and [more](https://about.gitlab.com/customers/)
 
-[
+GitLab is similar to GitHub and BitBucket, which are also web-based Git repository tools. A comparison between the three can be seen [here](https://stackshare.io/stackups/bitbucket-vs-github-vs-gitlab).
 
-![](https://media.licdn.com/dms/image/v2/D4E0BAQHmEOoN7HlS9Q/company-logo_100_100/company-logo_100_100/0/1688332300710/cyberclantm_logo?e=1775692800&v=beta&t=N6M9wBaXFP6AgiUXAUzeSLre1c5u3Z3KFFZAej1u1GM)
+During internal and external penetration tests, it is common to come across interesting data in a company's GitHub repo or a self-hosted GitLab or BitBucket instance. These Git repositories may just hold publicly available code such as scripts to interact with an API. However, we may also find scripts or configuration files that were accidentally committed containing cleartext secrets such as passwords that we may use to our advantage. We may also come across SSH private keys. We can attempt to use the search function to search for users, passwords, etc. Applications such as GitLab allow for public repositories (that require no authentication), internal repositories (available to authenticated users), and private repositories (restricted to specific users). It is also worth perusing any public repositories for sensitive data and, if the application allows, register an account and look to see if any interesting internal repositories are accessible. Most companies will only allow a user with a company email address to register and require an administrator to authorize the account, but as we'll see later on, a GitLab instance can be set up to allow anyone to register and then log in.
 
-CyberClan
+http://gitlab.inlanefreight.local:8081/admin/application_settings/general
 
-41,646 followers
+![GitLab sign-up restrictions page with options for enabling sign-up, requiring admin approval, setting minimum password length, and specifying allowed and denied domains.](https://cdn.services-k8s.prod.aws.htb.systems/content/modules/113/gitlab_signup_res.png)
 
+If we can obtain user credentials from our OSINT, we may be able to log in to a GitLab instance. Two-factor authentication is disabled by default.
 
+http://gitlab.inlanefreight.local:8081/admin/application_settings/general
 
+![GitLab sign-in restrictions page with options for password authentication, two-factor authentication, email notifications for unknown sign-ins, and settings for homepage URL and sign-out path.](https://cdn.services-k8s.prod.aws.htb.systems/content/modules/113/gitlab_2fa.png)
 
+---
 
+## Footprinting & Discovery
 
+We can quickly determine that GitLab is in use in an environment by just browsing to the GitLab URL, and we will be directed to the login page, which displays the GitLab logo.
 
-](https://www.linkedin.com/company/cyberclantm/life/)Follow
+http://gitlab.inlanefreight.local:8081/users/sign_in
 
-Computer and Network Security
+![GitLab login page with fields for username or email and password, and a sign-in button.](https://cdn.services-k8s.prod.aws.htb.systems/content/modules/113/gitlab_login.png)
 
-•
+The only way to footprint the GitLab version number in use is by browsing to the `/help` page when logged in. If the GitLab instance allows us to register an account, we can log in and browse to this page to confirm the version. If we cannot register an account, we may have to try a low-risk exploit such as [this](https://www.exploit-db.com/exploits/49821). We do not recommend launching various exploits at an application, so if we have no way to enumerate the version number (such as a date on the page, the first public commit, or by registering a user), then we should stick to hunting for secrets and not try multiple exploits against it blindly. There have been a few serious exploits against GitLab [12.9.0](https://www.exploit-db.com/exploits/48431) and GitLab [11.4.7](https://www.exploit-db.com/exploits/49257) in the past few years as well as GitLab Community Edition [13.10.3](https://www.exploit-db.com/exploits/49821), [13.9.3](https://www.exploit-db.com/exploits/49944), and [13.10.2](https://www.exploit-db.com/exploits/49951).
 
-51-200 employees
+---
 
-•
+## Enumeration
 
-75 on LinkedIn
+There's not much we can do against GitLab without knowing the version number or being logged in. The first thing we should try is browsing to `/explore` and see if there are any public projects that may contain something interesting. Browsing to this page, we see a project called `Inlanefreight dev`. Public projects can be interesting because we may be able to use them to find out more about the company's infrastructure, find production code that we can find a bug in after a code review, hard-coded credentials, a script or configuration file containing credentials, or other secrets such as an SSH private key or API key.
 
-Since 2006, CyberClan has been delivering the peace of mind our clients need to operate with confidence online. Located across the United States, Canada, the United Kingdom and Australia, CyberClan is a global organization offering first-class Incident Response & Breach Response Services, CyberExtortion, Ransomware, eDiscovery, tailored Risk Management Consultancy Services and unparalleled Managed Security Services. Working with industry-leading companies within a variety of sectors including Local Provincial, State & Federal Governments, Foreign Embassy, Aerospace, Mining, Technology, Insurance, Education, Healthcare, Manufacturing, Retail, Professional Services, Logistics, and Charities. Our services are affordable, adaptable and scalable, meaning that we are able to supply and manage solutions for any size organization. Enterprise Security. Human Response. https://www.cyberclan.com Follow us on Twitter @CyberClanTM Our blog: https://cyberclan.com/knowledge/ 24/7 Incident Hotline: US/CAD: 1800 762 3290 UK: 0800 368 8731 ANZ: 61 1800 413 128 Email: response@cyberclan.com… more
+http://gitlab.inlanefreight.local:8081/explore
 
-Interested in working with us in the future?
+![GitLab Explore page showing projects, groups, and snippets with a project by Administrator titled 'Inlanefreight dev'.](https://cdn.services-k8s.prod.aws.htb.systems/content/modules/113/gitlab_explore.png)
 
-Privately share your profile with our recruiters – you’ll be noted as expressing interest for up to a year and be notified about jobs and updates. [**Learn more**](https://www.linkedin.com/help/linkedin/answer/a1380509/)
+Browsing to the project, it looks like an example project and may not contain anything useful, though it is always worth digging around.
 
-I’m interested
+http://gitlab.inlanefreight.local:8081/root/inlanefreight-dev
 
-Looking for talent?
+![GitLab project overview for 'Inlanefreight dev' showing 44 commits, 1 branch, and a list of files with last commit messages.](https://cdn.services-k8s.prod.aws.htb.systems/content/modules/113/gitlab_example.png)
 
-[Try Hiring Pro](https://www.linkedin.com/talent/job-posting-redirect/?trk=flagship3_job_detail)
+From here, we can explore each of the pages linked in the top left `groups`, `snippets`, and `help`. We can also use the search functionality and see if we can uncover any other projects. Once we are done digging through what is available externally, we should check and see if we can register an account and access additional projects. Suppose the organization did not set up GitLab only to allow company emails to register or require an admin to approve a new account. In that case, we may be able to access additional data.
 
-[
+http://gitlab.inlanefreight.local:8081/users/sign_up
 
-About
+![GitLab registration page with fields for first name, last name, username, email, and password, alongside a description of GitLab as a complete DevOps platform.](https://cdn.services-k8s.prod.aws.htb.systems/content/modules/113/gitlab_signup.png)
 
-](https://about.linkedin.com/)[
+We can also use the registration form to enumerate valid users (more on this in the next section). If we can make a list of valid users, we could attempt to guess weak passwords or possibly re-use credentials that we find from a password dump using a tool such as `Dehashed` as seen in the osTicket section. Here we can see the user `root` is taken. We'll see another example of username enumeration in the next section. On this particular instance of GitLab (and likely others), we can also enumerate emails. If we try to register with an email that has already been taken, we will get the error `1 error prohibited this user from being saved: Email has already been taken`. As of the time of writing, this username enumeration technique works with the latest version of GitLab. Even if the `Sign-up enabled` checkbox is cleared within the settings page under `Sign-up restrictions`, we can still browse to the `/users/sign_up` page and enumerate users but will not be able to register a user.
 
-Accessibility
+Some mitigations can be put in place for this, such as enforcing 2FA on all user accounts, using `Fail2Ban` to block failed login attempts which are indicative of brute-forcing attacks, and even restricting which IP addresses can access a GitLab instance if it must be accessible outside of the internal corporate network.
 
-](https://www.linkedin.com/accessibility/)[
+http://gitlab.inlanefreight.local:8081/users/sign_up
 
-Talent Solutions
+![GitLab registration page with fields for first name, last name, username, email, and password. Error message: 'Username is already taken' for 'root'.](https://cdn.services-k8s.prod.aws.htb.systems/content/modules/113/gitlab_taken2.png)
 
-](https://business.linkedin.com/talent-solutions?trk=flagship_nav&veh=li-footer-lts-control&src=li-footer)[
+Let's go ahead and register with the credentials `hacker:Welcome` and log in and poke around. As soon as we complete registration, we are logged in and brought to the projects dashboard page. If we go to the `/explore` page now, we notice that there is now an internal project `Inlanefreight website` available to us. Digging around a bit, this just seems to be a static website for the company. Suppose this were some other type of application (such as PHP). In that case, we could possibly download the source and review it for vulnerabilities or hidden functionality or find credentials or other sensitive data.
 
-Community Guidelines
+http://gitlab.inlanefreight.local:8081/users/sign_up
 
-](https://www.linkedin.com/legal/professional-community-policies/)[
+![GitLab project overview for 'Inlanefreight website' with 22 commits, 1 branch, and a list of files. Warning: 'Add SSH key' to pull or push via SSH.](https://cdn.services-k8s.prod.aws.htb.systems/content/modules/113/gitlab_internal.png)
 
-Careers
+In a real-world scenario, we may be able to find a considerable amount of sensitive data if we can register and gain access to any of their repositories. As this [blog post](https://tillsongalloway.com/finding-sensitive-information-on-github/index.html) explains, there is a considerable amount of data that we may be able to uncover on GitLab, GitHub, etc.
 
-](https://careers.linkedin.com/)[
+---
 
-Marketing Solutions
+## Onwards
 
-](https://business.linkedin.com/advertise?trk=n_nav_lms_f&src=li-footer)
+This section shows us the importance (and power) of enumeration and that not every single application we uncover has to be directly exploitable to still prove very interesting and useful for us during an engagement. This is especially true on external penetration tests where the attack surface is usually considerably smaller than an internal assessment. We may need to gather data from two or more sources to mount a successful attack.
 
-Privacy & Terms
+## Connect to HTB
 
-[
+Pwnbox
 
-Ad Choices
+Your own web-based Parrot Linux instance to play our labs.
 
-](https://www.linkedin.com/help/linkedin/answer/62931/)[
+VPN
 
-Advertising
+Download your files and connect within your own environment
 
-](https://www.linkedin.com/ad/start/?trk=n_nav_ads_rr)[
+Switching Pwnbox location will terminate the spawned Pwnbox.
 
-Sales Solutions
+Pwnbox Location
 
-](https://business.linkedin.com/sales-solutions?trk=flagship_nav&veh=li-footer-lss-control&src=li-footer)[
+Start Pwnbox
 
-Mobile
+∞spawns left
 
-](https://mobile.linkedin.com/)[
+Offline
 
-Small Business
+## Target(s)
 
-](https://business.linkedin.com/grow?src=li-footer)[
+Time left: 51 min(s)
 
-Safety Center
+- 10.129.55.49(ACADEMY-ATCKAPPS-APP04)
+    
 
-](https://safety.linkedin.com/)
+Enable step-by-step solutions
 
-LinkedIn Corporation © 2026
+PRO
 
-[
+vHosts needed for these questions:
 
-Questions?
+- gitlab.inlanefreight.local
 
-](https://www.linkedin.com/help/linkedin/)
+- ## Question 1
+    
+    +1
+    
+- ## Question 2
+    
+    +1
+    
+    ---
+    
+    ### Find the PostgreSQL database password in the example project.
+    
+    Submit
+    
 
-Visit our Help Center.
+Previous
 
-[
+Section 17 / 33
 
-Manage your account and privacy
+Next
 
-](https://www.linkedin.com/mypreferences/d/)
+Mark Complete & Next
 
-Go to your Settings.
+### Table of Contents
 
-[
+1
 
-Recommendation transparency
+Setting the Stage
 
-](https://www.linkedin.com/help/linkedin/answer/a1339724/)
+---
 
-Learn more about Recommended Content.
+2
 
-Select language
+Content Management Systems (CMS)
 
-العربية (Arabic)বাংলা (Bangla)Čeština (Czech)Dansk (Danish)Deutsch (German)Ελληνικά (Greek)English (English)Español (Spanish)فارسی (Persian)Suomi (Finnish)Français (French)हिंदी (Hindi)Magyar (Hungarian)Bahasa Indonesia (Indonesian)Italiano (Italian)עברית (Hebrew)日本語 (Japanese)한국어 (Korean)मराठी (Marathi)Bahasa Malaysia (Malay)Nederlands (Dutch)Norsk (Norwegian)ਪੰਜਾਬੀ (Punjabi)Polski (Polish)Português (Portuguese)Română (Romanian)Русский (Russian)Svenska (Swedish)తెలుగు (Telugu)ภาษาไทย (Thai)Tagalog (Tagalog)Türkçe (Turkish)Українська (Ukrainian)Tiếng Việt (Vietnamese)简体中文 (Chinese (Simplified))正體中文 (Chinese (Traditional))
+---
 
-![Farouq Hassan](https://media.licdn.com/dms/image/v2/D4D03AQElOitvhO0zCw/profile-displayphoto-shrink_100_100/B4DZxJpczRIwAY-/0/1770762131535?e=1775692800&v=beta&t=FjICeJyxFvz7YF9qpwtA5NUsuz_xSCy7RX95mfDJnA4)
+3
 
-Status is online
+Servlet Containers/Software Development
 
-MessagingYou are on the messaging overlay. Press enter to open the list of conversations.
+---
 
-Compose message
+4
 
-You are on the messaging overlay. Press enter to open the list of conversations.
+Infrastructure/Network Monitoring Tools
+
+---
+
+5
+
+Customer Service Mgmt & Configuration Management
+
+1 / 3 Sections
+
+---
+
+- Interactive
+    
+    osTicket
+    
+- Interactive
+    
+    Gitlab - Discovery & Enumeration
+    
+    In progress
+    
+- Interactive
+    
+    Attacking GitLab
+    
+
+6
+
+Common Gateway Interfaces
+
+2 Sections
+
+---
+
+7
+
+Thick Client Applications
+
+2 Sections
+
+---
+
+8
+
+Miscellaneous Applications
+
+7 Sections
+
+---
+
+9
+
+Closing Out
+
+1 Sections
+
+---
+
+10
+
+Skills Assessments
+
+3 Sections
+
+---
+
+![adblock modal image](https://academy.hackthebox.com/images/warning.svg)

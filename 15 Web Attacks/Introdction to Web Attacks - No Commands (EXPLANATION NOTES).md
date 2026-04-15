@@ -1697,4 +1697,10 @@ This layered approach significantly reduces the risk of XXE exploitation in mode
 #
 #
 #
-#
+
+| Control | Status | Priority ─────────────────────|─────────|───────── 
+
+Firewall | Missing | HIGH Logging & Monitoring | Missing
+| HIGH Strong Passwords | Done
+| ✓ Backups | Missing 
+| HIGH Security Training | Missing | MEDIUM | 

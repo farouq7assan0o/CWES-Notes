@@ -178,6 +178,67 @@ PHP enables silent logging and redirection, maintaining realism and avoiding sus
 **Attack Chain Summary**  
 Reflected XSS → DOM overwrite → fake login → credential exfiltration → account takeover → flag retrieval.
 
+
+# Session Hijacking 
+
+This section demonstrates how to turn an XSS vulnerability into full account takeover through **session hijacking**.
+
+The attack begins with **Blind XSS detection**, where the attacker cannot directly see the payload execution. Instead of relying on visual confirmation, the attacker injects payloads that **force the victim’s browser to make a request back to the attacker** (see _REMOTE SCRIPT INJECTION PAYLOADS_).
+
+To identify which input field is vulnerable, each payload includes a unique identifier (e.g., `/username`, `/fullname`). When a request hits the attacker’s server, it reveals exactly which field executed the script.
+
+A local server is then set up (see _LISTENER SETUP_) to receive these incoming requests. This acts as both a detection mechanism and later as a data exfiltration endpoint.
+
+Once a working payload is identified, the attacker escalates to **session hijacking**. Instead of just triggering a callback, the payload now extracts the victim’s cookies (see _COOKIE STEALING PAYLOADS_). Cookies store session identifiers, meaning whoever possesses them can impersonate the user.
+
+The JavaScript payload in _SCRIPT.JS_ silently sends the victim’s cookies to the attacker’s server. The use of an image request makes the attack less noticeable compared to redirect-based techniques.
+
+To properly capture and organize stolen cookies, a backend script is used (see _COOKIE LOGGER (PHP)_). This script:
+
+- Receives incoming cookie data
+    
+- Splits multiple cookies
+    
+- Logs them with the victim’s IP address
+    
+
+This ensures scalability, allowing multiple victims to be tracked cleanly.
+
+Finally, the attacker uses the stolen cookie to **impersonate the victim session**. By manually inserting the cookie into the browser, authentication is bypassed entirely—no password needed.
+
+Key attacker insights:
+
+- Blind XSS relies on **out-of-band interaction**, not visual feedback
+    
+- Identifying the vulnerable field is critical for reliable exploitation
+    
+- Cookies are often enough to fully compromise accounts
+    
+- Stealth matters—subtle payloads reduce detection
+    
+- Input validation differences (e.g., email field) help narrow attack surface
+    
+
+The full chain is:
+
+1. Inject payload → trigger Blind XSS
+    
+2. Receive callback → confirm vulnerability
+    
+3. Deliver cookie-stealing payload
+    
+4. Capture session cookie
+    
+5. Reuse cookie → hijack session
+    
+
+This demonstrates how a seemingly minor XSS flaw can lead to **complete account compromise**, especially when targeting privileged users like admins.
+
+
+
+
+
+
 # 
 
 
