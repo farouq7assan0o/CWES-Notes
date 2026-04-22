@@ -1,107 +1,80 @@
-# Web Fuzzing
+# Introduction 
 
-**Introduction**
+**Tools**
 
-ffuf  
-wfuzz  
-Burp Suite Intruder
+ffuf wfuzz Burp Suite Intruder
 
-admin  
-login  
-password  
-backup  
-config
+---
 
-productID  
-addToCart  
-checkout
+# Tooling 
 
-' OR 1=1 --
+**Install Dependencies**
 
-
-# Tooling
-
-**Installing Go, Python and PIPX**
-
-```
+```bash
 sudo apt update
 ```
 
-```
+```bash
 sudo apt install -y golang
 ```
 
-```
+```bash
 sudo apt install -y python3 python3-pip
 ```
 
-```
+```bash
 sudo apt install pipx
-```
-
-```
 pipx ensurepath
-```
-
-```
 sudo pipx ensurepath --global
 ```
 
-```
+```bash
 go version
-```
-
-```
 python3 --version
 ```
 
-**FFUF**
+**Install FFUF**
 
-```
+```bash
 go install github.com/ffuf/ffuf/v2@latest
 ```
 
-**Gobuster**
+**Install Gobuster**
 
-```
+```bash
 go install github.com/OJ/gobuster/v3@latest
 ```
 
-**FeroxBuster**
+**Install FeroxBuster**
 
-```
+```bash
 curl -sL https://raw.githubusercontent.com/epi052/feroxbuster/main/install-nix.sh | sudo bash -s $HOME/.local/bin
 ```
 
-**wfuzz / wenum**
+**Install wenum**
 
-```
+```bash
 pipx install git+https://github.com/WebFuzzForge/wenum
-```
-
-```
 pipx runpip wenum install setuptools
 ```
 
 ---
 
-
 # Directory and File Fuzzing 
 
-**Wordlists**
+**Wordlist Paths**
 
-/usr/share/seclists/  
-/usr/share/seclists/Discovery/Web-Content/common.txt  
-/usr/share/seclists/Discovery/Web-Content/directory-list-2.3-medium.txt  
-/usr/share/seclists/Discovery/Web-Content/raft-large-directories.txt  
+```text
+/usr/share/seclists/Discovery/Web-Content/common.txt
+/usr/share/seclists/Discovery/Web-Content/directory-list-2.3-medium.txt
+/usr/share/seclists/Discovery/Web-Content/raft-large-directories.txt
 /usr/share/seclists/Discovery/Web-Content/big.txt
+```
 
-[https://github.com/danielmiessler/SecLists](https://github.com/danielmiessler/SecLists)
-
-**FUZZ Placeholder**
+**URL Pattern**
 
 ```http
-http://localhost/FUZZ
+http://IP:PORT/FUZZ
 ```
 
 **Directory Fuzzing**
@@ -109,91 +82,66 @@ http://localhost/FUZZ
 ```bash
 ffuf -w /usr/share/seclists/Discovery/Web-Content/directory-list-2.3-medium.txt -u http://IP:PORT/FUZZ
 ```
-ffuf -w /usr/share/seclists/Discovery/Web-Content/directory-list-2.3-medium.txt -u http://20.174.3.2`/FUZZ
 
-`
 **File Fuzzing**
 
 ```bash
 ffuf -w /usr/share/seclists/Discovery/Web-Content/common.txt -u http://IP:PORT/w2ksvrus/FUZZ -e .php,.html,.txt,.bak,.js -v
 ```
 
+---
 
-ffuf -w /usr/share/seclists/Discovery/Web-Content/common.txt -u http://172.16.16.147:5121//FUZZ -e .php,.html,.txt,.bak,.js -v
-
-**Tools**
-
-
-ffuf -w /usr/share/seclists/Discovery/Web-Content/directory-list-2.3-medium.txt -u https://scc1.jaf.mil.jo/FUZZ  
-
-ffuf -w /usr/share/seclists/Discovery/Web-Content/common.txt -u https://scc1.jaf.mil.jo/FUZZ -e .php,.html,.txt,.bak,.js -v
-
-ffuf  
-wfuzz  
-SecLists
-```
-ffuf -w /usr/share/seclists/Discovery/Web-Content/directory-list-2.3-medium.txt -u http://154.57.164.73:30183/FUZZ  
-```
-```
-ffuf -w /usr/share/seclists/Discovery/Web-Content/raft-large-directories.txt  -u http://154.57.164.73:30183/FUZZ
-```
-```
-ffuf -w /usr/share/seclists/Discovery/Web-Content/common.txt -u http://94.237.123.185:56611/webfuzzing_hidden_path//flag/FUZZ -e .php,.html,.txt,.bak,.js -v
-```
 
 # Recursive Fuzzing 
 
-**Recursive Fuzzing with ffuf**
+**Wordlist Path**
+
+```text
+/usr/share/seclists/Discovery/Web-Content/directory-list-2.3-medium.txt
+```
+
+**Recursive Fuzzing - Basic**
 
 ```bash
 ffuf -w /usr/share/seclists/Discovery/Web-Content/directory-list-2.3-medium.txt -ic -v -u http://IP:PORT/FUZZ -e .html -recursion
 ```
 
-**Responsible Recursive Fuzzing**
+**Recursive Fuzzing - Depth + Rate Limited**
 
 ```bash
 ffuf -w /usr/share/seclists/Discovery/Web-Content/directory-list-2.3-medium.txt -ic -u http://IP:PORT/FUZZ -e .html -recursion -recursion-depth 2 -rate 500
 ```
 
-**Wordlist**
+**Flags Reference**
 
-/usr/share/seclists/Discovery/Web-Content/directory-list-2.3-medium.txt
-
-**URL Patterns**
-
-[http://IP:PORT/FUZZ](http://ip:PORT/FUZZ)  
-[http://localhost/admin/FUZZ](http://localhost/admin/FUZZ)
-
-**Flags and Parameters**
-
--recursion  
--ic  
--v  
--e .html  
--recursion-depth 2  
--rate 500  
--timeout
-
+```text
+-recursion
+-recursion-depth 2
+-rate 500
+-ic
+-v
+-e .html
 ```
-ffuf -w /usr/share/seclists/Discovery/Web-Content/directory-list-2.3-medium.txt -ic -v -u http://83.136.251.11:44651/recursive_fuzz/FUZZ -e .html -recursion
-```
-# Parameter and Value Fuzzing
 
-**Wordlist**
+---
 
+
+# Parameter and Value Fuzzing 
+
+**Wordlist Path**
+
+```text
 /usr/share/seclists/Discovery/Web-Content/common.txt
+```
 
-**wenum Installation**
+**Install wenum**
 
 ```bash
 pipx install git+https://github.com/WebFuzzForge/wenum
-```
-
-```bash
 pipx runpip wenum install setuptools
 ```
 
-**GET Request Testing**
+**Probe GET Endpoint Manually**
 
 ```bash
 curl http://IP:PORT/get.php
@@ -203,43 +151,37 @@ curl http://IP:PORT/get.php
 curl http://IP:PORT/get.php?x=1
 ```
 
-```
-git clone https://github.com/WebFuzzForge/wenum
-cd wenum
-pip install -r requirements.txt
-python3 wenum.py
-```
-**GET Parameter Fuzzing**
+**Fuzz GET Parameter Value - wenum**
 
 ```bash
 wenum -w /usr/share/seclists/Discovery/Web-Content/common.txt --hc 404 -u "http://IP:PORT/get.php?x=FUZZ"
 ```
 
-**POST Request Testing**
+**Validate GET Result**
+
+```bash
+curl http://IP:PORT/get.php?x=OA...
+```
+
+**Probe POST Endpoint Manually**
 
 ```bash
 curl -d "" http://IP:PORT/post.php
 ```
 
-**POST Parameter Fuzzing**
+**Fuzz POST Parameter Value - ffuf**
 
 ```bash
 ffuf -u http://IP:PORT/post.php -X POST -H "Content-Type: application/x-www-form-urlencoded" -d "y=FUZZ" -w /usr/share/seclists/Discovery/Web-Content/common.txt -mc 200 -v
 ```
 
-**POST Parameter Validation**
+**Validate POST Result**
 
 ```bash
 curl -d "y=SU..." http://IP:PORT/post.php
 ```
 
-**GET Parameter Pattern**
-
-```http
-https://example.com/search?query=fuzzing&category=security
-```
-
-**POST Request Structure**
+**POST Request Pattern**
 
 ```http
 POST /login HTTP/1.1
@@ -249,21 +191,22 @@ Content-Type: application/x-www-form-urlencoded
 username=your_username&password=your_password
 ```
 
+# Virtual Host and Subdomain Fuzzing 
 
-# Virtual Host and Subdomain Fuzzing
+**Wordlist Paths**
 
-**Hosts File**
+```text
+/usr/share/seclists/Discovery/Web-Content/common.txt
+/usr/share/seclists/Discovery/DNS/subdomains-top1million-5000.txt
+```
+
+**Add vhost to /etc/hosts**
 
 ```bash
 echo "IP inlanefreight.htb" | sudo tee -a /etc/hosts
 ```
 
-**Wordlists**
-
-/usr/share/seclists/Discovery/Web-Content/common.txt  
-/usr/share/seclists/Discovery/DNS/subdomains-top1million-5000.txt
-
-**Gobuster VHost Fuzzing**
+**Gobuster vhost Fuzzing**
 
 ```bash
 gobuster vhost -u http://inlanefreight.htb:81 -w /usr/share/seclists/Discovery/Web-Content/common.txt --append-domain
@@ -275,31 +218,24 @@ gobuster vhost -u http://inlanefreight.htb:81 -w /usr/share/seclists/Discovery/W
 gobuster dns -d inlanefreight.com -w /usr/share/seclists/Discovery/DNS/subdomains-top1million-5000.txt
 ```
 
-**Latest Gobuster Domain Flag**
+**Gobuster Subdomain Fuzzing (latest version flag)**
 
---do  
---domain
+```bash
+gobuster dns --domain inlanefreight.com -w /usr/share/seclists/Discovery/DNS/subdomains-top1million-5000.txt
+```
 
-**Targets and Domains**
-
-[http://inlanefreight.htb:81](http://inlanefreight.htb:81/)  
-inlanefreight.htb  
-inlanefreight.com
-
-**Tools**
-
-Gobuster
+---
 
 
-# Filtering Fuzzing Output
+# Filtering Fuzzing Output 
 
-**Gobuster**
+**Gobuster Filters**
 
 ```bash
 gobuster dir -u http://example.com/ -w wordlist.txt -s 200,301 --exclude-length 0
 ```
 
-**FFUF**
+**ffuf Filters - Combined Examples**
 
 ```bash
 ffuf -u http://example.com/FUZZ -w wordlist.txt -mc 200 -fw 427 -ms >500
@@ -317,22 +253,26 @@ ffuf -u http://example.com/FUZZ.bak -w wordlist.txt -fs 0-10239 -ms 10240-102400
 ffuf -u http://example.com/FUZZ -w wordlist.txt -mt >500
 ```
 
+**ffuf - Default Matcher (no filter flag)**
+
 ```bash
 ffuf -u http://IP:PORT/post.php -X POST -H "Content-Type: application/x-www-form-urlencoded" -d "y=FUZZ" -w /usr/share/seclists/Discovery/Web-Content/common.txt -v
 ```
+
+**ffuf - Match All Status Codes**
 
 ```bash
 ffuf -u http://IP:PORT/post.php -X POST -H "Content-Type: application/x-www-form-urlencoded" -d "y=FUZZ" -w /usr/share/seclists/Discovery/Web-Content/common.txt -v -mc all
 ```
 
-**wenum**
+**wenum Filters - Combined Examples**
 
 ```bash
 wenum -w wordlist.txt --sc 200,301,302 -u https://example.com/FUZZ
 ```
 
 ```bash
-wenu -w wordlist.txt --hc 404,400,500 -u https://example.com/FUZZ
+wenum -w wordlist.txt --hc 404,400,500 -u https://example.com/FUZZ
 ```
 
 ```bash
@@ -347,117 +287,93 @@ wenum -w wordlist.txt --hs 10000 -u https://example.com/FUZZ
 wenum -w wordlist.txt --sr "admin\|password" -u https://example.com/FUZZ
 ```
 
-```bash
---filter "Login"
-```
-
-```bash
---hard-filter "Login"
-```
-
-**Feroxbuster**
+**FeroxBuster Filters - Combined Example**
 
 ```bash
 feroxbuster --url http://example.com -w wordlist.txt -s 200 -S 10240 -X "error"
 ```
 
-**Flags and Parameters**
+**Filter Flag Quick Reference**
 
--s  
--b  
---exclude-length  
--mc  
--fc  
--fs  
--ms  
--fw  
--mw  
--fl  
--ml  
--mt  
---hc  
---sc  
---hl  
---sl  
---hw  
---sw  
---hs  
---ss  
---hr  
---sr  
---filter  
---hard-filter  
---dont-scan  
--S  
--X  
--W  
--N  
--C  
---filter-similar-to  
--s
+```text
+# gobuster
+-s             include status codes (dir mode only)
+-b             exclude status codes (dir mode only)
+--exclude-length
 
-**Wordlists and Paths**
+# ffuf
+-mc            match status code
+-fc            filter status code
+-ms            match size
+-fs            filter size
+-mw            match word count
+-fw            filter word count
+-ml            match line count
+-fl            filter line count
+-mt            match time (TTFB)
 
-/usr/share/seclists/Discovery/Web-Content/common.txt
+# wenum
+--sc           show code
+--hc           hide code
+--sl           show length (lines)
+--hl           hide length (lines)
+--sw           show word count
+--hw           hide word count
+--ss           show size (bytes)
+--hs           hide size (bytes)
+--sr           show regex match
+--hr           hide regex match
+--filter       show regex (with plugin processing)
+--hard-filter  hide regex (blocks plugin processing)
+
+# feroxbuster
+-s / --status-codes     allowlist status codes
+-C / --filter-status    denylist status codes
+-S / --filter-size      filter by size
+-W / --filter-words     filter by word count
+-N / --filter-lines     filter by line count
+-X / --filter-regex     filter by body/header regex
+--filter-similar-to     filter near-duplicate pages
+--dont-scan             exclude URLs from scanning
+```
+
+---
 
 
-# Validating Findings
+# Validating Findings 
 
-**Validation Requests**
+**Check Directory Listing**
 
 ```bash
 curl http://IP:PORT/backup/
 ```
 
+**Retrieve Headers Only (no body)**
+
 ```bash
 curl -I http://IP:PORT/backup/password.txt
 ```
 
-**Paths and Files**
+**Endpoints / Paths**
 
-/backup/  
-/backup/password.txt  
-backup.sql  
-password.txt
-
-**HTTP Headers**
-
-Content-Type  
-Content-Length  
-ETag  
-Last-Modified  
-Accept-Ranges  
-Date  
-Server
-
-**HTML Indicators**
-
-```html
-<title>Index of /backup/</title>
+```text
+/backup/
+/backup/password.txt
+/backup/backup.sql
 ```
 
-```html
-<h2>Index of /backup/</h2>
-```
-
-```html
-<a href="backup.sql">backup.sql</a>
-```
-
-```html
-<div class="foot">lighttpd/1.4.76</div>
-```
+---
 
 
 # Web APIs 
 
-**REST Example**
+**REST API Example Request**
 
 ```http
 GET /users/123
 ```
 
-**SOAP Example**
+**SOAP API Example Request**
 
 ```xml
 <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:tem="http://tempuri.org/">
@@ -470,7 +386,7 @@ GET /users/123
 </soapenv:Envelope>
 ```
 
-**GraphQL Example**
+**GraphQL Example Query**
 
 ```graphql
 query {
@@ -481,47 +397,36 @@ query {
 }
 ```
 
-**HTTP Methods**
-
-GET  
-POST  
-PUT  
-DELETE
-
-**Data Formats**
-
-JSON  
-XML
-
-**API Endpoint Example**
-
-/users/123
-
-
 # Identifying Endpoints 
 
-**REST Endpoints**
+**REST Endpoint Patterns**
 
-/users  
-/users/123  
-/products  
+```http
+/users
+/users/123
+/products
 /products/456
-
-**REST Query Parameters**
-
 /users?limit=10&sort=name
+```
 
-**REST Path Parameter Pattern**
+**REST Request Body Parameter Example**
 
-/products/{id}
+```http
+POST /products HTTP/1.1
+Content-Type: application/json
 
-**REST Request Body Example**
-
-```json
 { "name": "New Product", "price": 99.99 }
 ```
 
-**SOAP Request Example**
+**SOAP Endpoint Pattern**
+
+```text
+/soap
+/api
+/service
+```
+
+**SOAP SearchBooks Request**
 
 ```xml
 <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:lib="http://example.com/library">
@@ -535,15 +440,11 @@ XML
 </soapenv:Envelope>
 ```
 
-**SOAP Parameters**
+**GraphQL Endpoint Pattern**
 
-keywords  
-author  
-genre
-
-**GraphQL Endpoint**
-
+```text
 /graphql
+```
 
 **GraphQL Query Example**
 
@@ -571,118 +472,127 @@ mutation {
 }
 ```
 
-**GraphQL Fields**
+**Tools for Endpoint Discovery**
 
-name  
-email  
-posts  
-title  
-body
-
-**GraphQL Arguments**
-
-id: 123  
-limit: 5  
-title: "New Post"  
-body: "This is the content of the new post"
+```text
+Burp Suite
+Wireshark
+tcpdump
+GraphiQL
+GraphQL Playground
+ffuf
+wfuzz / wenum
+```
 
 ---
 
-
-# API Fuzzing
+# API Fuzzing 
 
 **API Documentation Endpoint**
 
-/docs
+```http
+http://IP:PORT/docs
+```
 
-**Documented Endpoints**
+**Documented API Endpoints**
 
-GET /  
-GET /items/{item_id}  
-DELETE /items/{item_id}  
-PUT /items/{item_id}  
+```text
+GET /
+GET /items/{item_id}
+DELETE /items/{item_id}
+PUT /items/{item_id}
 POST /items/
+```
 
-**Tool Setup**
+**Clone and Install API Fuzzer**
 
 ```bash
 git clone https://github.com/PandaSt0rm/webfuzz_api.git
-```
-
-```bash
 cd webfuzz_api
-```
-
-```bash
 pip3 install -r requirements.txt
 ```
 
-**Run Fuzzer**
+**Run API Fuzzer**
 
 ```bash
 python3 api_fuzzer.py http://IP:PORT
 ```
 
-**Validation Request**
+**Validate Discovered Endpoint**
 
 ```bash
 curl http://localhost:8000/cz...
 ```
 
-**Discovered / Referenced Endpoints**
+# Skills Assessment 
 
-[http://IP:PORT/docs](http://ip:PORT/docs)  
-[http://localhost:8000/cz](http://localhost:8000/cz)...  
-[http://localhost:8000/docs](http://localhost:8000/docs)  
-[http://localhost:8000/items](http://localhost:8000/items)
+**Wordlist Path**
 
-**API Methods**
+```text
+/usr/share/seclists/Discovery/Web-Content/common.txt
+/usr/share/seclists/Discovery/Web-Content/directory-list-2.3-medium.txt
+/usr/share/seclists/Discovery/DNS/subdomains-top1million-5000.txt
+```
 
-GET  
-POST  
-PUT  
-DELETE
+**Step 1 - Directory Fuzzing**
 
-**Vulnerability Types**
-
-Broken Object-Level Authorization  
-Broken Function Level Authorization  
-Server-Side Request Forgery (SSRF)
-
-
-#
+```bash
 ffuf -w /usr/share/seclists/Discovery/Web-Content/directory-list-2.3-medium.txt -u http://154.57.164.70:30580/FUZZ
+```
 
+**Step 2 - File Fuzzing in Discovered Directory**
+
+```bash
 ffuf -w /usr/share/seclists/Discovery/Web-Content/common.txt -u http://154.57.164.70:30580/admin/FUZZ -e .php,.html,.txt,.bak,.js -v
+```
 
+**Step 3 - Probe Discovered Endpoint**
+
+```http
 http://154.57.164.70:30580/admin/panel.php?accessID=1
+```
 
+**Step 4 - Fuzz GET Parameter Value - wenum**
+
+```bash
 wenum -w /usr/share/seclists/Discovery/Web-Content/common.txt --hc 404 -u "http://154.57.164.70:30580/admin/panel.php?accessID=FUZZ"
+```
 
-ffuf -w /usr/share/wordlists/seclists/Discovery/Web-Content/common.txt:FUZZ -u http://154.57.164.70:30580/admin/panel.php?accessID=FUZZ -fs 58
+**Step 4 (alt) - Fuzz GET Parameter Value - ffuf**
 
+```bash
+ffuf -w /usr/share/seclists/Discovery/Web-Content/common.txt:FUZZ -u http://154.57.164.70:30580/admin/panel.php?accessID=FUZZ -fs 58
+```
+
+**Step 5 - Validate Parameter Value**
+
+```http
 http://154.57.164.70:30580/admin/panel.php?accessID=getaccess
+```
 
-http://FUZZ.fuzzing_fun.htb:30580
+**Step 6 - vhost Fuzzing**
 
-gobuster dns -d http://FUZZ.fuzzing_fun.htb:30580 -w /usr/share/seclists/Discovery/DNS/subdomains-top1million-5000.txt
+```bash
+ffuf -c -w /usr/share/seclists/Discovery/DNS/subdomains-top1million-5000.txt:FUZZ -u http://fuzzing_fun.htb:30580/ -H "Host: FUZZ.fuzzing_fun.htb" -fs 250-350
+```
 
-ffuf -c \
--w /usr/share/seclists/Discovery/DNS/subdomains-top1million-5000.txt:FUZZ \
--u http://fuzzing_fun.htb:30580/ \
--H "Host: FUZZ.fuzzing_fun.htb" \
--fs 250-350
+**Step 7 - Directory Fuzzing on Discovered vhost**
 
-20000.txt
-
+```bash
 ffuf -w /usr/share/seclists/Discovery/Web-Content/directory-list-2.3-medium.txt -u http://hidden.fuzzing_fun.htb:30580/godeep/
-
-```
-feroxbuster -u http://hidden.fuzzing_fun.htb:30580/godeep/ -w /usr/share/wordlists/seclists/Discovery/Web-Content/common.txt -r -t 50 -k
 ```
 
+**Step 8 - Recursive Fuzzing on Discovered Path**
 
-#
+```bash
+feroxbuster -u http://hidden.fuzzing_fun.htb:30580/godeep/ -w /usr/share/seclists/Discovery/Web-Content/common.txt -r -t 50 -k
+```
 
+**URL Pattern for vhost**
 
+```http
+http://FUZZ.fuzzing_fun.htb:30580
+```
+
+---
 

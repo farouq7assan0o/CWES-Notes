@@ -6,7 +6,7 @@
       {
         "id": "d6a806e4eb28a885",
         "type": "tabs",
-        "dimension": 52.55417956656346,
+        "dimension": 52.56723716381419,
         "children": [
           {
             "id": "c73117f49320c3a1",
@@ -14,12 +14,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "19 Attacking Common Applications/Attacking Common Applications   - Commands.md",
+                "file": "Notepad.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Attacking Common Applications   - Commands"
+              "title": "Notepad"
             }
           },
           {
@@ -41,7 +41,7 @@
       {
         "id": "ef8ac35093266f33",
         "type": "tabs",
-        "dimension": 47.44582043343653,
+        "dimension": 47.43276283618581,
         "children": [
           {
             "id": "ed8a971e62a015c1",
@@ -49,12 +49,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "19 Attacking Common Applications/Attacking Common Applications  - No Commands (EXPLANATION NOTES).md",
+                "file": "20 Bug Bounty Hunting Process/Bug Bounty Hunting Process - EXPLANATION NOTES.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Attacking Common Applications  - No Commands (EXPLANATION NOTES)"
+              "title": "Bug Bounty Hunting Process - EXPLANATION NOTES"
             }
           }
         ]
@@ -89,7 +89,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "password attack",
+                "query": "php_",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -114,7 +114,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 265.5
+    "width": 330.5
   },
   "right": {
     "id": "5fc1eff69b8ede0a",
@@ -221,39 +221,42 @@
   },
   "active": "c73117f49320c3a1",
   "lastOpenFiles": [
-    "19 Attacking Common Applications/Attacking Common Applications  - No Commands (EXPLANATION NOTES).md",
-    "19 Attacking Common Applications/Attacking Common Applications   - Commands.md",
-    "Note pad.md",
-    "03 Using Web Proxies/Using Web Proxies - No Commands (EXPLANATION NOTES).md",
-    "08 SQL Injection Fundamentals/SQL Injection Fundamentals  - No Commands (EXPLANATION NOTES).md",
-    "18 API Attacks/API Attacks - Commands.md",
+    "Pasted image 20260204003721 1.png",
+    "02 Introduction to Web Applications/Pasted image 20260204003721.png",
     "04 Information Gathering - Web Edition/Information Gathering - Web Edition - Commands.md",
-    "05 Web Fuzzing/Web Fuzzing - Commands.md",
-    "07 Cross-Site Scripting (XSS)/Cross-Site Scripting (XSS) - Commands.md",
-    "16  File Inclusions/File Inclusions - Commands.md",
-    "07 Cross-Site Scripting (XSS)/Cross-Site Scripting (XSS)  - No Commands (EXPLANATION NOTES).md",
-    "10 Command Injections/Command Injections - Commands.md",
-    "11 File Upload Attacks/File Upload Attacks - Commands.md",
-    "12 Server-side Attacks/Server-side Attacks - Commands.md",
-    "05 Web Fuzzing/Web Fuzzing - No Commands (EXPLANATION NOTES).md",
-    "18 API Attacks/API Attacks - No Commands (EXPLANATION NOTES).md",
-    "14 Broken Authentication/Broken Authentication  - Commands.md",
-    "15 Web Attacks/Introdction to Web Attacks - No Commands (EXPLANATION NOTES).md",
-    "14 Broken Authentication/Broken Authentication - No Commands (EXPLANATION NOTES).md",
+    "20 Bug Bounty Hunting Process/Bug Bounty Hunting Process - EXPLANATION NOTES.md",
+    "19 Attacking Common Applications/Attacking Common Applications  - EXPLANATION NOTES.md",
+    "18 API Attacks/API Attacks - EXPLANATION NOTES.md",
+    "17 Attacking GraphQL/Attacking GraphQL - EXPLANATION NOTES.md",
+    "16  File Inclusions/File Inclusions - EXPLANATION NOTES.md",
+    "15 Web Attacks/Introdction to Web Attacks - EXPLANATION NOTES.md",
+    "15 Web Attacks/Introduction to Web Attacks - Commands.md",
+    "14 Broken Authentication/Broken Authentication - EXPLANATION NOTES.md",
+    "13 Login Brute Forcing/Login Brute Forcing - EXPLANATION NOTES.md",
+    "12 Server-side Attacks/Server-side Attacks - EXPLANATION NOTES.md",
+    "11 File Upload Attacks/File Upload Attacks  - EXPLANATION NOTES.md",
+    "10 Command Injections/Command Injections - EXPLANATION NOTES.md",
+    "09 SQLMap Essentials/SQLMap Essentials - EXPLANATION NOTES.md",
+    "08 SQL Injection Fundamentals/SQL Injection Fundamentals  - EXPLANATION NOTES.md",
+    "07 Cross-Site Scripting (XSS)/Cross-Site Scripting (XSS)  - EXPLANATION NOTES.md",
+    "06 JavaScript Deobfuscation/JavaScript Deobfuscation - EXPLANATION NOTES.md",
+    "05 Web Fuzzing/Web Fuzzing - EXPLANATION NOTES.md",
+    "04 Information Gathering - Web Edition/Information Gathering - Web Edition - EXPLANATION NOTES.md",
+    "02 Introduction to Web Applications/Using Web Proxies - EXPLANATION NOTES.md",
+    "01 Web Requests/Web Requests - EXPLANATION NOTES.md",
+    "20 Bug Bounty Hunting Process/Bug Bounty Hunting Process - Commands.md",
+    "Notepad.md",
+    "01 Web Requests 1/Web Requests - No Commands (EXPLANATION NOTES).md",
+    "01 Web Requests 1/Web Requests - Commands.md",
+    "01 Web Requests 1",
+    "19 Attacking Common Applications/Pasted image 20260420003658.png",
+    "20 Bug Bounty Hunting Process",
     "19 Attacking Common Applications",
-    "16  File Inclusions/File Inclusions - No Commands (EXPLANATION NOTES).md",
-    "Pasted image 20260204003721.png",
     "17 Attacking GraphQL/Pasted image 20260315122515.png",
-    "17 Attacking GraphQL/Attacking GraphQL - No Commands (EXPLANATION NOTES).md",
-    "17 Attacking GraphQL/Attacking GraphQL - Commands.md",
     "18 API Attacks/Pasted image 20260315122202.png",
     "18 API Attacks",
     "17 Attacking GraphQL/Pasted image 20260315122202.png",
     "17 Attacking GraphQL",
-    "04 Information Gathering - Web Edition/Information Gathering - Web Edition - No Commands (EXPLANATION NOTES).md",
-    "11 File Upload Attacks/File Upload Attacks  - No Commands (EXPLANATION NOTES).md",
-    "10 Command Injections/Command Injections - No Commands (EXPLANATION NOTES).md",
-    "08 SQL Injection Fundamentals/SQL Injection Fundamentals  - Commands.md",
     "12 Server-side Attacks/Pasted image 20260203120236.png",
     "13 Login Brute Forcing/Pasted image 20260310224517.png",
     "Pasted image 20260203145024.png",
@@ -262,10 +265,7 @@
     "03 Using Web Proxies",
     "02 Introduction to Web Applications",
     "01 Web Requests",
-    "05 Web Fuzzing",
     "Pasted image 20260223005512.png",
-    "machines/Pasted image 20260225125747.png",
-    "machines/Pasted image 20260225125716.png",
-    "Untitled 1"
+    "machines/Pasted image 20260225125747.png"
   ]
 }

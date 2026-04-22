@@ -1,161 +1,157 @@
+
 # Intro to Web Proxies 
 
-**COMMANDS**
+**Tools**
 
-**PAYLOADS**
+Burp Suite ZAP (OWASP Zed Attack Proxy) Wireshark
 
-**CODE**
+**Ports / Protocols**
 
-**PATHS**
+```text
+HTTP/80
+HTTPS/443
+```
 
-**ENDPOINTS**
+**URLs / References**
 
-**PARAMETERS**
-
-**TOOLS**
-
-Burp Suite  
-OWASP Zed Attack Proxy (ZAP)  
-Wireshark
-
-**SERVICES**
-
-HTTP  
-HTTPS
-
-**PORTS**
-
-80  
-443
-
-**DOM IDS**
-
-**ELEMENT NAMES**
-
-**ATTRIBUTES**
-
-**REQUEST PATTERNS**
+```text
+https://portswigger.net/burp
+https://www.zaproxy.org/
+https://owasp.org/
+https://portswigger.net/burp/pro/trial
+```
 
 ---
-
-
 # Setting Up 
 
-**COMMANDS**
+**Launch Commands**
 
+```shell
 burpsuite
-
-```
-java -jar </path/to/burpsuite.jar>
 ```
 
+```shell
 zaproxy
-
-```
-java -jar </path/to/zap.jar>
 ```
 
-**PAYLOADS**
-
-**CODE**
-
-```
+```shell
 java -jar </path/to/burpsuite.jar>
 ```
 
+**Download URLs**
+
+```text
+https://portswigger.net/burp/releases/
+https://www.zaproxy.org/download/
+https://docs.oracle.com/goldengate/1212/gg-winux/GDRAD/java.htm
 ```
-java -jar </path/to/zap.jar>
+
+**Burp Dark Theme Path**
+
+```text
+Burp > Settings > User interface > Display > theme > dark
 ```
 
-**PATHS**
+**ZAP Dark Theme Path**
 
-</path/to/burpsuite.jar>  
-</path/to/zap.jar>
-
-**ENDPOINTS**
-
-**PARAMETERS**
-
-**TOOLS**
-
-Burp Suite  
-OWASP Zed Attack Proxy (ZAP)  
-Java Runtime Environment (JRE)  
-PwnBox  
-Parrot OS  
-Kali Linux
-
-**SERVICES**
-
-**PORTS**
-
-**DOM IDS**
-
-**ELEMENT NAMES**
-
-**ATTRIBUTES**
-
-**REQUEST PATTERNS**
+```text
+Tools > Options > Display > Look and Feel > Flat Dark
+```
 
 ---
 
 
-# Proxy Setup 
+# Proxy Setup
 
-**COMMANDS**
+**Default Proxy Port**
 
-**PAYLOADS**
-
-**CODE**
-
-**PATHS**
-
-about:preferences#privacy
-
-**ENDPOINTS**
-
-[http://burp](http://burp/)
-
-**PARAMETERS**
-
-**TOOLS**
-
-Burp Suite  
-OWASP Zed Attack Proxy (ZAP)  
-Firefox  
-FoxyProxy
-
-**SERVICES**
-
-HTTP  
-HTTPS
-
-**PORTS**
-
+```text
 8080
+```
 
-**DOM IDS**
+**Proxy Listener Settings Paths**
 
-**ELEMENT NAMES**
+```text
+Burp > Proxy > Proxy settings > Proxy listeners
+```
 
-**ATTRIBUTES**
+```text
+ZAP > Tools > Options > Network > Local Servers/Proxies
+```
 
-**REQUEST PATTERNS**
+**Burp Pre-configured Browser Path**
 
-127.0.0.1:8080
+```text
+Proxy > Intercept > Open Browser
+```
+
+**FoxyProxy Configuration Values**
+
+```text
+IP: 127.0.0.1
+Port: 8080
+Name: Burp / ZAP
+```
+
+**Burp CA Certificate URL**
+
+```http
+http://burp
+```
+
+**ZAP CA Certificate Path**
+
+```text
+Tools > Options > Network > Server Certificates > Save
+```
+
+**Firefox CA Certificate Import Path**
+
+```text
+about:preferences#privacy
+```
+
+```text
+Firefox > about:preferences#privacy > View Certificates > Authorities > Import
+```
+
+**Firefox Trust Options (on import)**
+
+```text
+Trust this CA to identify websites
+Trust this CA to identify email users
+```
+
+**FoxyProxy Extension URL**
+
+```text
+https://addons.mozilla.org/en-US/firefox/addon/foxyproxy-standard/
+```
 
 ---
 
 
-# Intercepting Web Requests 
+# Intercepting Web Requests
 
-**COMMANDS**
+**Burp - Intercept Toggle Path**
 
-**PAYLOADS**
+```text
+Proxy > Intercept > Intercept is on/off
+```
 
-;ls;
+**ZAP - Intercept Toggle Shortcut**
 
-**CODE**
+```text
+CTRL+B
+```
+
+**ZAP HUD Tutorial Path**
+
+```text
+Configuration button (bottom right) > Take the HUD tutorial
+```
+
+**Intercepted Request**
 
 ```http
 POST /ping HTTP/1.1
@@ -175,415 +171,298 @@ Connection: keep-alive
 ip=1
 ```
 
-```http
-ip=1
-```
+**Manipulated Parameter**
 
-```http
+```text
 ip=;ls;
 ```
 
-**PATHS**
+**Target Endpoint**
 
+```text
 /ping
+```
 
-**ENDPOINTS**
-
-http://SERVER_IP:PORT/  
-[http://94.237.62.138:32306/](http://94.237.62.138:32306/)  
-[http://94.237.62.138:32306](http://94.237.62.138:32306/)
-
-**PARAMETERS**
-
-ip
-
-**TOOLS**
-
-Burp Suite  
-OWASP Zed Attack Proxy (ZAP)  
-Firefox  
-Heads Up Display (HUD)
-
-**SERVICES**
-
-HTTP
-
-**PORTS**
-
-32306
-
-**DOM IDS**
-
-**ELEMENT NAMES**
-
-IP  
-Ping
-
-**ATTRIBUTES**
-
-Host  
-Content-Length  
-Cache-Control  
-Accept-Language  
-Origin  
-Content-Type  
-Upgrade-Insecure-Requests  
-User-Agent  
-Accept  
-Referer  
-Accept-Encoding  
-Connection
-
-**REQUEST PATTERNS**
-
-POST /ping HTTP/1.1  
-ip=1  
-ip=;ls;
+---
 
 
-# Intercepting Responses
 
-**COMMANDS**
 
+# Intercepting Responses 
+
+**Burp - Enable Response Interception Path**
+
+```text
+Proxy > Proxy settings > Response interception rules > Intercept Response
+```
+
+**Burp - Unhide Hidden Form Fields Path**
+
+```text
+Proxy > Proxy settings > Response modification rules > Unhide hidden form fields
+```
+
+**Browser Force Refresh**
+
+```text
 CTRL+SHIFT+R
+```
 
-**PAYLOADS**
-
-;ls;
-
-**CODE**
+**HTML - Original Restricted Input**
 
 ```html
-<input type="number" id="ip" name="ip" min="1" max="255" maxlength="3"
-    oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
-    required>
+<input type="number" id="ip" name="ip" min="1" max="255" maxlength="3">
 ```
+
+**HTML - Modified Input (after response interception)**
 
 ```html
 <input type="text" id="ip" name="ip" min="1" max="255" maxlength="100"
     oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
-    required>
+   required>
 ```
 
-**PATHS**
+**ZAP HUD - Show/Enable Disabled Fields**
 
-/ping
+```text
+HUD left pane > third button (light bulb icon) > Show/Enable
+```
 
-**ENDPOINTS**
+**ZAP HUD - Show HTML Comments**
 
-http://SERVER_IP:PORT/
-
-**PARAMETERS**
-
-ip
-
-**TOOLS**
-
-Burp Suite  
-OWASP Zed Attack Proxy (ZAP)  
-Firefox  
-Heads Up Display (HUD)
-
-**SERVICES**
-
-HTTP
-
-**PORTS**
-
-**DOM IDS**
-
-ip
-
-**ELEMENT NAMES**
-
-input
-
-**ATTRIBUTES**
-
-type  
-id  
-name  
-min  
-max  
-maxlength  
-oninput  
-required
-
-**REQUEST PATTERNS**
-
-ip=;ls;
+```text
+HUD left pane > + button > Comments
+```
 
 ---
-
 
 # Automatic Modification 
 
-**COMMANDS**
+**Burp - Match and Replace Path**
 
-CTRL+R  
-CTRL+B  
+```text
+Proxy > Proxy settings > HTTP match and replace rules > Add
+```
+
+**Burp - Automatic Request Modification (User-Agent)**
+
+```text
+Type: Request header
+Match: ^User-Agent.*$
+Replace: User-Agent: HackTheBox Agent 1.0
+Regex match: True
+```
+
+**Burp - Automatic Response Modification (input type)**
+
+```text
+Type: Response body
+Match: type="number"
+Replace: type="text"
+Regex match: False
+```
+
+**Burp - Automatic Response Modification (maxlength)**
+
+```text
+Type: Response body
+Match: maxlength="3"
+Replace: maxlength="100"
+Regex match: False
+```
+
+**ZAP - Replacer Shortcut**
+
+```text
+CTRL+R
+```
+
+**ZAP - Replacer Path**
+
+```text
+ZAP Options > Replacer > Add
+```
+
+**ZAP - Automatic Request Modification (User-Agent)**
+
+```text
+Description: HTB User-Agent
+Match Type: Request Header (will add if not present)
+Match String: User-Agent
+Replacement String: HackTheBox Agent 1.0
+Enable: True
+```
+
+**ZAP - Automatic Response Modification (input type)**
+
+```text
+Match Type: Response Body String
+Match Regex: False
+Match String: type="number"
+Replacement String: type="text"
+Enable: True
+```
+
+**ZAP - Automatic Response Modification (maxlength)**
+
+```text
+Match Type: Response Body String
+Match Regex: False
+Match String: maxlength="3"
+Replacement String: maxlength="100"
+Enable: True
+```
+
+**Browser Force Refresh**
+
+```text
 CTRL+SHIFT+R
-
-**PAYLOADS**
-
-;ls;
-
-**CODE**
-
-```
-^User-Agent.*$
 ```
 
+**ZAP - Enable Request Interception**
+
+```text
+CTRL+B
 ```
-User-Agent: HackTheBox Agent 1.0
-```
-
-```
-type="number"
-```
-
-```
-type="text"
-```
-
-```
-maxlength="3"
-```
-
-```
-maxlength="100"
-```
-
-**PATHS**
-
-/ping
-
-**ENDPOINTS**
-
-http://SERVER_IP:PORT/
-
-**PARAMETERS**
-
-ip
-
-**TOOLS**
-
-Burp Suite  
-OWASP Zed Attack Proxy (ZAP)  
-ZAP Replacer
-
-**SERVICES**
-
-HTTP  
-HTTPS
-
-**PORTS**
-
-**DOM IDS**
-
-ip
-
-**ELEMENT NAMES**
-
-input
-
-**ATTRIBUTES**
-
-User-Agent  
-type  
-maxlength
-
-**REQUEST PATTERNS**
-
-User-Agent: HackTheBox Agent 1.0  
-ip=;ls;
 
 ---
 
-
 # Repeating Requests 
 
-**COMMANDS**
+**Burp - Proxy History Path**
 
-CTRL+R  
+```text
+Proxy > HTTP History
+```
+
+**Burp - Send to Repeater**
+
+```text
+CTRL+R
+```
+
+**Burp - Go to Repeater Tab**
+
+```text
 CTRL+SHIFT+R
+```
 
-**PAYLOADS**
+**Burp - Change Request Method**
 
-**CODE**
+```text
+Right-click request > Change Request Method
+```
 
-**PATHS**
+**ZAP - Resend Request**
 
-/ping
+```text
+Right-click request > Open/Resend with Request Editor > Send
+```
 
-**ENDPOINTS**
+**ZAP HUD - Resend Options**
 
-**PARAMETERS**
+```text
+History pane > click request > Replay in Console
+History pane > click request > Replay in Browser
+```
 
-**TOOLS**
-
-Burp Suite  
-OWASP Zed Attack Proxy (ZAP)  
-Burp Repeater  
-ZAP Request Editor  
-ZAP HUD
-
-**SERVICES**
-
-HTTP  
-WebSockets
-
-**PORTS**
-
-**DOM IDS**
-
-**ELEMENT NAMES**
-
-Send  
-Replay in Console  
-Replay in Browser  
-Open/Resend with Request Editor  
-Change Request Method
-
-**ATTRIBUTES**
-
-POST  
-GET
-
-**REQUEST PATTERNS**
+---
 
 
 # Encoding/Decoding 
 
-**COMMANDS**
+**Burp - URL-Encode Selected Text**
 
-CTRL+U  
+```text
+CTRL+U
+```
+
+```text
+Right-click > Convert Selection > URL > URL-encode key characters
+```
+
+**Burp - Decoder Tab Path**
+
+```text
+Decoder tab
+```
+
+**Burp - Inspector Tool Location**
+
+```text
+Burp Proxy > Inspector
+Burp Repeater > Inspector
+```
+
+**ZAP - Encoder/Decoder/Hash Shortcut**
+
+```text
 CTRL+E
+```
 
-**PAYLOADS**
-
-eyJ1c2VybmFtZSI6Imd1ZXN0IiwgImlzX2FkbWluIjpmYWxzZX0=  
-{"username":"guest", "is_admin":false}  
-{"username":"admin", "is_admin":true}  
-eyJ1c2VybmFtZSI6ImFkbWluIiwgImlzX2FkbWluIjp0cnVlfQ==
-
-**CODE**
+**Base64 Encoded Cookie (example)**
 
 ```text
 eyJ1c2VybmFtZSI6Imd1ZXN0IiwgImlzX2FkbWluIjpmYWxzZX0=
 ```
 
-```json
+**Decoded Cookie Value (example)**
+
+```text
 {"username":"guest", "is_admin":false}
 ```
 
-```json
+**Modified Cookie Value (before re-encoding)**
+
+```text
 {"username":"admin", "is_admin":true}
 ```
 
+**Supported Encoding Types**
+
 ```text
-eyJ1c2VybmFtZSI6ImFkbWluIiwgImlzX2FkbWluIjp0cnVlfQ==
+URL
+Full URL-Encoding
+Unicode URL
+HTML
+Unicode
+Base64
+ASCII hex
 ```
 
-**PATHS**
-
-**ENDPOINTS**
-
-**PARAMETERS**
-
-**TOOLS**
-
-Burp Suite  
-OWASP Zed Attack Proxy (ZAP)  
-Burp Repeater  
-Burp Decoder  
-Burp Inspector  
-ZAP Encoder/Decoder/Hash
-
-**SERVICES**
-
-HTTP
-
-**PORTS**
-
-**DOM IDS**
-
-**ELEMENT NAMES**
-
-Decode as > Base64  
-Convert Selection>URL>URL-encode key characters  
-Add New Tab
-
-**ATTRIBUTES**
-
-**REQUEST PATTERNS**
-
-URL-encode key characters  
-Full URL-Encoding  
-Unicode URL encoding  
-HTML  
-Unicode  
-Base64  
-ASCII hex
+---
 
 
 # Proxying Tools 
 
-**COMMANDS**
+**Proxychains Config File**
 
-```shell
+```text
+/etc/proxychains.conf
+```
+
+**Proxychains Config - Comment Out and Add**
+
+```text
 #socks4         127.0.0.1 9050
 http 127.0.0.1 8080
 ```
+
+**Proxychains with curl**
 
 ```shell
 proxychains -q curl http://SERVER_IP:PORT
 ```
 
-```shell
-msfconsole
-```
-
-```shell
-use auxiliary/scanner/http/robots_txt
-```
-
-```shell
-set PROXIES HTTP:127.0.0.1:8080
-```
-
-```shell
-set RHOST SERVER_IP
-```
-
-```shell
-set RPORT PORT
-```
-
-```shell
-run
-```
-
-**PAYLOADS**
-
-HTTP:127.0.0.1:8080  
-[http://127.0.0.1:8080](http://127.0.0.1:8080/)  
-http://SERVER_IP:PORT
-
-**CODE**
-
-```shell
-#socks4         127.0.0.1 9050
-http 127.0.0.1 8080
-```
-
-```shell
-proxychains -q curl http://SERVER_IP:PORT
-```
+**Metasploit - Launch**
 
 ```shell
 msfconsole
+```
 
+**Metasploit - robots_txt Scanner with Proxy**
+
+```shell
 use auxiliary/scanner/http/robots_txt
 set PROXIES HTTP:127.0.0.1:8080
 set RHOST SERVER_IP
@@ -591,522 +470,398 @@ set RPORT PORT
 run
 ```
 
-**PATHS**
+**Proxy Address (universal)**
 
-/etc/proxychains.conf  
-/robots.txt
+```text
+http://127.0.0.1:8080
+```
 
-**ENDPOINTS**
-
-[http://127.0.0.1:8080](http://127.0.0.1:8080/)  
-http://SERVER_IP:PORT
-
-**PARAMETERS**
-
-PROXIES  
-RHOST  
-RPORT
-
-**TOOLS**
-
-Burp Suite  
-OWASP Zed Attack Proxy (ZAP)  
-proxychains  
-curl  
-Metasploit  
-msfconsole  
-auxiliary/scanner/http/robots_txt
-
-**SERVICES**
-
-HTTP  
-socks4
-
-**PORTS**
-
-9050  
-8080  
-PORT
-
-**DOM IDS**
-
-**ELEMENT NAMES**
-
-**ATTRIBUTES**
-
-**REQUEST PATTERNS**
-
-HTTP:127.0.0.1:8080  
-GET /robots.txt
+---
 
 
 # Burp Intruder 
 
-**COMMANDS**
+**Send to Intruder**
 
-CTRL+I  
-CTRL+SHIFT+I
-
-**PAYLOADS**
-
-§DIRECTORY§  
-^..*$  
-200 OK
-
-**CODE**
-
-```http
-GET /§DIRECTORY§/ HTTP/1.1
+```text
+CTRL+I
 ```
+
+**Go to Intruder Tab**
+
+```text
+CTRL+SHIFT+I
+```
+
+**Payload Position Syntax**
+
+```text
+§DIRECTORY§
+```
+
+**Attack Type**
+
+```text
+Sniper
+```
+
+**Wordlist Path**
 
 ```text
 /opt/useful/seclists/Discovery/Web-Content/common.txt
 ```
 
-```regex
+**Payload Processing - Skip Rule (regex)**
+
+```text
+Skip if matches regex
 ^\..*$
 ```
 
+**Grep - Match Configuration**
+
 ```text
-200 OK
+Settings > Grep - Match > Clear > Add: 200 OK
+Disable: Exclude HTTP Headers
 ```
 
-**PATHS**
+**Intruder Payload Types**
 
-/opt/useful/seclists/Discovery/Web-Content/common.txt  
+```text
+Simple List
+Runtime file
+Character Substitution
+```
+
+**Target Directory Fuzz Request Pattern**
+
+```http
+GET /§DIRECTORY§/ HTTP/1.1
+```
+
+**Result Hit**
+
+```text
 /admin/
+```
 
-**ENDPOINTS**
+**Intruder Documentation URL**
 
-http://SERVER_IP:PORT/admin/
+```text
+https://portswigger.net/burp/documentation/desktop/tools/intruder/getting-started
+https://portswigger.net/burp/documentation/desktop/tools/intruder/configure-attack/payload-types
+```
 
-**PARAMETERS**
-
-Payload Position  
-Payload Type  
-Payload Configuration  
-Payload Processing  
-Payload Encoding  
-Number of retries on network failure  
-Pause before retry  
-Exclude HTTP Headers
-
-**TOOLS**
-
-Burp Suite  
-Burp Intruder  
-ffuf  
-dirbuster  
-gobuster  
-wfuzz  
-Resource Pool
-
-**SERVICES**
-
-HTTP  
-HTTPS  
-Active Directory (AD)  
-Outlook Web Access (OWA)  
-SSL VPN  
-Remote Desktop Services (RDS)  
-Citrix
-
-**PORTS**
-
-31827
-
-**DOM IDS**
-
-**ELEMENT NAMES**
-
-Send to Intruder  
-Start Attack  
-Add §  
-Load  
-Add  
-Paste  
-Remove  
-Clear  
-Add new item  
-Add from list  
-Skip if matches regex  
-Grep - Match  
-Grep - Extract  
-Exclude HTTP Headers
-
-**ATTRIBUTES**
-
-Sniper  
-Cluster Bomb  
-Simple List  
-Runtime file  
-Character Substitution  
-Regex match  
-Response body  
-Request header  
-200 OK  
-404 NOT FOUND
-
-**REQUEST PATTERNS**
-
-GET /§DIRECTORY§/ HTTP/1.1  
-/admin/
-
+---
 
 # ZAP Fuzzer 
 
-**COMMANDS**
+**Open Fuzzer from History**
 
-**PAYLOADS**
+```text
+Right-click request > Attack > Fuzz
+```
 
-test  
-skills
-
-**CODE**
+**Initial Fuzz URL Pattern**
 
 ```http
 GET /test/ HTTP/1.1
 ```
 
-```http
-GET /skills/ HTTP/1.1
+**Fuzz Location - Select and Add**
+
+```text
+Select word: test > click Add
 ```
 
-**PATHS**
+**Payload Type - File Fuzzers Selection**
 
-/test/  
-/skills/
+```text
+Type: File Fuzzers
+Wordlist: dirbuster > directory-list-1.0.txt
+```
 
-**ENDPOINTS**
+**Payload Type Options**
 
-http://SERVER_IP:PORT/test/  
-http://SERVER_IP:PORT/skills/
-
-**PARAMETERS**
-
-Fuzz Location  
-Payloads  
-Processors  
-Options  
-Concurrent Scanning Threads per Scan  
-Retries on IO error  
-Limit max errors  
-Depth First  
-Breadth First
-
-**TOOLS**
-
-OWASP Zed Attack Proxy (ZAP)  
-ZAP Fuzzer  
-ZAP Marketplace  
-dirbuster  
+```text
+File
 File Fuzzers
+Numberzz
+```
 
-**SERVICES**
+**Processor - URL Encode**
 
-HTTP
+```text
+Type: URL Encode
+Encoding: UTF-8
+```
 
-**PORTS**
+**Processor Types**
 
-PORT
+```text
+Base64 Decode/Encode
+MD5 Hash
+Postfix String
+Prefix String
+SHA-1/256/512 Hash
+URL Decode/Encode
+Script
+```
 
-**DOM IDS**
+**Options - Concurrent Threads**
 
-**ELEMENT NAMES**
+```text
+Concurrent Scanning Threads per Scan: 20
+```
 
-Attack>Fuzz  
-Add  
-Remove  
-Modify  
-Generate Preview  
-Start Fuzzer
+**Traversal Strategy Options**
 
-**ATTRIBUTES**
+```text
+Depth First
+Breadth First
+```
 
-File  
-File Fuzzers  
-Numberzz  
-URL Encode  
-Prefix String  
-Postfix String  
-Script  
-Base64 Decode  
-Base64 Encode  
-MD5 Hash  
-SHA-1 Hash  
-SHA-256 Hash  
-SHA-512 Hash
+**Result Hit**
 
-**REQUEST PATTERNS**
+```text
+/skills/
+```
 
-GET /test/ HTTP/1.1  
-GET /skills/ HTTP/1.1
+**Sort Results By**
+
+```text
+Response code: 200
+```
 
 ---
 
 
 # Burp Scanner 
 
-**COMMANDS**
+**Start Scan from Proxy History**
 
-**PAYLOADS**
+```text
+Right-click request > Scan
+Right-click request > Passive Scan
+Right-click request > Active Scan
+```
 
-200 OK
+**New Scan from Dashboard**
 
-**CODE**
+```text
+Dashboard > New Scan
+```
 
-**PATHS**
+**Add to Scope**
 
-/xmlrpc.php
+```text
+Target > Site map > Right-click target > Add to scope
+```
 
-**ENDPOINTS**
+**Remove from Scope**
 
-[http://142.93.35.92:30269/](http://142.93.35.92:30269/)  
-[http://46.101.23.188:30760/](http://46.101.23.188:30760/)  
-[http://142.93.35.92:32729/](http://142.93.35.92:32729/)
+```text
+Right-click in-scope item > Remove from scope
+```
 
-**PARAMETERS**
+**View/Edit Scope**
 
-Target Scope  
-Include in scope  
-Exclude from scope  
-Use advanced scope control  
-Crawl  
-Audit  
-Crawl and Audit  
-Crawl strategy - fastest  
+```text
+Target > Scope
+```
+
+**View Site Map**
+
+```text
+Target > Site map
+```
+
+**Crawl Config Preset**
+
+```text
+Crawl strategy - fastest
+```
+
+**Audit Config Preset**
+
+```text
 Audit checks - critical issues only
+```
 
-**TOOLS**
+**Scan Type Options**
 
-Burp Suite  
-Burp Scanner  
-Burp Crawler  
-Burp Passive Scanner  
-Burp Active Scanner  
-Burp Logger
+```text
+Crawl and Audit
+Crawl
+```
 
-**SERVICES**
+**Passive Scan from Site Map**
 
-HTTP  
-HTTPS
+```text
+Target > Site map > Right-click > Do passive scan
+Target > Site map > Right-click > Passively scan this target
+```
 
-**PORTS**
+**Active Scan from History**
 
-30269  
-30760  
-32729
+```text
+Right-click request > Do active scan
+```
 
-**DOM IDS**
+**View Scan Logs**
 
-**ELEMENT NAMES**
+```text
+Dashboard > Tasks > View details > Logger tab
+Logger tab (main Burp nav)
+```
 
-Scan  
-Passive Scan  
-Active Scan  
-New Scan  
-Add to scope  
-Remove from scope  
-View details  
-Logger  
-Issue activity  
-Report issues for this host
+**Issue Filter (Dashboard)**
 
-**ATTRIBUTES**
+```text
+Issue activity pane > Filter: High + Certain
+```
 
-High  
-Medium  
-Low  
-Information  
-Certain  
-Firm
+**Export Report**
 
-**REQUEST PATTERNS**
+```text
+Target > Site map > Right-click target > Issue > Report issues for this host
+```
+
+**Identified Vulnerability (example)**
+
+```text
+OS command injection
+Parameter: ip
+Severity: High
+Confidence: Firm
+```
 
 ---
 
 
 # ZAP Scanner 
 
-**COMMANDS**
-
-**PAYLOADS**
-
-127.0.0.1&cat /etc/passwd&  
-root:x:0:0
-
-**CODE**
+**Start Spider from History**
 
 ```text
-127.0.0.1&cat /etc/passwd&
+Right-click request > Attack > Spider
 ```
+
+**Start Spider from HUD**
 
 ```text
-root:x:0:0
+HUD right pane > second button (Spider Start)
 ```
 
-**PATHS**
+**View Sites Tree from HUD**
 
-/customer-support.php  
-/etc/passwd
+```text
+HUD right pane > first button (Sites Tree)
+```
 
-**ENDPOINTS**
+**Start Ajax Spider from HUD**
 
-[http://academy.htb/customer-support.php](http://academy.htb/customer-support.php)  
-[http://46.101.23.188:30873/](http://46.101.23.188:30873/)
+```text
+HUD right pane > third button (Ajax Spider)
+```
 
-**PARAMETERS**
+**Start Active Scan from HUD**
 
-Scope
+```text
+HUD right pane > Active Scan button
+```
 
-**TOOLS**
+**Generate Report**
 
-OWASP Zed Attack Proxy (ZAP)  
-ZAP Scanner  
-ZAP Spider  
-Ajax Spider  
-ZAP HUD  
-ZAP Request Editor
+```text
+Report > Generate HTML Report
+```
 
-**SERVICES**
+**Report Export Formats**
 
-HTTP  
-AJAX  
-XML  
+```text
+HTML
+XML
 Markdown
+```
 
-**PORTS**
+**High Alert Identified (example)**
 
-30873
+```text
+Remote OS Command Injection
+Risk: High
+Confidence: Medium
+Attack: 127.0.0.1&cat /etc/passwd&
+Evidence: root:x:0:0
+```
 
-**DOM IDS**
-
-**ELEMENT NAMES**
-
-Attack>Spider  
-Start  
-Sites Tree  
-Active Scan  
-Alerts  
-Report>Generate HTML Report  
-Replay in Console  
-Replay in Browser
-
-**ATTRIBUTES**
-
-High  
-Medium  
-Low  
-Informational  
-Remote OS Command Injection  
-X-Frame-Options Header Not Set  
-Cross-Domain Misconfiguration  
-Directory Browsing
-
-**REQUEST PATTERNS**
-
-127.0.0.1&cat /etc/passwd&  
-root:x:0:0
+---
 
 
 # Extensions 
 
-**COMMANDS**
-
-**PAYLOADS**
-
-HTB Academy  
-;id  
-/usr/bin/id
-
-**CODE**
+**Burp - BApp Store Path**
 
 ```text
-HTB Academy
+Extensions > BApp Store
 ```
+
+**Burp - Notable Extensions**
 
 ```text
-;id
-```
-
-```text
-/usr/bin/id
-```
-
-**PATHS**
-
-fuzzdb/attack/os-cmd-execution/command_execution-unix.txt
-
-**ENDPOINTS**
-
-[http://139.59.6.56:31133/ping](http://139.59.6.56:31133/ping)
-
-**PARAMETERS**
-
-**TOOLS**
-
-Burp Suite  
-Burp Extensions  
-BApp Store  
-Decoder Improved  
-Active Scan++  
-Additional Scanner Checks  
-AWS Security Checks  
-Backslash Powered Scanner  
-Wsdler  
-Java Deserialization Scanner  
-C02  
-Cloud Storage Tester  
-CMS Scanner  
-Error Message Checks  
-Detect Dynamic JS  
-Headers Analyzer  
-HTML5 Auditor  
-PHP Object Injection Check  
-JavaScript Security  
-Retire.JS  
-CSP Auditor  
-Random IP Address Header  
-Autorize  
-CSRF Scanner  
+.NET Beautifier
+J2EEScan
+Software Vulnerability Scanner
+Software Version Reporter
+Active Scan++
+Additional Scanner Checks
+AWS Security Checks
+Backslash Powered Scanner
+Wsdler
+Java Deserialization Scanner
+C02
+Cloud Storage Tester
+CMS Scanner
+Error Message Checks
+Detect Dynamic JS
+Headers Analyzer
+HTML5 Auditor
+PHP Object Injection Check
+JavaScript Security
+Retire.JS
+CSP Auditor
+Random IP Address Header
+Autorize
+CSRF Scanner
 JS Link Finder
+Decoder Improved
+```
 
-OWASP Zed Attack Proxy (ZAP)  
-ZAP Marketplace  
-FuzzDB Files  
+**Burp - Decoder Improved Hash Example**
+
+```text
+Input: HTB Academy
+Hash With > MD5
+```
+
+**ZAP - Open Marketplace**
+
+```text
+Manage Add-ons button > Marketplace tab
+```
+
+**ZAP - FuzzDB Add-ons to Install**
+
+```text
+FuzzDB Files
 FuzzDB Offensive
+```
 
-**SERVICES**
+**ZAP - FuzzDB Command Injection Wordlist Path**
 
-HTTP
+```text
+File Fuzzers > fuzzdb > attack > os-cmd-execution > command_execution-unix.txt
+```
 
-**PORTS**
+---
 
-31133
-
-**DOM IDS**
-
-**ELEMENT NAMES**
-
-Extensions  
-BApp Store  
-Manage Add-ons  
-Marketplace  
-Install  
-Get more info  
-File Fuzzers  
-Hash With>MD5
-
-**ATTRIBUTES**
-
-Release  
-Beta  
-Alpha  
-MD5
-
-**REQUEST PATTERNS**
-
-;id  
-/usr/bin/id
-#
-#

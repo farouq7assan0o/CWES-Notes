@@ -1,335 +1,291 @@
-# HTTP Fundamentals 
 
-**cURL Commands**
+# HyperText Transfer Protocol (HTTP) 
+---
+
+**cURL Basic Request**
 
 ```
 curl inlanefreight.com
 ```
 
+**cURL Download (Remote Filename)**
+
 ```
 curl -O inlanefreight.com/index.html
 ```
+
+**cURL Download (Custom Filename)**
+
+```
+curl -o <filename> inlanefreight.com/index.html
+```
+
+**cURL Silent Download**
 
 ```
 curl -s -O inlanefreight.com/index.html
 ```
 
+**cURL Help**
+
 ```
 curl -h
-```
-
-```
 curl --help all
-```
-
-```
+curl --help category
+curl -h http
 man curl
 ```
 
-**cURL Flags**
+**cURL Key Flags**
 
 ```
--d
---data
+-d, --data <data>               HTTP POST data
+-h, --help <category>           Get help for commands
+-i, --include                   Include protocol response headers in the output
+-o, --output <file>             Write to file instead of stdout
+-O, --remote-name               Write output to a file named as the remote file
+-s, --silent                    Silent mode
+-u, --user <user:password>      Server user and password
+-A, --user-agent <name>         Send User-Agent <name> to server
+-v, --verbose                   Make the operation more talkative
 ```
 
-```
--h
---help
-```
+**URL Structure Reference**
 
 ```
--i
---include
+http://admin:password@inlanefreight.com:80/dashboard.php?login=true#status
 ```
 
-```
--o
---output
-```
+**URL Components**
 
 ```
--O
---remote-name
+Scheme:        http://  https://
+User Info:     admin:password@
+Host:          inlanefreight.com
+Port:          :80
+Path:          /dashboard.php
+Query String:  ?login=true
+Fragment:      #status
 ```
 
-```
--s
---silent
-```
-
-```
--u
---user
-```
-
-```
--A
---user-agent
-```
-
-```
--v
---verbose
-```
-
-**File Paths**
+**DNS Hosts File**
 
 ```
 /etc/hosts
 ```
+
+**Default Ports**
+
+```
+HTTP:   80
+HTTPS:  443
+```
+
+---
 
 ---
 
 
 # Hypertext Transfer Protocol Secure (HTTPS)
 
-**cURL Commands**
+---
 
-```
-curl https://inlanefreight.com
-```
+**cURL HTTPS Request (Skip Certificate Check)**
 
 ```
 curl -k https://www.inlanefreight.com
 ```
 
-**cURL Flags**
+**cURL Flag**
 
 ```
--k
+-k    Skip SSL certificate verification
+```
+
+**Default Ports**
+
+```
+HTTP:   80
+HTTPS:  443
+```
+
+**HTTP to HTTPS Redirect Response Code**
+
+```
+301 Moved Permanently
+```
+
+**Encrypted DNS Servers**
+
+```
+8.8.8.8
+1.1.1.1
 ```
 
 ---
 
+---
 
-# HTTP Requests and Responses
 
-**cURL Commands**
+# HTTP Requests and Responses 
 
-```bash
+---
+
+**cURL Verbose Request**
+
+```
 curl inlanefreight.com -v
 ```
 
-```bash
+**cURL Extra Verbose**
+
+```
 curl inlanefreight.com -vvv
 ```
 
-**HTTP Request Example**
+**Browser DevTools Shortcut**
 
-```http
+```
+CTRL+SHIFT+I
+F12
+```
+
+**DevTools Tab**
+
+```
+Network
+```
+
+**HTTP Request Structure**
+
+```
 GET /users/login.html HTTP/1.1
 Host: inlanefreight.com
 User-Agent: Mozilla/5.0
 Cookie: PHPSESSID=c4ggt4jull9obt7aupa55o8vbf
 ```
 
-**HTTP Response Example**
+**HTTP Response Structure**
 
-```http
+```
 HTTP/1.1 200 OK
-Date: Tue, 21 Jul 2020 05:20:15 GMT
+Date:
 Server: Apache/2.4.41
 Set-Cookie: PHPSESSID=m4u64rqlpfthrvvb12ai9voqgf
 Content-Type: text/html; charset=UTF-8
 ```
 
-**Verbose cURL Request/Response Example**
+**Example Request Line Fields**
 
-```http
-GET / HTTP/1.1
-Host: inlanefreight.com
-User-Agent: curl/7.65.3
-Accept: */*
-Connection: close
+```
+Method:   GET
+Path:     /users/login.html
+Version:  HTTP/1.1
 ```
 
-```http
-HTTP/1.1 401 Unauthorized
-Date: Tue, 21 Jul 2020 05:20:15 GMT
-Server: Apache/X.Y.ZZ (Ubuntu)
-WWW-Authenticate: Basic realm="Restricted Content"
-Content-Length: 464
-Content-Type: text/html; charset=iso-8859-1
+**Example Response First Line Fields**
+
+```
+Version:  HTTP/1.1
+Code:     200 OK
 ```
 
-**Browser DevTools**  
-CTRL+SHIFT+I  
-F12  
-Network  
-Filter URLs  
-Response  
-Raw
-
-**HTTP Fields**  
-GET  
-/users/login.html  
-HTTP/1.1  
-200 OK  
-401 Unauthorized
-
-**Headers**  
-Host  
-User-Agent  
-Cookie  
-Date  
-Server  
-Set-Cookie  
-Content-Type  
-Accept  
-Connection  
-WWW-Authenticate  
-Content-Length
-
-**Cookie Values**  
-PHPSESSID=c4ggt4jull9obt7aupa55o8vbf  
-PHPSESSID=m4u64rqlpfthrvvb12ai9voqgf
+---
 
 ---
 
 
-# HTTP Headers
+# HTTP Headers 
 
-**cURL Commands**
+---
 
-```bash
+**cURL — View Response Headers Only (HEAD request)**
+
+```
 curl -I https://www.inlanefreight.com
 ```
 
-```bash
+**cURL — View Headers + Response Body**
+
+```
+curl -i https://www.inlanefreight.com
+```
+
+**cURL — Set Custom Header**
+
+```
+curl -H 'Header-Name: value' https://www.inlanefreight.com
+```
+
+**cURL — Set User-Agent**
+
+```
 curl https://www.inlanefreight.com -A 'Mozilla/5.0'
-```
-
-```bash
-curl https://www.inlanefreight.com -I -A 'Mozilla/5.0'
-```
-
-```bash
-curl https://www.inlanefreight.com -v -A 'Mozilla/5.0'
 ```
 
 **cURL Flags**
 
-```bash
--I
 ```
-
-```bash
--i
-```
-
-```bash
--H
-```
-
-```bash
--A
-```
-
-```bash
--v
+-I    Send HEAD request, display response headers only
+-i    Display response headers + body
+-H    Set a custom request header
+-A    Set User-Agent header
 ```
 
 **General Headers**
 
-```http
+```
 Date: Wed, 16 Feb 2022 10:38:44 GMT
-```
-
-```http
 Connection: close
-```
-
-```http
 Connection: keep-alive
 ```
 
 **Entity Headers**
 
-```http
+```
 Content-Type: text/html
-```
-
-```http
 Media-Type: application/pdf
-```
-
-```http
 boundary="b4e4fbd93540"
-```
-
-```http
 Content-Length: 385
-```
-
-```http
 Content-Encoding: gzip
 ```
 
 **Request Headers**
 
-```http
+```
 Host: www.inlanefreight.com
-```
-
-```http
 User-Agent: curl/7.77.0
-```
-
-```http
 Referer: http://www.inlanefreight.com/
-```
-
-```http
 Accept: */*
-```
-
-```http
 Cookie: PHPSESSID=b4e4fbd93540
-```
-
-```http
 Authorization: BASIC cGFzc3dvcmQK
 ```
 
 **Response Headers**
 
-```http
+```
 Server: Apache/2.2.14 (Win32)
-```
-
-```http
 Set-Cookie: PHPSESSID=b4e4fbd93540
-```
-
-```http
 WWW-Authenticate: BASIC realm="localhost"
 ```
 
 **Security Headers**
 
-```http
+```
 Content-Security-Policy: script-src 'self'
-```
-
-```http
 Strict-Transport-Security: max-age=31536000
-```
-
-```http
 Referrer-Policy: origin
 ```
 
-**Example Header Dump**
+**Full Header Example Output**
 
-```http
+```
 Host: www.inlanefreight.com
 User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_5) AppleWebKit/605.1.15 (KHTML, like Gecko)
 Cookie: cookie1=298zf09hf012fh2; cookie2=u32t4o3tb3gg4
 Accept: text/plain
 Referer: https://www.inlanefreight.com/
 Authorization: BASIC cGFzc3dvcmQK
-
 Date: Sun, 06 Aug 2020 08:49:37 GMT
 Connection: keep-alive
 Content-Length: 26012
@@ -343,264 +299,214 @@ Strict-Transport-Security: max-age=31536000
 Referrer-Policy: origin
 ```
 
-**Browser DevTools**  
-Network  
-Headers  
-Raw  
-Cookies
+**Reference URLs**
+
+```
+https://tools.ietf.org/html/rfc7231#section-5
+https://tools.ietf.org/html/rfc7231#section-7
+https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers
+```
+
+**Browser DevTools**
+
+```
+Network tab -> click request -> Headers tab -> Raw button
+Network tab -> click request -> Cookies tab
+```
 
 ---
+
+---
+
 
 
 # HTTP Methods and Codes 
 
-**HTTP Request Line Examples**
+---
 
-```http
-GET / HTTP/1.1
+**HTTP Methods**
+
 ```
-
-```http
-GET /resource?param=value HTTP/1.1
-```
-
-```http
-POST / HTTP/1.1
-```
-
-```http
-HEAD / HTTP/1.1
-```
-
-```http
-PUT / HTTP/1.1
-```
-
-```http
-DELETE / HTTP/1.1
-```
-
-```http
-OPTIONS / HTTP/1.1
-```
-
-```http
-PATCH / HTTP/1.1
-```
-
-**HTTP Methods**  
-GET  
-POST  
-HEAD  
-PUT  
-DELETE  
-OPTIONS  
+GET
+POST
+HEAD
+PUT
+DELETE
+OPTIONS
 PATCH
-
-**Query String Example**
-
-```http
-?param=value
 ```
 
-**HTTP Status Codes**  
-200 OK  
-302 Found  
-400 Bad Request  
-403 Forbidden  
-404 Not Found  
-500 Internal Server Error
+**HTTP Status Code Classes**
 
-**HTTP Status Code Classes**  
-1xx  
-2xx  
-3xx  
-4xx  
-5xx
+```
+1xx    Informational
+2xx    Success
+3xx    Redirection
+4xx    Client Error
+5xx    Server Error
+```
+
+**Common Status Codes**
+
+```
+200    OK
+302    Found (Redirect)
+400    Bad Request
+403    Forbidden
+404    Not Found
+500    Internal Server Error
+```
+
+**Reference URLs**
+
+```
+https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods
+https://developer.mozilla.org/en-US/docs/Web/HTTP/Status
+https://support.cloudflare.com/hc/en-us/articles/115003014432-HTTP-Status-Codes
+https://docs.aws.amazon.com/AmazonSimpleDB/latest/DeveloperGuide/APIError.html
+```
+
+---
 
 ---
 
 
-# GET
+# GET 
 
-**URLs**
+---
 
-```text
-http://<SERVER_IP>:<PORT>/
+**cURL GET with Response Headers**
+
 ```
-
-```text
-http://admin:admin@<SERVER_IP>:<PORT>/
-```
-
-```text
-http://<SERVER_IP>:<PORT>/search.php?search=le
-```
-
-**cURL Commands**
-
-```bash
 curl -i http://<SERVER_IP>:<PORT>/
 ```
 
-```bash
+**cURL Basic Auth (-u flag)**
+
+```
 curl -u admin:admin http://<SERVER_IP>:<PORT>/
 ```
 
-```bash
+**cURL Basic Auth (URL inline)**
+
+```
 curl http://admin:admin@<SERVER_IP>:<PORT>/
 ```
 
-```bash
-curl -v http://admin:admin@<SERVER_IP>:<PORT>/
-```
+**cURL Basic Auth (Manual Authorization Header)**
 
-```bash
+```
 curl -H 'Authorization: Basic YWRtaW46YWRtaW4=' http://<SERVER_IP>:<PORT>/
 ```
 
-```bash
+**cURL Verbose with Auth**
+
+```
+curl -v http://admin:admin@<SERVER_IP>:<PORT>/
+```
+
+**cURL GET with Query Parameter + Auth Header**
+
+```
 curl 'http://<SERVER_IP>:<PORT>/search.php?search=le' -H 'Authorization: Basic YWRtaW46YWRtaW4='
 ```
 
-**HTTP Requests**
+**Base64 Encoded Credential (admin:admin)**
 
-```http
-GET / HTTP/1.1
-Host: <SERVER_IP>
-Authorization: Basic YWRtaW46YWRtaW4=
-User-Agent: curl/7.77.0
-Accept: */*
 ```
-
-```http
-GET /search.php?search=le HTTP/1.1
-Authorization: Basic YWRtaW46YWRtaW4=
-```
-
-**HTTP Headers**
-
-```http
-WWW-Authenticate: Basic realm="Access denied"
-```
-
-```http
-Authorization: Basic YWRtaW46YWRtaW4=
-```
-
-**Credentials**
-
-```text
-admin:admin
-```
-
-**Encoded Values**
-
-```text
 YWRtaW46YWRtaW4=
 ```
 
-**Parameters**
+**Default Credentials**
 
-```text
-search=le
+```
+admin:admin
 ```
 
-**Paths**
+**Authorization Header Format**
 
-```text
-/search.php
+```
+Authorization: Basic YWRtaW46YWRtaW4=
 ```
 
-**Browser Shortcuts / Tools**  
-CTRL+SHIFT+E  
-CTRL+SHIFT+K  
-Network  
-Copy  
-Copy as cURL  
-Copy as Fetch  
-JavaScript console
+**GET Parameter Pattern**
 
-
-# POST
-
-**URLs**
-
-```text
-http://<SERVER_IP>:<PORT>/
+```
+/search.php?search=le
 ```
 
-```text
-http://server_ip/index.php
+**Browser DevTools Shortcuts**
+
+```
+CTRL+SHIFT+E    Network tab
+CTRL+SHIFT+K    JavaScript console tab
 ```
 
-```text
-http://<SERVER_IP>:<PORT>/search.php
+**Browser DevTools Actions**
+
+```
+Right-click request -> Copy -> Copy as cURL
+Right-click request -> Copy -> Copy as Fetch
 ```
 
-**POST Data**
+---
 
-```bash
-username=admin&password=admin
-```
+---
 
-```json
-{"search":"london"}
-```
 
-**cURL Commands**
+# POST 
+
+---
+
+**POST Login Request**
 
 ```bash
 curl -X POST -d 'username=admin&password=admin' http://<SERVER_IP>:<PORT>/
 ```
 
+**POST Login — Follow Redirect**
+
+```bash
+curl -X POST -d 'username=admin&password=admin' http://<SERVER_IP>:<PORT>/ -L
+```
+
+**POST Login — View Response Headers**
+
 ```bash
 curl -X POST -d 'username=admin&password=admin' http://<SERVER_IP>:<PORT>/ -i
 ```
+
+**Use Cookie (-b flag)**
 
 ```bash
 curl -b 'PHPSESSID=c1nsa6op7vtk7kdis7bcnbadf1' http://<SERVER_IP>:<PORT>/
 ```
 
+**Use Cookie (Header flag)**
+
 ```bash
 curl -H 'Cookie: PHPSESSID=c1nsa6op7vtk7kdis7bcnbadf1' http://<SERVER_IP>:<PORT>/
 ```
+
+**POST JSON Data with Cookie and Content-Type**
 
 ```bash
 curl -X POST -d '{"search":"london"}' -b 'PHPSESSID=c1nsa6op7vtk7kdis7bcnbadf1' -H 'Content-Type: application/json' http://<SERVER_IP>:<PORT>/search.php
 ```
 
-**cURL Flags**
+**POST Data Format (Form)**
 
-```bash
--X POST
+```text
+username=admin&password=admin
 ```
 
-```bash
--d
+**POST Data Format (JSON)**
+
+```json
+{"search":"london"}
 ```
 
-```bash
--L
-```
-
-```bash
--v
-```
-
-```bash
--i
-```
-
-```bash
--b
-```
-
-```bash
--H
-```
-
-**HTTP Request**
+**Captured Request Headers**
 
 ```http
 POST /search.php HTTP/1.1
@@ -618,62 +524,136 @@ Connection: keep-alive
 Cookie: PHPSESSID=c1nsa6op7vtk7kdis7bcnbadf1
 ```
 
-**HTTP Headers**
-
-```http
-Set-Cookie: PHPSESSID=c1nsa6op7vtk7kdis7bcnbadf1; path=/
-```
-
-```http
-Cookie: PHPSESSID=c1nsa6op7vtk7kdis7bcnbadf1
-```
-
-```http
-Content-Type: application/json
-```
-
-```http
-Referer: http://server_ip/index.php
-```
-
-```http
-Origin: http://server_ip
-```
-
-**Cookie Names and Values**
-
-```text
-PHPSESSID
-```
+**Cookie Value (Example)**
 
 ```text
 PHPSESSID=c1nsa6op7vtk7kdis7bcnbadf1
 ```
 
-**Paths**
+**cURL Flags**
 
 ```text
-/search.php
+-X POST       Specify POST method
+-d            POST data body
+-b            Send cookie
+-L            Follow redirects
+-i            Show response headers
 ```
+
+**Browser DevTools Shortcuts**
 
 ```text
-/index.php
+SHIFT+F9      Storage tab
 ```
 
-**Browser DevTools / Shortcuts**  
-Network  
-Request  
-Raw  
-Copy  
-Copy as cURL  
-Copy Request Headers  
-Copy as Fetch  
-Storage  
-Cookies  
-Delete All  
-SHIFT+F9  
-Console
+**Browser DevTools Actions**
+
+```text
+Network tab -> Request -> Raw
+Right-click request -> Copy -> Copy as cURL
+Right-click request -> Copy -> Copy as Fetch
+Right-click request -> Copy -> Copy Request Headers
+Storage tab -> Cookies -> select site -> add/edit cookie
+```
+
+---
+
+---
 
 
-#
-#
+# CRUD API 
+
+---
+
+**CRUD Operations Reference**
+
+```text
+Create  POST    Adds data to the database table
+Read    GET     Reads entity from the database table
+Update  PUT     Updates data in the database table
+Delete  DELETE  Removes row from the database table
+```
+
+**Read - Specific Entry**
+
+```bash
+curl http://<SERVER_IP>:<PORT>/api.php/city/london
+```
+
+**Read - Formatted with jq**
+
+```bash
+curl -s http://<SERVER_IP>:<PORT>/api.php/city/london | jq
+```
+
+**Read - Partial Search**
+
+```bash
+curl -s http://<SERVER_IP>:<PORT>/api.php/city/le | jq
+```
+
+**Read - All Entries**
+
+```bash
+curl -s http://<SERVER_IP>:<PORT>/api.php/city/ | jq
+```
+
+**Create - POST New Entry**
+
+```bash
+curl -X POST http://<SERVER_IP>:<PORT>/api.php/city/ -d '{"city_name":"HTB_City", "country_name":"HTB"}' -H 'Content-Type: application/json'
+```
+
+**Update - PUT Existing Entry**
+
+```bash
+curl -X PUT http://<SERVER_IP>:<PORT>/api.php/city/london -d '{"city_name":"New_HTB_City", "country_name":"HTB"}' -H 'Content-Type: application/json'
+```
+
+**Verify Update - Read Old Entry**
+
+```bash
+curl -s http://<SERVER_IP>:<PORT>/api.php/city/london | jq
+```
+
+**Verify Update - Read New Entry**
+
+```bash
+curl -s http://<SERVER_IP>:<PORT>/api.php/city/New_HTB_City | jq
+```
+
+**Delete - Remove Entry**
+
+```bash
+curl -X DELETE http://<SERVER_IP>:<PORT>/api.php/city/New_HTB_City
+```
+
+**Verify Delete - Confirm Empty**
+
+```bash
+curl -s http://<SERVER_IP>:<PORT>/api.php/city/New_HTB_City | jq
+```
+
+**API URL Pattern**
+
+```http
+http://<SERVER_IP>:<PORT>/api.php/city/<entry_name>
+```
+
+**POST/PUT JSON Payload Examples**
+
+```json
+{"city_name":"HTB_City", "country_name":"HTB"}
+{"city_name":"New_HTB_City", "country_name":"HTB"}
+```
+
+**Required Header for JSON Data**
+
+```text
+Content-Type: application/json
+```
+
+---
+
+---
+

